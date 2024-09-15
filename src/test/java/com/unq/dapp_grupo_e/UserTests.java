@@ -7,13 +7,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.unq.dapp_grupo_e.model.User;
 
 @SpringBootTest
-public class UserTests {
+class UserTests {
 
     @Test
     void validationUsername() {
         var user = new User();
-        user.setNombre("Mark");
-        Assertions.assertEquals("Mark", user.getNombre());
+        user.setName("Mark");
+        Assertions.assertEquals("Mark", user.getName());
     }
     
 }
