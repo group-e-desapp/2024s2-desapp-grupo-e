@@ -13,6 +13,42 @@ public class UserRegisterFactory {
         return userDTO;
     }
 
+    public static UserRegisterDTO createWithName(String name) {
+        var userDTO = new UserRegisterDTO();
+        userDTO.email = "non@gmail.com";
+        userDTO.password = "Nonnon";
+        userDTO.name = name;
+        userDTO.surname = "non";
+        return userDTO;
+    }
+
+    public static UserRegisterDTO createWithSurname(String surname) {
+        var userDTO = new UserRegisterDTO();
+        userDTO.email = "non@gmail.com";
+        userDTO.password = "Nonnon";
+        userDTO.name = "anon";
+        userDTO.surname = surname;
+        return userDTO;
+    }
+
+    public static UserRegisterDTO createWithPassword(String password) {
+        var userDTO = new UserRegisterDTO();
+        userDTO.email = "non@gmail.com";
+        userDTO.password = password;
+        userDTO.name = "anon";
+        userDTO.surname = "non";
+        return userDTO;
+    }
+
+    public static UserRegisterDTO createWithEmail(String email) {
+        var userDTO = new UserRegisterDTO();
+        userDTO.email = email;
+        userDTO.password = "Nonnon";
+        userDTO.name = "anon";
+        userDTO.surname = "non";
+        return userDTO;
+    }
+
     public static UserRegisterDTO createWithNameAndSurname(
         String name, String surname
     ) {
@@ -23,5 +59,5 @@ public class UserRegisterFactory {
         userDTO.surname = surname;
         return userDTO;
     }
-    
+
 }

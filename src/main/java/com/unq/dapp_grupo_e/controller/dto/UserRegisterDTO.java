@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Size;
 
 public class UserRegisterDTO {
 
-    final String messageMinMax = "This field has a limit of 30 characters and a required minimun of 3 characters";
+    final static String messageMinMax = "This field has a limit of 30 characters and a required minimun of 3 characters";
 
     @NotNull
     @Email(message = "The given value is not a valid e-mail")
