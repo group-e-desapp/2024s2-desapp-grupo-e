@@ -28,4 +28,8 @@ jobs:
           SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/testdb
           SPRING_DATASOURCE_USERNAME: root
           SPRING_DATASOURCE_PASSWORD: root
-        run: mvn clean verify org.sonarsource.scanner.maven:sonar -Dsonar.projectKey=group-e-desapp_2024s2-desapp-grupo-e -Dsonar.organization=group-e-desapp -Dsonar.login=bf4035fe80911577282dda1c66e3143edeb1ebe3
+        run: mvn clean verify 
+      - name: SonarCloud Scan
+        run: mvn sonar:sonar -Dsonar.projectKey=group-e-desapp_2024s2-desapp-grupo-e -Dsonar.organization=group-e-desapp
+        env:
+          SONAR_TOKEN: bf4035fe80911577282dda1c66e3143edeb1ebe3
