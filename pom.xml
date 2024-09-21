@@ -33,7 +33,6 @@
 	  	<sonar.host.url>https://sonarcloud.io</sonar.host.url>
     	<sonar.organization>group-e-desapp</sonar.organization>
     	<sonar.projectKey>group-e-desapp_2024s2-desapp-grupo-e</sonar.projectKey>
-    	<sonar.login>bf4035fe80911577282dda1c66e3143edeb1ebe3</sonar.login>
     	<sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 	</properties>
 	<dependencies>

@@ -34,4 +34,4 @@ jobs:
         env:
           projectKey: group-e-desapp_2024s2-desapp-grupo-e
           organization: group-e-desapp
-          token: bf4035fe80911577282dda1c66e3143edeb1ebe3
+          SONAR_TOKEN: bf4035fe80911577282dda1c66e3143edeb1ebe3
