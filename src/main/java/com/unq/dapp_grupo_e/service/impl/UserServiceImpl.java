@@ -14,8 +14,11 @@ import com.unq.dapp_grupo_e.service.UserService;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserRepository repo;
+    private final UserRepository repo;
+
+    public UserServiceImpl(UserRepository userRepo) {
+        this.repo = userRepo;
+    }
 
     @Override
     public UserRegisterResponseDTO createUser(UserRegisterDTO entityUser) {
