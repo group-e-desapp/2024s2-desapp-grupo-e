@@ -14,7 +14,7 @@ import com.unq.dapp_grupo_e.factories.UserRegisterFactory;
 
 @AutoConfigureMockMvc
 @SpringBootTest
-public class UserControllerTests {
+class UserControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
