@@ -2,7 +2,7 @@ package com.unq.dapp_grupo_e.service.impl;
 
 import java.util.NoSuchElementException;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.unq.dapp_grupo_e.controller.dto.UserRegisterDTO;
@@ -43,8 +43,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(Integer id) {
+        var userOptional = repo.findById(id);
         try {
-            return repo.findById(id).get();
+            if(userOptional.isPresent()) {
+                return userOptional.get();
+            } else {
+                throw new NotFoundException();
+            }
         }  catch (Exception e) {
             throw new NoSuchElementException("The id user given is not valid");
         }

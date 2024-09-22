@@ -1,6 +1,8 @@
 package com.unq.dapp_grupo_e;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -54,34 +56,16 @@ class UserControllerTests {
 
     }
 
-    @Test
-    void userRegisterWithInvalidPasswordLength() throws Exception {
-        var invalidUser = UserRegisterFactory.createWithPassword("Try");
+    @ParameterizedTest
+    @ValueSource(strings = {"Try", "notvalid", "NOTVALID"})
+    void userRegisterInvalidForMissingRequerimentsForPassword(String passwordTry) throws Exception {
+        var invalidUser = UserRegisterFactory.createWithPassword(passwordTry);
 
         mockMvc.perform(post("/user/register")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(objectMapper.writeValueAsString(invalidUser)))
                     .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    void userRegisterWithMissingUppercasePassword() throws Exception {
-        var invalidUser = UserRegisterFactory.createWithPassword("notvalid");
-
-        mockMvc.perform(post("/user/register")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(objectMapper.writeValueAsString(invalidUser)))
-                    .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    void userRegisterWithMissingLowercasePassword() throws Exception {
-        var invalidUser = UserRegisterFactory.createWithPassword("NOTVALID");
-
-        mockMvc.perform(post("/user/register")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(objectMapper.writeValueAsString(invalidUser)))
-                    .andExpect(status().isBadRequest());
+        
     }
 
 }

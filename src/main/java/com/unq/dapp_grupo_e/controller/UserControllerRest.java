@@ -18,8 +18,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 public class UserControllerRest {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+    
+
+    public UserControllerRest(UserService userService) {
+        this.userService = userService;
+    }
 
     @PostMapping("/register")
     public ResponseEntity<Object> createUser(@Valid @RequestBody UserRegisterDTO user) {
