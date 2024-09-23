@@ -10,6 +10,8 @@ public class UserRegisterFactory {
         userDTO.password = "Nonnon";
         userDTO.name = "anon";
         userDTO.surname = "non";
+        userDTO.cvu = "1011121314151617181920";
+        userDTO.walletAddress = "12349876";
         return userDTO;
     }
 
@@ -19,6 +21,8 @@ public class UserRegisterFactory {
         userDTO.password = "Nonnon";
         userDTO.name = name;
         userDTO.surname = "non";
+        userDTO.cvu = "1011121314151617181920";
+        userDTO.walletAddress = "12349876";
         return userDTO;
     }
 
@@ -28,6 +32,8 @@ public class UserRegisterFactory {
         userDTO.password = "Nonnon";
         userDTO.name = "anon";
         userDTO.surname = surname;
+        userDTO.cvu = "1011121314151617181920";
+        userDTO.walletAddress = "12349876";
         return userDTO;
     }
 
@@ -37,6 +43,8 @@ public class UserRegisterFactory {
         userDTO.password = password;
         userDTO.name = "anon";
         userDTO.surname = "non";
+        userDTO.cvu = "1011121314151617181920";
+        userDTO.walletAddress = "12349876";
         return userDTO;
     }
 
@@ -46,6 +54,8 @@ public class UserRegisterFactory {
         userDTO.password = "Nonnon";
         userDTO.name = "anon";
         userDTO.surname = "non";
+        userDTO.cvu = "1011121314151617181920";
+        userDTO.walletAddress = "12349876";
         return userDTO;
     }
 
@@ -57,6 +67,8 @@ public class UserRegisterFactory {
         userDTO.password = "Nonnon";
         userDTO.name = name;
         userDTO.surname = surname;
+        userDTO.cvu = "1011121314151617181920";
+        userDTO.walletAddress = "12349876";
         return userDTO;
     }
 

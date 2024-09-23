@@ -1,5 +1,6 @@
 package com.unq.dapp_grupo_e;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -13,6 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.unq.dapp_grupo_e.factories.UserRegisterFactory;
+import com.unq.dapp_grupo_e.service.UserService;
 
 @AutoConfigureMockMvc
 @SpringBootTest
@@ -22,10 +24,14 @@ class UserControllerTests {
     private MockMvc mockMvc;
     @Autowired
     private ObjectMapper objectMapper;
+    @Autowired
+    private UserService userService;
 
      
     @Test
     void userRegisterValidReturns200() throws Exception{
+        userService.deleteUsers();
+        userService.resetIdUser();
         var validUser = UserRegisterFactory.anyUserRegister();
 
         mockMvc.perform(post("/user/register")
