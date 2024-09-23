@@ -22,11 +22,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserRegisterResponseDTO createUser(UserRegisterDTO entityUser) {
+        if (repo.existsByEmail(entityUser.email)) {
+            throw new RuntimeException("This email has already been used");
+        }
         var user = new User();
         user.setEmail(entityUser.email);
         user.setName(entityUser.name);
         user.setSurname(entityUser.surname);
         user.setPassword(entityUser.password);
+        user.setCvu(entityUser.cvu);
+        user.setWalletAddress(entityUser.walletAddress);
         repo.save(user);
         return UserRegisterResponseDTO.from(user);
     }

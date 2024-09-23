@@ -22,6 +22,10 @@ public class User {
     private String email;
     @Column
     private String password;
+    @Column
+    private String cvu;
+    @Column
+    private String walletAddress;
 
     public Long getIdUser() {
         return idUser;
@@ -57,5 +61,20 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+    
+    public String getCvu() {
+        return cvu;
+    }
+    public void setCvu(String cvu) {
+        this.cvu = cvu;
+    }
+    public String getWalletAddress() {
+        return walletAddress;
+    }
+    public void setWalletAddress(String walletAddress) {
+        this.walletAddress = walletAddress;
+    }
+
+    
     
 }

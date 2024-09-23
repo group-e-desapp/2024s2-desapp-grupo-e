@@ -16,4 +16,5 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     @Query(value = "ALTER TABLE user AUTO_INCREMENT = 1", nativeQuery = true)
     void resetIdUser();
     
+    boolean existsByEmail(String email);
 }

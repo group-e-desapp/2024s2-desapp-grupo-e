@@ -27,5 +27,12 @@ public class UserRegisterDTO {
     @NotNull
     public String surname;
 
-    
+    @Size(min = 22, max = 22)
+    @NotNull
+    public String cvu;
+
+    @Size(min = 8, max = 8)
+    @NotNull
+    public String walletAddress;
+
 }
