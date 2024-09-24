@@ -3,10 +3,10 @@ package com.unq.dapp_grupo_e.controller.dto;
 import com.unq.dapp_grupo_e.model.User;
 
 public class UserRegisterResponseDTO {
-
-    public String name;
-    public String surname;
-    public String email;
+    
+    private String name;
+    private String surname;
+    private String email;
 
 
     public static UserRegisterResponseDTO from(User user) {
@@ -16,6 +16,19 @@ public class UserRegisterResponseDTO {
         userDTO.email = user.getEmail();
 
         return userDTO;
-    }    
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
     
 }

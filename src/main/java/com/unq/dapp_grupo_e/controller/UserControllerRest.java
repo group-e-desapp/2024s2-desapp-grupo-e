@@ -9,6 +9,10 @@ import jakarta.validation.Valid;
 import com.unq.dapp_grupo_e.controller.dto.UserRegisterDTO;
 import com.unq.dapp_grupo_e.service.UserService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -24,6 +28,11 @@ public class UserControllerRest {
         this.userService = userService;
     }
 
+    @ApiResponses({
+        @ApiResponse(responseCode = "201"),
+        @ApiResponse(responseCode = "400")
+    })
+    @Operation(summary = "Register of a new user")
     @PostMapping("/register")
     public ResponseEntity<Object> createUser(@Valid @RequestBody UserRegisterDTO user) {
         var response = userService.createUser(user);

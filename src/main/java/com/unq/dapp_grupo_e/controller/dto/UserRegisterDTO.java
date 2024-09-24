@@ -14,7 +14,7 @@ public class UserRegisterDTO {
     @Email(message = "The given value is not a valid e-mail")
     public String email;
 
-    @Size(min = 6, message = "Password must contain at least 6 characters")
+    @Size(min = 6, max = 70, message = "Password must contain at least 6 characters")
     @NotNull
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z]).*$", message = "Password must contain at least one lowercase and one uppercase")
     public String password;
