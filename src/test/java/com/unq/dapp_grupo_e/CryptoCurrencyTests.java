@@ -2,6 +2,7 @@ package com.unq.dapp_grupo_e;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledIfSystemProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -15,7 +16,7 @@ public class CryptoCurrencyTests {
     @Autowired
     private CryptoCurrencyService cryptoService;
 
-
+    @EnabledIfSystemProperty(named = "enable.binance.tests", matches = "true")
     @Test
     void getCurrentPriceOfCryptoCurrency() {
         CryptoCurrencyEnum cryptoSelected = CryptoCurrencyEnum.ADAUSDT;

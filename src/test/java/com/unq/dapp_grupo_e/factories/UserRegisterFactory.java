@@ -7,7 +7,7 @@ public class UserRegisterFactory {
     public static UserRegisterDTO anyUserRegister() {
         var userDTO = new UserRegisterDTO();
         userDTO.email = "non@gmail.com";
-        userDTO.password = "Nonnon";
+        userDTO.password = "Non&non";
         userDTO.name = "anon";
         userDTO.surname = "non";
         userDTO.cvu = "1011121314151617181920";
@@ -18,7 +18,7 @@ public class UserRegisterFactory {
     public static UserRegisterDTO createWithName(String name) {
         var userDTO = new UserRegisterDTO();
         userDTO.email = "non@gmail.com";
-        userDTO.password = "Nonnon";
+        userDTO.password = "Non&non";
         userDTO.name = name;
         userDTO.surname = "non";
         userDTO.cvu = "1011121314151617181920";
@@ -29,7 +29,7 @@ public class UserRegisterFactory {
     public static UserRegisterDTO createWithSurname(String surname) {
         var userDTO = new UserRegisterDTO();
         userDTO.email = "non@gmail.com";
-        userDTO.password = "Nonnon";
+        userDTO.password = "Non&non";
         userDTO.name = "anon";
         userDTO.surname = surname;
         userDTO.cvu = "1011121314151617181920";
@@ -51,7 +51,7 @@ public class UserRegisterFactory {
     public static UserRegisterDTO createWithEmail(String email) {
         var userDTO = new UserRegisterDTO();
         userDTO.email = email;
-        userDTO.password = "Nonnon";
+        userDTO.password = "Non&non";
         userDTO.name = "anon";
         userDTO.surname = "non";
         userDTO.cvu = "1011121314151617181920";
@@ -64,7 +64,7 @@ public class UserRegisterFactory {
     ) {
         var userDTO = new UserRegisterDTO();
         userDTO.email = "non@gmail.com";
-        userDTO.password = "Nonnon";
+        userDTO.password = "Non&non";
         userDTO.name = name;
         userDTO.surname = surname;
         userDTO.cvu = "1011121314151617181920";

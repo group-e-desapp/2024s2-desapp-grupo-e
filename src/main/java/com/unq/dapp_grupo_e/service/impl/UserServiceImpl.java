@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.unq.dapp_grupo_e.controller.dto.UserRegisterDTO;
 import com.unq.dapp_grupo_e.controller.dto.UserRegisterResponseDTO;
 import com.unq.dapp_grupo_e.model.User;
+import com.unq.dapp_grupo_e.model.exceptions.DuplicationDataException;
 import com.unq.dapp_grupo_e.repository.UserRepository;
 import com.unq.dapp_grupo_e.service.UserService;
 
@@ -23,7 +24,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserRegisterResponseDTO createUser(UserRegisterDTO entityUser) {
         if (repo.existsByEmail(entityUser.email)) {
-            throw new RuntimeException("This email has already been used");
+            throw new DuplicationDataException("This email has already been used");
         }
         var user = new User();
         user.setEmail(entityUser.email);

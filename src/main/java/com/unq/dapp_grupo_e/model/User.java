@@ -1,5 +1,9 @@
 package com.unq.dapp_grupo_e.model;
 
+import com.unq.dapp_grupo_e.model.exceptions.InvalidCharactersException;
+import com.unq.dapp_grupo_e.model.exceptions.InvalidEmailException;
+import com.unq.dapp_grupo_e.model.exceptions.InvalidLengthException;
+import com.unq.dapp_grupo_e.utilities.CharacterValidator;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,6 +30,11 @@ public class User {
     private String cvu;
     @Column
     private String walletAddress;
+    
+    @Column
+    private Integer amountSetOperations = 0;
+    @Column
+    private Integer amountSuccededOperations = 0;
 
     public Long getIdUser() {
         return idUser;
@@ -37,42 +46,93 @@ public class User {
     public String getEmail() {
         return email;
     }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    
+
     public String getName() {
         return name;
-    }
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getSurname() {
         return surname;
     }
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-    
+
     public String getPassword() {
         return password;
     }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    
+
     public String getCvu() {
         return cvu;
     }
-    public void setCvu(String cvu) {
-        this.cvu = cvu;
-    }
+
     public String getWalletAddress() {
         return walletAddress;
     }
+
+    public void setEmail(String email) {
+        if (!CharacterValidator.validateEmail(email)) {
+            throw new InvalidEmailException("The email given is not valid");
+        }
+        this.email = email;
+    }
+    
+    public void setName(String name) {
+        if (name.length() < 3 || name.length() > 30) {
+            throw new InvalidLengthException("The name given need to have at least 3 characters and 30 at most");
+        }
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        if (surname.length() < 3 || surname.length() > 30) {
+            throw new InvalidLengthException("The surname given need to have at least 3 characters and 30 at most");
+        }
+        this.surname = surname;
+    }
+    
+    public void setPassword(String password) {
+        if (password.length() < 6) {
+            throw new InvalidLengthException("The password given need to have at least 6 characters");
+        }
+        if (!CharacterValidator.validatePassword(password)) {
+            throw new InvalidCharactersException("The password need to have at least 1 lowercase,1 uppercase and 1 special character");
+        }
+        this.password = password;
+    }
+    
+    public void setCvu(String cvu) {
+        if (cvu.length() != 22) {
+            throw new InvalidLengthException("The cvu given doesn't meet the requirement of 22 digits");
+        }
+        this.cvu = cvu;
+    }
+    
     public void setWalletAddress(String walletAddress) {
+        if (walletAddress.length() != 8) {
+            throw new InvalidLengthException("The wallet address given doesn't meet the requirement of 8 digits");
+        }
         this.walletAddress = walletAddress;
+    }
+
+    
+    public void setAmountSetOperations(Integer amountSetOperations) {
+        this.amountSetOperations = amountSetOperations;
+    }
+    public void setAmountSuccededOperations(Integer amountSuccededOperations) {
+        this.amountSuccededOperations = amountSuccededOperations;
+    }
+
+
+    // Steps for the moment i have some of the operations of transaction
+    public void countANewOperation() {
+        this.amountSetOperations =+ 1;
+    }
+
+    public void countASucceddedOperation() {
+        this.amountSuccededOperations =+ 1;
+    }
+
+    public Integer reputation() {
+        Float calculation = (float) this.amountSuccededOperations / this.amountSetOperations;
+        return (int) (calculation * 100);
     }
 
     

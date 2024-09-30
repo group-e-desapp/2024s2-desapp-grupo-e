@@ -3,11 +3,19 @@ package com.unq.dapp_grupo_e;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.unq.dapp_grupo_e.controller.dto.UserRegisterResponseDTO;
+import com.unq.dapp_grupo_e.factories.UserFactory;
 import com.unq.dapp_grupo_e.factories.UserRegisterFactory;
+import com.unq.dapp_grupo_e.model.User;
+import com.unq.dapp_grupo_e.model.exceptions.DuplicationDataException;
+import com.unq.dapp_grupo_e.model.exceptions.InvalidCharactersException;
+import com.unq.dapp_grupo_e.model.exceptions.InvalidEmailException;
+import com.unq.dapp_grupo_e.model.exceptions.InvalidLengthException;
 import com.unq.dapp_grupo_e.service.UserService;
 
 @SpringBootTest
@@ -20,6 +28,56 @@ class UserTests {
     void deleteAndReset() {
         userService.deleteUsers();
         userService.resetIdUser();
+    }
+
+    @Test
+    void exceptionForInvalidShortLengthName() throws Exception {
+        var user = new User();
+        Assertions.assertThrows(InvalidLengthException.class, () -> user.setName("IA"));
+    }
+
+    @Test
+    void exceptionForInvalidLongLengthName() throws Exception {
+        var user = new User();
+        Assertions.assertThrows(InvalidLengthException.class, () -> user.setName("AABBCCDDEEFFGGHHIIJJKKLLMMNNOOP"));
+    }
+
+    @Test
+    void exceptionForInvalidLengthForCVU() throws Exception {
+        var user = new User();
+        Assertions.assertThrows(InvalidLengthException.class, () -> user.setCvu("1234567890"));
+    }
+
+    @Test
+    void exceptionForInvalidLengthForWalletAddress() throws Exception {
+        var user = new User();
+        Assertions.assertThrows(InvalidLengthException.class, () -> user.setWalletAddress("7654321"));
+    }
+
+    @Test
+    void exceptionForInvalidLengthForPassword() throws Exception {
+        var user = new User();
+        Assertions.assertThrows(InvalidLengthException.class, () -> user.setPassword("Mark#"));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"#asdfg", "#QWERT", "Wasdfg"})
+    void exceptionForMissingATypeOfCharacterInPassword(String passwordTry) throws Exception {
+        var user = new User();
+        Assertions.assertThrows(InvalidCharactersException.class, () -> user.setPassword("passwordTry"));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"mark05com", "#mark05.com" ,"@gmail.com",  "mark05gmail.com"})
+    void exceptionForInvalidEmail(String emailTry) throws Exception {
+        var user = new User();
+        Assertions.assertThrows(InvalidEmailException.class, () -> user.setEmail(emailTry));
+    }
+ 
+    @Test
+    void checkReputationOfUser() {
+        var userWithOperations = UserFactory.createWithSomeOperations(40, 30);
+        Assertions.assertEquals(75, userWithOperations.reputation());
     }
 
     @Test
@@ -43,6 +101,15 @@ class UserTests {
         var userRecovered = userService.findById(1);
         Assertions.assertEquals("Mark", userRecovered.getName());
         Assertions.assertEquals("Coyle", userRecovered.getSurname());
+    }
+
+    @Test
+    void exceptionForDuplicatedEmailUsedForRegister() throws Exception {
+        var userDTO = UserRegisterFactory.createWithEmail("mark5@gmail.com");
+        var userDTODuplicated = UserRegisterFactory.createWithEmail("mark5@gmail.com");
+        userService.createUser(userDTO);
+        Assertions.assertThrows(DuplicationDataException.class, () -> userService.createUser(userDTODuplicated));
+
     }
     
 }
