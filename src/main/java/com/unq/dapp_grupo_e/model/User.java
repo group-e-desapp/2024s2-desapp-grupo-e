@@ -68,6 +68,9 @@ public class User {
     }
 
     public void setEmail(String email) {
+        if (email.length() > 70) {
+            throw new InvalidLengthException("The email given is not valid due to its extension");
+        }
         if (!CharacterValidator.validateEmail(email)) {
             throw new InvalidEmailException("The email given is not valid");
         }
@@ -123,11 +126,11 @@ public class User {
 
     // Steps for the moment i have some of the operations of transaction
     public void countANewOperation() {
-        this.amountSetOperations =+ 1;
+        this.amountSetOperations += 1;
     }
 
     public void countASucceddedOperation() {
-        this.amountSuccededOperations =+ 1;
+        this.amountSuccededOperations += 1;
     }
 
     public Integer reputation() {

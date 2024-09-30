@@ -31,38 +31,38 @@ class UserTests {
     }
 
     @Test
-    void exceptionForInvalidShortLengthName() throws Exception {
+    void exceptionForInvalidShortLengthName() {
         var user = new User();
         Assertions.assertThrows(InvalidLengthException.class, () -> user.setName("IA"));
     }
 
     @Test
-    void exceptionForInvalidLongLengthName() throws Exception {
+    void exceptionForInvalidLongLengthName() {
         var user = new User();
         Assertions.assertThrows(InvalidLengthException.class, () -> user.setName("AABBCCDDEEFFGGHHIIJJKKLLMMNNOOP"));
     }
 
     @Test
-    void exceptionForInvalidLengthForCVU() throws Exception {
+    void exceptionForInvalidLengthForCVU() {
         var user = new User();
         Assertions.assertThrows(InvalidLengthException.class, () -> user.setCvu("1234567890"));
     }
 
     @Test
-    void exceptionForInvalidLengthForWalletAddress() throws Exception {
+    void exceptionForInvalidLengthForWalletAddress() {
         var user = new User();
         Assertions.assertThrows(InvalidLengthException.class, () -> user.setWalletAddress("7654321"));
     }
 
     @Test
-    void exceptionForInvalidLengthForPassword() throws Exception {
+    void exceptionForInvalidLengthForPassword() {
         var user = new User();
         Assertions.assertThrows(InvalidLengthException.class, () -> user.setPassword("Mark#"));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"#asdfg", "#QWERT", "Wasdfg"})
-    void exceptionForMissingATypeOfCharacterInPassword(String passwordTry) throws Exception {
+    void exceptionForMissingATypeOfCharacterInPassword(String passwordTry) {
         var user = new User();
         Assertions.assertThrows(InvalidCharactersException.class, () -> user.setPassword("passwordTry"));
     }

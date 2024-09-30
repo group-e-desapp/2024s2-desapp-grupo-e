@@ -1,6 +1,5 @@
 package com.unq.dapp_grupo_e.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.unq.dapp_grupo_e.model.CryptoCurrency;
@@ -11,9 +10,12 @@ import com.unq.dapp_grupo_e.utilities.CurrentDateAndTime;
 @Service
 public class CryptoCurrencyServiceImpl implements CryptoCurrencyService {
 
+    private final BinanceService binanceService;
+
     
-    @Autowired
-    private BinanceService binanceService;
+    public CryptoCurrencyServiceImpl(BinanceService binanceService) {
+        this.binanceService = binanceService;
+    }
 
     @Override
     public CryptoCurrency getCryptoValue(String symbol) {

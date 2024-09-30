@@ -11,7 +11,7 @@ import com.unq.dapp_grupo_e.model.CryptoCurrencyEnum;
 import com.unq.dapp_grupo_e.service.CryptoCurrencyService;
 
 @SpringBootTest
-public class CryptoCurrencyTests {
+class CryptoCurrencyTests {
 
     @Autowired
     private CryptoCurrencyService cryptoService;

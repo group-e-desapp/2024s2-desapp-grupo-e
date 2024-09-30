@@ -4,6 +4,10 @@ import java.util.regex.Pattern;
 
 public class CharacterValidator {
 
+    private CharacterValidator() {
+        throw new IllegalStateException("Utility class");
+      }
+
     private static final Pattern EMAIL_PATTERN = Pattern.compile("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$");
     private static final Pattern PASSWORD_PATTERN = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=<>|?°]).+$");
 

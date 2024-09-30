@@ -7,7 +7,7 @@ public class CurrentDateAndTime {
 
     private static final String DATE_FORMAT = "dd/MM/yyyy HH:mm:ss";
 
-    private CurrentDateAndTime() {};
+    private CurrentDateAndTime() {}
 
     public static Date getNewDate() {
         return new Date();
@@ -15,7 +15,7 @@ public class CurrentDateAndTime {
 
     public static String getNewDateAsString() {
         SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
-        return formatter.format(getNewDate()); 
+        return formatter.format(getNewDate());
     }
     
 }

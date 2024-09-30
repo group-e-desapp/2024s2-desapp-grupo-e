@@ -11,7 +11,7 @@ import com.unq.dapp_grupo_e.model.CryptoCurrency;
 public class BinanceService {
 
     private final RestTemplate restTemplate;
-    private final String BINANCEURL = "https://api.binance.com/api/v3/ticker/"; 
+    private static final String BINANCEURL = "https://api.binance.com/api/v3/ticker/"; 
 
     public BinanceService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;

@@ -11,6 +11,7 @@ public class UserRegisterDTO {
     static final String MESSAGEMINMAX = "This field has a limit of 30 characters and a required minimun of 3 characters";
 
     @NotNull
+    @Size(max = 70, message = "Email surpassed the expected length")
     @Email(message = "The given value is not a valid e-mail")
     public String email;
 
