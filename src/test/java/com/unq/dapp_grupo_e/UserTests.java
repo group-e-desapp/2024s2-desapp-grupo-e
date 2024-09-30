@@ -69,7 +69,7 @@ class UserTests {
 
     @ParameterizedTest
     @ValueSource(strings = {"mark05com", "#mark05.com" ,"@gmail.com",  "mark05gmail.com"})
-    void exceptionForInvalidEmail(String emailTry) throws Exception {
+    void exceptionForInvalidEmail(String emailTry) {
         var user = new User();
         Assertions.assertThrows(InvalidEmailException.class, () -> user.setEmail(emailTry));
     }
@@ -104,7 +104,7 @@ class UserTests {
     }
 
     @Test
-    void exceptionForDuplicatedEmailUsedForRegister() throws Exception {
+    void exceptionForDuplicatedEmailUsedForRegister() {
         var userDTO = UserRegisterFactory.createWithEmail("mark5@gmail.com");
         var userDTODuplicated = UserRegisterFactory.createWithEmail("mark5@gmail.com");
         userService.createUser(userDTO);

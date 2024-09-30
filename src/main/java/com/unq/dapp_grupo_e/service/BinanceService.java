@@ -11,14 +11,14 @@ import com.unq.dapp_grupo_e.model.CryptoCurrency;
 public class BinanceService {
 
     private final RestTemplate restTemplate;
-    private static final String BINANCEURL = "https://api.binance.com/api/v3/ticker/"; 
+    private static final String BINANCE_URL = "https://api.binance.com/api/v3/ticker/"; 
 
     public BinanceService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
     public CryptoCurrency getPrice(String symbol) {
-        String fullUrl = BINANCEURL + "price?symbol=" + symbol;
+        String fullUrl = BINANCE_URL + "price?symbol=" + symbol;
         ResponseEntity<CryptoCurrency> response =  restTemplate.getForEntity(fullUrl, CryptoCurrency.class);
         return response.getBody();
     }
