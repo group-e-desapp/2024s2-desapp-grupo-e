@@ -144,7 +144,8 @@ class UserTests {
     @Test
     void exceptionForInvalidEmailForRegister() {
         var userDTO = UserRegisterFactory.createWithEmail("mark5@gmailcom");
-        Assertions.assertThrows(InvalidEmailException.class, () -> userService.createUser(userDTO));
+        InvalidEmailException exception = Assertions.assertThrows(InvalidEmailException.class, () -> userService.createUser(userDTO));
+        Assertions.assertEquals("The email given is not valid", exception.getMessage());
     }
 
     @Test

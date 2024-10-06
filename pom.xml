@@ -31,7 +31,7 @@
 		<java.version>17</java.version>
 		<sonar.organization>desapp-grupo-e</sonar.organization>
 	  	<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-		<sonar.coverage.exclusions>**/controller/**, !**/controller/dto**, **/service/**, !**/service/impl/**</sonar.coverage.exclusions>
+		<sonar.coverage.exclusions>**/controller/**, !**/controller/dto**, **/utilities/**</sonar.coverage.exclusions>
     	<sonar.organization>group-e-desapp</sonar.organization>
     	<sonar.projectKey>group-e-desapp_2024s2-desapp-grupo-e</sonar.projectKey>
     	<sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
