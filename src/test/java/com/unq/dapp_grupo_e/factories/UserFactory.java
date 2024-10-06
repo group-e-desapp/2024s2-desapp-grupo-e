@@ -14,12 +14,10 @@ public class UserFactory {
         user.setSurname("non");
         user.setCvu("1011121314151617181920");
         user.setWalletAddress("12349876");
-        user.countANewOperation();
-        user.countASucceddedOperation();
         return user;
     }
 
-    public static User createWithSomeOperations(Integer operationsSetted, Integer operationsSuccedded) {
+    public static User createWithSomeOperations(Integer operationsSetted, Integer reputationPoints) {
         var user = new User();
         user.setEmail("non@gmail.com");
         user.setPassword("Non&non");
@@ -28,7 +26,7 @@ public class UserFactory {
         user.setCvu("1011121314151617181920");
         user.setWalletAddress("12349876");
         user.setAmountSetOperations(operationsSetted);
-        user.setAmountSuccededOperations(operationsSuccedded);
+        user.setReputationPoints(reputationPoints);
         return user;
     }
     

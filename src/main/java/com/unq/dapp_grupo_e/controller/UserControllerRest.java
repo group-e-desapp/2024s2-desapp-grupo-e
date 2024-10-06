@@ -4,8 +4,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.validation.Valid;
-
 import com.unq.dapp_grupo_e.controller.dto.UserRegisterDTO;
 import com.unq.dapp_grupo_e.service.UserService;
 
@@ -32,9 +30,8 @@ public class UserControllerRest {
     @ApiResponse(responseCode = "400")
     @Operation(summary = "Register of a new user")
     @PostMapping("/register")
-    public ResponseEntity<Object> createUser(@Valid @RequestBody UserRegisterDTO user) {
+    public ResponseEntity<Object> createUser(@RequestBody UserRegisterDTO user) {
         var response = userService.createUser(user);
-        
         return ResponseEntity.ok(response);
     }
     

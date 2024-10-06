@@ -1,5 +1,7 @@
 package com.unq.dapp_grupo_e;
 
+import java.util.NoSuchElementException;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,6 +45,18 @@ class UserTests {
     }
 
     @Test
+    void exceptionForInvalidShortLengthSurname() {
+        var user = new User();
+        Assertions.assertThrows(InvalidLengthException.class, () -> user.setSurname("IA"));
+    }
+
+    @Test
+    void exceptionForInvalidLongLengthSurname() {
+        var user = new User();
+        Assertions.assertThrows(InvalidLengthException.class, () -> user.setSurname("AABBCCDDEEFFGGHHIIJJKKLLMMNNOOP"));
+    }
+
+    @Test
     void exceptionForInvalidLengthForCVU() {
         var user = new User();
         Assertions.assertThrows(InvalidLengthException.class, () -> user.setCvu("1234567890"));
@@ -75,10 +89,24 @@ class UserTests {
     }
  
     @Test
-    void checkReputationOfUser() {
-        var userWithOperations = UserFactory.createWithSomeOperations(40, 30);
-        Assertions.assertEquals(75, userWithOperations.reputation());
+    void checkReputationWithoutOperationsDone() {
+        var userWithoutOperations = UserFactory.createWithSomeOperations(0, 0);
+        Assertions.assertEquals("No operations realized", userWithoutOperations.reputation());
     }
+
+    @Test
+    void checkReputationOfUser() {
+        var userWithOperations = UserFactory.createWithSomeOperations(8, 40);
+        Assertions.assertEquals("5", userWithOperations.reputation());
+    }
+
+    @Test
+    void checkAddedOperationsForReputationOfUser() {
+        var userWithOperations = UserFactory.createWithSomeOperations(4, 45);
+        userWithOperations.countANewOperation();
+        Assertions.assertEquals("9", userWithOperations.reputation());
+    }
+
 
     @Test
     void checkResponseUserOfRegister() {
@@ -109,7 +137,11 @@ class UserTests {
         var userDTODuplicated = UserRegisterFactory.createWithEmail("mark5@gmail.com");
         userService.createUser(userDTO);
         Assertions.assertThrows(DuplicationDataException.class, () -> userService.createUser(userDTODuplicated));
+    }
 
+    @Test
+    void exceptionForInvalidUserIdSearched() {
+        Assertions.assertThrows(NoSuchElementException.class, () -> userService.findById(3));
     }
     
 }

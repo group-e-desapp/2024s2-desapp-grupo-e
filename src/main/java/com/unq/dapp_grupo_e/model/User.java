@@ -34,7 +34,7 @@ public class User {
     @Column
     private Integer amountSetOperations = 0;
     @Column
-    private Integer amountSuccededOperations = 0;
+    private Integer reputationPoints = 0;
 
     public Long getIdUser() {
         return idUser;
@@ -96,7 +96,7 @@ public class User {
             throw new InvalidLengthException("The password given need to have at least 6 characters");
         }
         if (!CharacterValidator.validatePassword(password)) {
-            throw new InvalidCharactersException("The password need to have at least 1 lowercase,1 uppercase and 1 special character");
+            throw new InvalidCharactersException("The password need to have at least 1 lowercase, 1 uppercase and 1 special character");
         }
         this.password = password;
     }
@@ -119,24 +119,26 @@ public class User {
     public void setAmountSetOperations(Integer amountSetOperations) {
         this.amountSetOperations = amountSetOperations;
     }
-    public void setAmountSuccededOperations(Integer amountSuccededOperations) {
-        this.amountSuccededOperations = amountSuccededOperations;
+
+    public void setReputationPoints(Integer reputationPoints) {
+        this.reputationPoints = reputationPoints;
     }
+    
 
 
-    // Steps for the moment i have some of the operations of transaction
     public void countANewOperation() {
         this.amountSetOperations += 1;
     }
 
-    public void countASucceddedOperation() {
-        this.amountSuccededOperations += 1;
+    public String reputation() {
+        if (this.amountSetOperations == 0) {
+            return "No operations realized";
+        } else {
+            Integer resultReputation = this.reputationPoints / this.amountSetOperations;
+            return resultReputation.toString();
+        }
     }
-
-    public Integer reputation() {
-        Float calculation = (float) this.amountSuccededOperations / this.amountSetOperations;
-        return (int) (calculation * 100);
-    }
+    
 
     
     

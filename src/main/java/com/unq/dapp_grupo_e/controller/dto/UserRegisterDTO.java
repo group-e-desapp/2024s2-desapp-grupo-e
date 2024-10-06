@@ -1,5 +1,7 @@
 package com.unq.dapp_grupo_e.controller.dto;
 
+import java.util.Arrays;
+import java.util.List;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -17,7 +19,7 @@ public class UserRegisterDTO {
 
     @Size(min = 6, max = 70, message = "Password must contain at least 6 characters")
     @NotNull
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z]).*$", message = "Password must contain at least one lowercase and one uppercase")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z]).*$", message = "Password must contain at least 1 lowercase, 1 uppercase and 1 special character")
     public String password;
 
     @Size(min = 3, max = 30, message = MESSAGEMINMAX)
@@ -35,5 +37,11 @@ public class UserRegisterDTO {
     @Size(min = 8, max = 8)
     @NotNull
     public String walletAddress;
+
+    public boolean validationOfEmptyFields() {
+        List<String> fields = Arrays.asList(this.name, this.surname, this.email, 
+                                            this.password, this.cvu, this.walletAddress);
+        return fields.stream().anyMatch(f -> f == null || f.isEmpty()); // 
+    }
 
 }
