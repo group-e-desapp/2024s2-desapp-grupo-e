@@ -18,8 +18,8 @@ public class DolarApiService {
 
     public Double getDolarCotization() {
         String consultURL = "https://dolarapi.com/v1/dolares/oficial";
-        DolarApiResponseDTO response = restTemplate.getForObject(consultURL, DolarApiResponseDTO.class);
         try {
+            DolarApiResponseDTO response = restTemplate.getForObject(consultURL, DolarApiResponseDTO.class);
             return response.getSale();
         } catch (NullPointerException exc) {
             throw new EntityNotFoundException("An unexpected error has ocurred from the query side, please try later");

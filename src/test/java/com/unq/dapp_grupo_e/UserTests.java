@@ -17,6 +17,7 @@ import com.unq.dapp_grupo_e.model.User;
 import com.unq.dapp_grupo_e.model.exceptions.DuplicationDataException;
 import com.unq.dapp_grupo_e.model.exceptions.InvalidCharactersException;
 import com.unq.dapp_grupo_e.model.exceptions.InvalidEmailException;
+import com.unq.dapp_grupo_e.model.exceptions.InvalidEmptyFieldException;
 import com.unq.dapp_grupo_e.model.exceptions.InvalidLengthException;
 import com.unq.dapp_grupo_e.service.UserService;
 
@@ -107,6 +108,7 @@ class UserTests {
         Assertions.assertEquals("9", userWithOperations.reputation());
     }
 
+    // Service side
 
     @Test
     void checkResponseUserOfRegister() {
@@ -137,6 +139,30 @@ class UserTests {
         var userDTODuplicated = UserRegisterFactory.createWithEmail("mark5@gmail.com");
         userService.createUser(userDTO);
         Assertions.assertThrows(DuplicationDataException.class, () -> userService.createUser(userDTODuplicated));
+    }
+
+    @Test
+    void exceptionForInvalidEmailForRegister() {
+        var userDTO = UserRegisterFactory.createWithEmail("mark5@gmailcom");
+        Assertions.assertThrows(InvalidEmailException.class, () -> userService.createUser(userDTO));
+    }
+
+    @Test
+    void exceptionForMissingCharactersInPasswordForRegister() {
+        var userDTO = UserRegisterFactory.createWithPassword("mark05#");
+        Assertions.assertThrows(InvalidCharactersException.class, () -> userService.createUser(userDTO));
+    }
+
+    @Test
+    void exceptionForInvalidLengthInNameForRegister() {
+        var userDTO = UserRegisterFactory.createWithName("AI");
+        Assertions.assertThrows(InvalidLengthException.class, () -> userService.createUser(userDTO));
+    }
+
+    @Test
+    void exceptionForEmptyFieldForRegister() {
+        var userDTO = UserRegisterFactory.createWithSurname("");
+        Assertions.assertThrows(InvalidEmptyFieldException.class, () -> userService.createUser(userDTO));
     }
 
     @Test
