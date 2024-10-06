@@ -11,8 +11,15 @@ import com.unq.dapp_grupo_e.model.Transaction;
 class TransactionTests {
 
     @Test
-    void validationOfPriceOfferForTransaction() {
+    void validationOfPriceOfferForTransactionLowerMargin() {
         Transaction transaction = TransactionFactory.createWithPrice((float) 103.4);
+        Double currentCryptoPriceInARS = 108.0;
+        Assertions.assertTrue(transaction.isAValidMarginForTransaction(currentCryptoPriceInARS));
+    }
+
+    @Test
+    void validationOfPriceOfferForTransactionUpperMargin() {
+        Transaction transaction = TransactionFactory.createWithPrice((float) 112.7);
         Double currentCryptoPriceInARS = 108.0;
         Assertions.assertTrue(transaction.isAValidMarginForTransaction(currentCryptoPriceInARS));
     }

@@ -21,7 +21,7 @@ public class ValidationExceptionHandler {
 
     @ExceptionHandler(InvalidLengthException.class)
     public ResponseEntity<Map<String, String>> handleLengthValidation(InvalidLengthException exc) {
-        return  new ResponseEntity<>(createResponseError(exc), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(createResponseError(exc), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(DuplicationDataException.class)
@@ -31,26 +31,26 @@ public class ValidationExceptionHandler {
 
     @ExceptionHandler(InvalidEmailException.class)
     public ResponseEntity<Map<String, String>> handleEmailValidation(InvalidEmailException exc) {
-        return  new ResponseEntity<>(createResponseError(exc), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(createResponseError(exc), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(InvalidCharactersException.class)
     public ResponseEntity<Map<String, String>> handleMissingCharacterValidation(InvalidCharactersException exc) {
-        return  new ResponseEntity<>(createResponseError(exc), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(createResponseError(exc), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(InvalidCurrencyException.class)
     public ResponseEntity<Map<String, String>> handleCryptoSymbolValidation(InvalidCurrencyException exc) {
-        return  new ResponseEntity<>(createResponseError(exc), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(createResponseError(exc), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(InvalidCryptoPriceOffer.class)
     public ResponseEntity<Map<String, String>> handlePriceOfferValidation(InvalidCryptoPriceOffer exc) {
-        return  new ResponseEntity<>(createResponseError(exc), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(createResponseError(exc), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(InvalidEmptyFieldException.class)
     public ResponseEntity<Map<String, String>> handleEmptyFieldValidation(InvalidEmptyFieldException exc) {
-        return new ResponseEntity<Map<String,String>>(createResponseError(exc), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(createResponseError(exc), HttpStatus.BAD_REQUEST);
     }
 }
