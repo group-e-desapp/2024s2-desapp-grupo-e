@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.unq.dapp_grupo_e.model.CryptoCurrency;
 import com.unq.dapp_grupo_e.model.CryptoCurrencyEnum;
+import com.unq.dapp_grupo_e.model.exceptions.InvalidCurrencyException;
 import com.unq.dapp_grupo_e.service.CryptoCurrencyService;
 
 @SpringBootTest
@@ -22,6 +23,24 @@ class CryptoCurrencyTests {
         CryptoCurrencyEnum cryptoSelected = CryptoCurrencyEnum.ADAUSDT;
         CryptoCurrency cryptoConsulted = cryptoService.getCryptoValue(cryptoSelected.name());
         Assertions.assertNotNull(cryptoConsulted.getPrice());
+    }
+
+    @Test
+    void checkSymbolBelongsToTheSymbolsRegistered() {
+        String nameSymbol = "CAKEUSDT";
+        Assertions.assertTrue(CryptoCurrencyEnum.isAValidCurrency(nameSymbol));
+    }
+
+    @Test
+    void checkSymbolDoesntBelongToTheSymbolsRegistered() {
+        String nameSymbol = "MyNewCoin";
+        Assertions.assertFalse(CryptoCurrencyEnum.isAValidCurrency(nameSymbol));
+    }
+
+    @Test
+    void exceptionForInvalidCurrencySymbol() {
+        String nameSymbol = "FalseCoin";
+        Assertions.assertThrows(InvalidCurrencyException.class, () -> CryptoCurrencyEnum.validateCrypto(nameSymbol));
     }
     
 }
