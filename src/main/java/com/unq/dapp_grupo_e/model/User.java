@@ -68,7 +68,7 @@ public class User {
     }
 
     public void setEmail(String email) {
-        if (email.length() > 70) {
+        if (email.length() > 50) {
             throw new InvalidLengthException("The email given is not valid due to its extension");
         }
         if (!CharacterValidator.validateEmail(email)) {

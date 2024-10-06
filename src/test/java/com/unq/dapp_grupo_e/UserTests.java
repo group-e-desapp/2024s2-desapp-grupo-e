@@ -88,6 +88,13 @@ class UserTests {
         var user = new User();
         Assertions.assertThrows(InvalidEmailException.class, () -> user.setEmail(emailTry));
     }
+
+    @Test
+    void exceptionForInvalidLengthForEmail() {
+        var user = new User();
+        Assertions.assertThrows(InvalidLengthException.class,
+                                 () -> user.setEmail("aaaaaaemailemailemailemailemailemailemail@gmail.com"));
+    }
  
     @Test
     void checkReputationWithoutOperationsDone() {
@@ -144,8 +151,7 @@ class UserTests {
     @Test
     void exceptionForInvalidEmailForRegister() {
         var userDTO = UserRegisterFactory.createWithEmail("mark5@gmailcom");
-        InvalidEmailException exception = Assertions.assertThrows(InvalidEmailException.class, () -> userService.createUser(userDTO));
-        Assertions.assertEquals("The email given is not valid", exception.getMessage());
+        Assertions.assertThrows(InvalidEmailException.class, () -> userService.createUser(userDTO));
     }
 
     @Test

@@ -13,11 +13,11 @@ public class UserRegisterDTO {
     static final String MESSAGEMINMAX = "This field has a limit of 30 characters and a required minimun of 3 characters";
 
     @NotNull
-    @Size(max = 70, message = "Email surpassed the expected length")
+    @Size(max = 50, message = "Email surpassed the expected length")
     @Email(message = "The given value is not a valid e-mail")
     public String email;
 
-    @Size(min = 6, max = 70, message = "Password must contain at least 6 characters")
+    @Size(min = 6, max = 50, message = "Password must contain at least 6 characters")
     @NotNull
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z]).*$", message = "Password must contain at least 1 lowercase, 1 uppercase and 1 special character")
     public String password;
