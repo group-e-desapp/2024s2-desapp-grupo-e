@@ -21,7 +21,7 @@ import com.unq.dapp_grupo_e.model.exceptions.InvalidEmptyFieldException;
 import com.unq.dapp_grupo_e.model.exceptions.InvalidLengthException;
 import com.unq.dapp_grupo_e.service.UserService;
 
-@SpringBootTest
+@SpringBootTest(properties = "spring.main.web-application-type=none")
 class UserTests {
 
     @Autowired

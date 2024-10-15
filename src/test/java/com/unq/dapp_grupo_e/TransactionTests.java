@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.unq.dapp_grupo_e.factories.TransactionFactory;
 import com.unq.dapp_grupo_e.model.Transaction;
 
-@SpringBootTest
+@SpringBootTest(properties = "spring.main.web-application-type=none")
 class TransactionTests {
 
     @Test

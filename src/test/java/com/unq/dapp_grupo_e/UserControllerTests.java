@@ -16,7 +16,7 @@ import com.unq.dapp_grupo_e.factories.UserRegisterFactory;
 import com.unq.dapp_grupo_e.service.UserService;
 
 @AutoConfigureMockMvc
-@SpringBootTest
+@SpringBootTest(properties = "spring.main.web-application-type=none")
 class UserControllerTests {
 
     @Autowired

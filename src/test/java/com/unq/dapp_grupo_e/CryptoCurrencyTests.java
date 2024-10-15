@@ -11,7 +11,7 @@ import com.unq.dapp_grupo_e.model.CryptoCurrencyEnum;
 import com.unq.dapp_grupo_e.model.exceptions.InvalidCurrencyException;
 import com.unq.dapp_grupo_e.service.CryptoCurrencyService;
 
-@SpringBootTest
+@SpringBootTest(properties = "spring.main.web-application-type=none")
 class CryptoCurrencyTests {
 
     @Autowired
