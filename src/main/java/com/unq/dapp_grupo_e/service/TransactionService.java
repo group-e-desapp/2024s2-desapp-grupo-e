@@ -11,4 +11,6 @@ public interface TransactionService {
     Transaction createTransaction(TransactionFormDTO transactionFrom);
 
     ArrayList<Transaction> getAllTransactions();
+
+    void deleteAllTransactions();
 }

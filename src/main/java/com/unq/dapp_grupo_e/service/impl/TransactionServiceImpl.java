@@ -50,5 +50,11 @@ public class TransactionServiceImpl implements TransactionService  {
         transactionRepo.findAll().forEach(transactions::add);
         return transactions;
     }
+
+    @Override
+    public void deleteAllTransactions() {
+        transactionRepo.deleteAll();
+        transactionRepo.resetIdTransaction();
+    }
     
 }

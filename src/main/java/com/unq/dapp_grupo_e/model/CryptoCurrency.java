@@ -14,7 +14,7 @@ public class CryptoCurrency implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idSymbol;
     private String symbol;
-    private Float price;
+    private Double price;
     private String lastUpdateDateAndTime;
 
     public String getSymbol() {
@@ -23,10 +23,10 @@ public class CryptoCurrency implements Serializable {
     public void setSymbol(String symbol) {
         this.symbol = symbol;
     }
-    public Float getPrice() {
+    public Double getPrice() {
         return price;
     }
-    public void setPrice(Float price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
     public String getLastUpdateDateAndTime() {

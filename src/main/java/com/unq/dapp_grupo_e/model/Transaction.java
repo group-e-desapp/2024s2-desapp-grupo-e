@@ -13,7 +13,7 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idExchange;
-    private Integer idUser = 15;
+    private Integer idUser = 5;
     private String symbolTrade;
     private Float cryptoNominalValue;
     private Double priceOffered;

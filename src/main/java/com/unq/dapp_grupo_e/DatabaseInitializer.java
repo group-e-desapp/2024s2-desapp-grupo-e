@@ -20,10 +20,10 @@ import com.unq.dapp_grupo_e.utilities.factories.UserFactory;
 public class DatabaseInitializer {
 
     @Bean
-    public CommandLineRunner initializeDatabase(UserService userService, 
-                                        UserRepository userRepo, 
-                                        TransactionRepository transactionRepo,
+    public CommandLineRunner initializeDatabase(UserService userService,
                                         CryptoCurrencyService cryptoService,
+                                        UserRepository userRepo,
+                                        TransactionRepository transactionRepo,
                                         DolarApiService dolarApiService) {
         
         return args -> {
