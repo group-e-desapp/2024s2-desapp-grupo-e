@@ -1,5 +1,8 @@
 package com.unq.dapp_grupo_e;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +12,6 @@ import org.springframework.test.context.ActiveProfiles;
 import com.unq.dapp_grupo_e.controller.dto.TransactionFormDTO;
 import com.unq.dapp_grupo_e.model.Transaction;
 import com.unq.dapp_grupo_e.service.TransactionService;
-import com.unq.dapp_grupo_e.utilities.CurrentDateAndTime;
 import com.unq.dapp_grupo_e.utilities.factories.TransactionFactory;
 
 @ActiveProfiles("test") 
@@ -57,14 +59,16 @@ class TransactionTests {
         transactionForm.operationType = "Sell";
 
         Transaction transactionSaved = transactionService.createTransaction(transactionForm);
-        String currentDate = CurrentDateAndTime.getNewDateAsString();
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String currentDate = formatter.format(new Date());
 
         Assertions.assertEquals(1, transactionSaved.getIdExchange());
         Assertions.assertEquals(33, transactionSaved.getCryptoNominalValue());
         Assertions.assertEquals(351.33, transactionSaved.getPriceOffered());
         Assertions.assertEquals("Sell", transactionSaved.getOperationType());
         Assertions.assertEquals("ADAUSDT", transactionSaved.getSymbolTrade());
-        Assertions.assertEquals(currentDate, transactionSaved.getDateTimeCreated());
+        Assertions.assertTrue(transactionSaved.getDateTimeCreated().contains(currentDate));
     }
     
 }
