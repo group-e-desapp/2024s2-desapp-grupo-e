@@ -4,7 +4,7 @@ import com.unq.dapp_grupo_e.model.Transaction;
 
 public class TransactionFactory {
 
-    public static Transaction createWithPrice(Float priceOffered) {
+    public static Transaction createWithPrice(Double priceOffered) {
         var transaction = new Transaction();
         transaction.setSymbolTrade("ADAUSDT");
         transaction.setCryptoNominalValue((float) 10.0);
@@ -13,7 +13,7 @@ public class TransactionFactory {
         return transaction;
     }
 
-    public static Transaction createWithPriceAndNominalValue(Float priceOffered, Float nominalValue) {
+    public static Transaction createWithPriceAndNominalValue(Double priceOffered, Float nominalValue) {
         var transaction = new Transaction();
         transaction.setSymbolTrade("ADAUSDT");
         transaction.setCryptoNominalValue(nominalValue);

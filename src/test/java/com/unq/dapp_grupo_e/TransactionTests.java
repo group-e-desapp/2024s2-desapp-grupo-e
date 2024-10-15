@@ -12,21 +12,21 @@ class TransactionTests {
 
     @Test
     void validationOfPriceOfferForTransactionLowerMargin() {
-        Transaction transaction = TransactionFactory.createWithPrice((float) 103.4);
+        Transaction transaction = TransactionFactory.createWithPrice((double) 103.4);
         Double currentCryptoPriceInARS = 108.0;
         Assertions.assertTrue(transaction.isAValidMarginForTransaction(currentCryptoPriceInARS));
     }
 
     @Test
     void validationOfPriceOfferForTransactionUpperMargin() {
-        Transaction transaction = TransactionFactory.createWithPrice((float) 112.7);
+        Transaction transaction = TransactionFactory.createWithPrice((double) 112.7);
         Double currentCryptoPriceInARS = 108.0;
         Assertions.assertTrue(transaction.isAValidMarginForTransaction(currentCryptoPriceInARS));
     }
 
     @Test
     void checkOfTotalSumOfOperation() {
-        Transaction transaction = TransactionFactory.createWithPriceAndNominalValue((float) 520.0, (float) 10.0);
+        Transaction transaction = TransactionFactory.createWithPriceAndNominalValue((double) 520.0, (float) 10.0);
         Assertions.assertEquals((float) 5200.0, transaction.totalSumOfOperation());
     }
     

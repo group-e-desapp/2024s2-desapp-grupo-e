@@ -2,23 +2,27 @@ package com.unq.dapp_grupo_e.controller.dto;
 
 import com.unq.dapp_grupo_e.model.Transaction;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 
 public class TransactionFormDTO {
 
     @NotNull
+    @Schema(example = "BTCUSDT")
     public String symbolCrypto;
     @NotNull
+    @Schema(example = "Sell")
     public String operationType;
     @NotNull
+    @Schema(example = "25")
     public Float cryptoNominalValue;
     @NotNull
-    public Float priceOffered;
+    @Schema(example = "531.5")
+    public Double priceOffered;
 
 
     public Transaction toModel() {
         var createdTransaction = new Transaction();
-        createdTransaction.setIdUser((long) 1);
         createdTransaction.setSymbolTrade(symbolCrypto);
         createdTransaction.setOperationType(operationType);
         createdTransaction.setCryptoNominalValue(cryptoNominalValue);

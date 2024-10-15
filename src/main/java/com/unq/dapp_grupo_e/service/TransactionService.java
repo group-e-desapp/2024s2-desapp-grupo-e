@@ -1,11 +1,14 @@
 package com.unq.dapp_grupo_e.service;
 
+import java.util.ArrayList;
+
 import com.unq.dapp_grupo_e.controller.dto.TransactionFormDTO;
+import com.unq.dapp_grupo_e.model.Transaction;
 
 public interface TransactionService {
 
 
-    void createTransaction(TransactionFormDTO transactionFrom);
+    Transaction createTransaction(TransactionFormDTO transactionFrom);
 
-    
+    ArrayList<Transaction> getAllTransactions();
 }

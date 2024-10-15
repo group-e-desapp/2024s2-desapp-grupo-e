@@ -36,6 +36,21 @@ public class User {
     @Column
     private Integer reputationPoints = 0;
 
+    public User() {};
+
+    public User(Long id, String name, String surname, String email, String password, 
+                String cvu, String walletAddress, Integer amountOperations, Integer reputation) {
+        this.setIdUser(id);
+        this.setName(name);
+        this.setSurname(surname);
+        this.setEmail(email);
+        this.setPassword(password);
+        this.setCvu(cvu);
+        this.setWalletAddress(walletAddress);
+        this.setAmountSetOperations(amountOperations);
+        this.setReputationPoints(reputation);
+    }
+
     public Long getIdUser() {
         return idUser;
     }

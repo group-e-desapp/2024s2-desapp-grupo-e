@@ -1,13 +1,18 @@
 package com.unq.dapp_grupo_e.model;
 
+import java.io.Serializable;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class CryptoCurrency {
+public class CryptoCurrency implements Serializable {
 
     @Id
-    private String idSymbol;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idSymbol;
     private String symbol;
     private Float price;
     private String lastUpdateDateAndTime;
