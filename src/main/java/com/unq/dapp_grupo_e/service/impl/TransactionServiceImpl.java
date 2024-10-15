@@ -46,8 +46,8 @@ public class TransactionServiceImpl implements TransactionService  {
 
     @Override
     public ArrayList<Transaction> getAllTransactions() {
-        ArrayList<Transaction> transactions = new ArrayList<Transaction>();
-        transactionRepo.findAll().forEach(transaction -> transactions.add(transaction) );
+        ArrayList<Transaction> transactions = new ArrayList<>();
+        transactionRepo.findAll().forEach(transactions::add);
         return transactions;
     }
     

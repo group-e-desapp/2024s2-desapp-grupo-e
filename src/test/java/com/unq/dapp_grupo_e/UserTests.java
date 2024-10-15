@@ -12,8 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.unq.dapp_grupo_e.controller.dto.UserRegisterResponseDTO;
-import com.unq.dapp_grupo_e.factories.UserFactory;
-import com.unq.dapp_grupo_e.factories.UserRegisterFactory;
 import com.unq.dapp_grupo_e.model.User;
 import com.unq.dapp_grupo_e.model.exceptions.DuplicationDataException;
 import com.unq.dapp_grupo_e.model.exceptions.InvalidCharactersException;
@@ -21,6 +19,8 @@ import com.unq.dapp_grupo_e.model.exceptions.InvalidEmailException;
 import com.unq.dapp_grupo_e.model.exceptions.InvalidEmptyFieldException;
 import com.unq.dapp_grupo_e.model.exceptions.InvalidLengthException;
 import com.unq.dapp_grupo_e.service.UserService;
+import com.unq.dapp_grupo_e.utilities.factories.UserFactory;
+import com.unq.dapp_grupo_e.utilities.factories.UserRegisterFactory;
 
 @ActiveProfiles("test") 
 @SpringBootTest

@@ -1,4 +1,4 @@
-package com.unq.dapp_grupo_e.factories;
+package com.unq.dapp_grupo_e.utilities.factories;
 
 import com.unq.dapp_grupo_e.model.Transaction;
 

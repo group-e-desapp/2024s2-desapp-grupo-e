@@ -13,8 +13,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.unq.dapp_grupo_e.factories.UserRegisterFactory;
 import com.unq.dapp_grupo_e.service.UserService;
+import com.unq.dapp_grupo_e.utilities.factories.UserRegisterFactory;
 
 @ActiveProfiles("test") 
 @AutoConfigureMockMvc

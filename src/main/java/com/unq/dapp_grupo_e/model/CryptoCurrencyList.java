@@ -1,14 +1,13 @@
 package com.unq.dapp_grupo_e.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.unq.dapp_grupo_e.model.exceptions.InvalidCurrencyException;
 
 public class CryptoCurrencyList {
 
-    public ArrayList<CryptoCurrency> cryptos = new ArrayList<>();
-
-    //public CryptoCurrencyList() { }
+    public static final List<CryptoCurrency> cryptos = new ArrayList<>();
 
     public void addCrypto(CryptoCurrency crypto) {
         cryptos.add(crypto);

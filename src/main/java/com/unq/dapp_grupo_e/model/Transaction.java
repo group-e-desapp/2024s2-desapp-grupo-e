@@ -21,7 +21,7 @@ public class Transaction {
     private String dateTimeCreated;
 
 
-    public Transaction() {};
+    public Transaction() {}
 
     public Transaction(Long idExc, Integer idUser, String symbol, Float cryptoNominalValue,
     Double priceOffered, String operationType) {
