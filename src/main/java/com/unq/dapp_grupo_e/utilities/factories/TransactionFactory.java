@@ -4,6 +4,10 @@ import com.unq.dapp_grupo_e.model.Transaction;
 
 public class TransactionFactory {
 
+    private TransactionFactory() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static Transaction createWithPrice(Double priceOffered) {
         var transaction = new Transaction();
         transaction.setSymbolTrade("ADAUSDT");
