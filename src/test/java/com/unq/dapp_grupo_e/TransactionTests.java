@@ -3,11 +3,13 @@ package com.unq.dapp_grupo_e;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.unq.dapp_grupo_e.factories.TransactionFactory;
 import com.unq.dapp_grupo_e.model.Transaction;
 
-@SpringBootTest(properties = "spring.main.web-application-type=none")
+@ActiveProfiles("test") 
+@SpringBootTest
 class TransactionTests {
 
     @Test

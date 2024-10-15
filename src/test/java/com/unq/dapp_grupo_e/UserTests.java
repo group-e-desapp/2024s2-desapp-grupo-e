@@ -9,6 +9,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.unq.dapp_grupo_e.controller.dto.UserRegisterResponseDTO;
 import com.unq.dapp_grupo_e.factories.UserFactory;
@@ -21,7 +22,8 @@ import com.unq.dapp_grupo_e.model.exceptions.InvalidEmptyFieldException;
 import com.unq.dapp_grupo_e.model.exceptions.InvalidLengthException;
 import com.unq.dapp_grupo_e.service.UserService;
 
-@SpringBootTest(properties = "spring.main.web-application-type=none")
+@ActiveProfiles("test") 
+@SpringBootTest
 class UserTests {
 
     @Autowired

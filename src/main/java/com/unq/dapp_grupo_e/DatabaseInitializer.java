@@ -3,6 +3,7 @@ package com.unq.dapp_grupo_e;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import com.unq.dapp_grupo_e.model.CryptoCurrencyList;
 import com.unq.dapp_grupo_e.model.Transaction;
@@ -14,10 +15,11 @@ import com.unq.dapp_grupo_e.service.DolarApiService;
 import com.unq.dapp_grupo_e.service.UserService;
 
 @Configuration
+@Profile("prod")
 public class DatabaseInitializer {
 
     @Bean
-    CommandLineRunner initializeDatabase(UserService userService, 
+    public CommandLineRunner initializeDatabase(UserService userService, 
                                         UserRepository userRepo, 
                                         TransactionRepository transactionRepo,
                                         CryptoCurrencyService cryptoService,

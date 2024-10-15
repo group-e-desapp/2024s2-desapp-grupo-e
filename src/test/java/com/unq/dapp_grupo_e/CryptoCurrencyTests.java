@@ -5,13 +5,15 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledIfSystemProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.unq.dapp_grupo_e.model.CryptoCurrency;
 import com.unq.dapp_grupo_e.model.CryptoCurrencyEnum;
 import com.unq.dapp_grupo_e.model.exceptions.InvalidCurrencyException;
 import com.unq.dapp_grupo_e.service.CryptoCurrencyService;
 
-@SpringBootTest(properties = "spring.main.web-application-type=none")
+@ActiveProfiles("test") 
+@SpringBootTest
 class CryptoCurrencyTests {
 
     @Autowired
