@@ -17,7 +17,7 @@ public class BinanceService {
         this.restTemplate = restTemplate;
     }
 
-    public CryptoCurrency getPrice(String symbol) {
+    public CryptoCurrency getCrypto(String symbol) {
         String fullUrl = BINANCE_URL + "price?symbol=" + symbol;
         ResponseEntity<CryptoCurrency> response =  restTemplate.getForEntity(fullUrl, CryptoCurrency.class);
         return response.getBody();

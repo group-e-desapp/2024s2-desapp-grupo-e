@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledIfSystemProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -48,6 +49,7 @@ class TransactionTests {
         Assertions.assertEquals((float) 5200.0, transaction.totalSumOfOperation());
     }
 
+    @EnabledIfSystemProperty(named = "enable.binance.tests", matches = "true")
     @Test
     void checkTransactionDataSaved() {
         transactionService.deleteAllTransactions();

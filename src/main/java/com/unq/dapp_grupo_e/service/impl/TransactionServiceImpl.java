@@ -31,7 +31,7 @@ public class TransactionServiceImpl implements TransactionService  {
     public Transaction createTransaction(TransactionFormDTO transactionForm) {
         var symbolCrypto = transactionForm.symbolCrypto;
         CryptoCurrencyEnum.validateCrypto(symbolCrypto);
-        var cryptoPrice = binanceService.getPrice(symbolCrypto).getPrice();
+        var cryptoPrice = binanceService.getCrypto(symbolCrypto).getPrice();
 
         Double cotizationToARS = dolarApiService.getDolarCotization();
         Transaction transaction = transactionForm.toModel();
