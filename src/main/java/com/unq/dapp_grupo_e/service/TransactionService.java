@@ -3,6 +3,7 @@ package com.unq.dapp_grupo_e.service;
 import java.util.ArrayList;
 
 import com.unq.dapp_grupo_e.controller.dto.TransactionFormDTO;
+import com.unq.dapp_grupo_e.model.CryptoVolume;
 import com.unq.dapp_grupo_e.model.Transaction;
 
 public interface TransactionService {
@@ -13,4 +14,6 @@ public interface TransactionService {
     ArrayList<Transaction> getAllTransactions();
 
     void deleteAllTransactions();
+
+    CryptoVolume getCryptoVolumeOfUserBetweenDates(Integer userId, String startDate, String endDate);
 }

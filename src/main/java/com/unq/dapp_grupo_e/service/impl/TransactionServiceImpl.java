@@ -1,11 +1,15 @@
 package com.unq.dapp_grupo_e.service.impl;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.unq.dapp_grupo_e.controller.dto.TransactionFormDTO;
+import com.unq.dapp_grupo_e.controller.dto.TransactionSummaryDTO;
+import com.unq.dapp_grupo_e.model.CryptoActive;
 import com.unq.dapp_grupo_e.model.CryptoCurrencyEnum;
+import com.unq.dapp_grupo_e.model.CryptoVolume;
 import com.unq.dapp_grupo_e.model.Transaction;
 import com.unq.dapp_grupo_e.model.exceptions.InvalidCryptoPriceOffer;
 import com.unq.dapp_grupo_e.repository.TransactionRepository;
@@ -13,6 +17,7 @@ import com.unq.dapp_grupo_e.service.BinanceService;
 import com.unq.dapp_grupo_e.service.DolarApiService;
 import com.unq.dapp_grupo_e.service.TransactionService;
 import com.unq.dapp_grupo_e.utilities.CurrentDateAndTime;
+
 
 @Service
 public class TransactionServiceImpl implements TransactionService  {
@@ -55,6 +60,26 @@ public class TransactionServiceImpl implements TransactionService  {
     public void deleteAllTransactions() {
         transactionRepo.deleteAll();
         transactionRepo.resetIdTransaction();
+    }
+
+    @Override
+    public CryptoVolume getCryptoVolumeOfUserBetweenDates(Integer userId, String startDate, String endDate) {
+        CryptoVolume responseVolume = new CryptoVolume();
+
+        List<TransactionSummaryDTO> listCryptoActives = transactionRepo.getTotalNominalValuesOfUserBetweenDates(userId, startDate, endDate);
+        Double cotizationToARS = dolarApiService.getDolarCotization();
+        System.out.println(listCryptoActives.size());
+        for (TransactionSummaryDTO active:listCryptoActives) {
+            Double cryptoPrice = binanceService.getCrypto(active.getSymbolTrade()).getPrice();
+            responseVolume.addCryptoActive(new CryptoActive(active.getSymbolTrade(), 
+                                                            active.getTotalNominalValue(), 
+                                                            cryptoPrice * cotizationToARS));
+        }
+        responseVolume.calculateTotalInARS();
+        responseVolume.calculateTotalInUSD(cotizationToARS);
+        
+        return responseVolume;
+
     }
     
 }

@@ -29,5 +29,15 @@ public class TransactionFormDTO {
         createdTransaction.setPriceOffered(priceOffered);
         return createdTransaction;
     }
+
+    public Transaction toModel(String fictionalDate) {
+        var createdTransaction = new Transaction();
+        createdTransaction.setSymbolTrade(symbolCrypto);
+        createdTransaction.setOperationType(operationType);
+        createdTransaction.setCryptoNominalValue(cryptoNominalValue);
+        createdTransaction.setPriceOffered(priceOffered);
+        return createdTransaction;
+    }
+    
     
 }

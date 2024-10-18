@@ -23,12 +23,11 @@ import com.unq.dapp_grupo_e.service.impl.TransactionServiceImpl;
 import com.unq.dapp_grupo_e.utilities.CurrentDateAndTime;
 import com.unq.dapp_grupo_e.utilities.factories.CryptoCurrencyFactory;
 import com.unq.dapp_grupo_e.utilities.factories.TransactionFactory;
+import com.unq.dapp_grupo_e.utilities.factories.TransactionFormFactory;
 
 @ActiveProfiles("test") 
 @SpringBootTest
 class TransactionTests {
-
-    //@Autowired
 
     @Mock
     private BinanceService binanceService;
@@ -82,11 +81,8 @@ class TransactionTests {
     @Test
     void invalidPriceOfferedForTransaction() {
 
-        TransactionFormDTO transactionForm = new TransactionFormDTO();
-        transactionForm.cryptoNominalValue = 33f;
-        transactionForm.priceOffered = 250.5;
-        transactionForm.symbolCrypto = "ADAUSDT";
-        transactionForm.operationType = "Sell";
+        TransactionFormDTO transactionForm = TransactionFormFactory.createFullData("ADAUSDT", 33f, 
+                                                                                      250.5, "Sell");
 
         CryptoCurrency cryptoMock = CryptoCurrencyFactory.createWithSymbolAndPrice("ADAUSDT", 0.36d);
 
@@ -100,11 +96,8 @@ class TransactionTests {
     void checkValidTransactionWasSaved() {
         transactionService.deleteAllTransactions();
 
-        TransactionFormDTO transactionForm = new TransactionFormDTO();
-        transactionForm.cryptoNominalValue = 33f;
-        transactionForm.priceOffered = 104.3;
-        transactionForm.symbolCrypto = "ADAUSDT";
-        transactionForm.operationType = "Sell";
+        TransactionFormDTO transactionForm = TransactionFormFactory.createFullData("ADAUSDT", 33f, 
+                                                                                      104.3, "Sell");
 
         CryptoCurrency cryptoMock = CryptoCurrencyFactory.createWithSymbolAndPrice("ADAUSDT", 0.36d);
 
@@ -121,5 +114,6 @@ class TransactionTests {
         Assertions.assertEquals("ADAUSDT", transactionSaved.getSymbolTrade());
         Assertions.assertEquals(currentDate, transactionSaved.getDateTimeCreated());
     }
+
     
 }
