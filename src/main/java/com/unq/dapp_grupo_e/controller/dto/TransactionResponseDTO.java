@@ -5,14 +5,14 @@ import com.unq.dapp_grupo_e.model.User;
 
 public class TransactionResponseDTO {
 
-    public String dateIntentionCreated;
-    public String cryptoSymbol;
-    public Float nominalValue;
-    public Double priceOfferCotization;
-    public Double totalOperationARS;
-    public String userFullName;
-    public Integer userOperationsDone;
-    public String userReputation;
+    private String dateIntentionCreated;
+    private String cryptoSymbol;
+    private Float nominalValue;
+    private Double priceOfferCotization;
+    private Double totalOperationARS;
+    private String userFullName;
+    private Integer userOperationsDone;
+    private String userReputation;
 
     public static TransactionResponseDTO from(Transaction transaction, User user) {
         var transactionDTO = new TransactionResponseDTO();

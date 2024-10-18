@@ -2,6 +2,8 @@ package com.unq.dapp_grupo_e.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -59,8 +61,12 @@ public class TransactionServiceImpl implements TransactionService  {
     public List<TransactionResponseDTO> getAllTransactions() {
         ArrayList<TransactionResponseDTO> transactions = new ArrayList<>();
         for(Transaction transaction:transactionRepo.findAll()){
-            User userTransaction = userRepository.findById(transaction.getIdUser()).get();
-            transactions.add(TransactionResponseDTO.from(transaction, userTransaction));
+            Optional<User> userTransaction = userRepository.findById(transaction.getIdUser());
+            if(userTransaction.isPresent()) {
+                transactions.add(TransactionResponseDTO.from(transaction, userTransaction.get()));
+            } else {
+                throw new NoSuchElementException("Invalid transaction registered, please try again later");
+            }      
         }
         return transactions;
     }
