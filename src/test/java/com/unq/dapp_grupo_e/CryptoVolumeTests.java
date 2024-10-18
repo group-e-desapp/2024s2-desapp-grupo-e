@@ -32,7 +32,7 @@ import com.unq.dapp_grupo_e.utilities.factories.TransactionFormFactory;
 
 @ActiveProfiles("test") 
 @SpringBootTest
-public class CryptoVolumeTests {
+class CryptoVolumeTests {
 
     @Mock
     private BinanceService binanceService;
@@ -62,7 +62,7 @@ public class CryptoVolumeTests {
         Assertions.assertEquals("NEOUSDT", cryptoAct.getSymbol());
         Assertions.assertEquals(10d, cryptoAct.getTotalNominalValue());
         Assertions.assertEquals(4100d, cryptoAct.getCurrentCotization());
-        Assertions.assertEquals(41000d, cryptoAct.getTotalCotizationARS());;
+        Assertions.assertEquals(41000d, cryptoAct.getTotalCotizationARS());
     }
 
     @Test
@@ -124,7 +124,7 @@ public class CryptoVolumeTests {
             Assertions.assertEquals(7d, cryptoActives.get("BNBUSDT"));
             Assertions.assertEquals("29/09/2024 12:15:00", responseVolume.getDateTimeRequest());
             Assertions.assertEquals(1827000, responseVolume.getTotalOperationARS());
-            Assertions.assertEquals(4567.5, responseVolume.getTotalOperationUSD());;
+            Assertions.assertEquals(4567.5, responseVolume.getTotalOperationUSD());
         }                                                              
     }
     

@@ -68,7 +68,7 @@ public class TransactionServiceImpl implements TransactionService  {
 
         List<TransactionSummaryDTO> listCryptoActives = transactionRepo.getTotalNominalValuesOfUserBetweenDates(userId, startDate, endDate);
         Double cotizationToARS = dolarApiService.getDolarCotization();
-        System.out.println(listCryptoActives.size());
+
         for (TransactionSummaryDTO active:listCryptoActives) {
             Double cryptoPrice = binanceService.getCrypto(active.getSymbolTrade()).getPrice();
             responseVolume.addCryptoActive(new CryptoActive(active.getSymbolTrade(), 

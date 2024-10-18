@@ -21,11 +21,11 @@ public class CryptoVolume {
     }
 
     public void calculateTotalInARS() {
-        this.totalOperationARS = cryptoActives.stream().mapToDouble(cvalue -> cvalue.getTotalCotizationARS()).sum();
+        this.totalOperationARS = cryptoActives.stream().mapToDouble(CryptoActive::getTotalCotizationARS).sum();
     }
 
     public void calculateTotalInUSD(Double cotizationARS) {
-        Double totalInArs = cryptoActives.stream().mapToDouble(cvalue -> cvalue.getTotalCotizationARS()).sum();
+        Double totalInArs = cryptoActives.stream().mapToDouble(CryptoActive::getTotalCotizationARS).sum();
         this.totalOperationUSD = totalInArs / cotizationARS; 
     }
 
