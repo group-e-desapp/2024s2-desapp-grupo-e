@@ -26,5 +26,38 @@ public class TransactionResponseDTO {
         transactionDTO.userReputation = user.reputation();
         return transactionDTO;
     }
+
+    public String getDateIntentionCreated() {
+        return dateIntentionCreated;
+    }
+
+    public String getCryptoSymbol() {
+        return cryptoSymbol;
+    }
+
+    public Float getNominalValue() {
+        return nominalValue;
+    }
+
+    public Double getPriceOfferCotization() {
+        return priceOfferCotization;
+    }
+
+    public Double getTotalOperationARS() {
+        return totalOperationARS;
+    }
+
+    public String getUserFullName() {
+        return userFullName;
+    }
+
+    public Integer getUserOperationsDone() {
+        return userOperationsDone;
+    }
+
+    public String getUserReputation() {
+        return userReputation;
+    }
+    
     
 }
