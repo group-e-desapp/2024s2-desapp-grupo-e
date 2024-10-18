@@ -16,6 +16,7 @@ import com.unq.dapp_grupo_e.model.CryptoCurrency;
 import com.unq.dapp_grupo_e.model.Transaction;
 import com.unq.dapp_grupo_e.model.exceptions.InvalidCryptoPriceOffer;
 import com.unq.dapp_grupo_e.repository.TransactionRepository;
+import com.unq.dapp_grupo_e.repository.UserRepository;
 import com.unq.dapp_grupo_e.service.BinanceService;
 import com.unq.dapp_grupo_e.service.DolarApiService;
 import com.unq.dapp_grupo_e.service.TransactionService;
@@ -38,6 +39,9 @@ class TransactionTests {
     @Autowired
     private TransactionRepository transactionRepo;
 
+    @Autowired
+    private UserRepository userRepository;
+
     private TransactionService transactionService;
 
     @BeforeEach
@@ -47,7 +51,8 @@ class TransactionTests {
         transactionService = new TransactionServiceImpl(
             dolarApiService,
             binanceService,
-            transactionRepo
+            transactionRepo,
+            userRepository
         );
     }
 

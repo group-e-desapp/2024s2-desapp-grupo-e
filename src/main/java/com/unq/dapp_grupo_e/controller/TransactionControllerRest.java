@@ -1,9 +1,12 @@
 package com.unq.dapp_grupo_e.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.unq.dapp_grupo_e.controller.dto.TransactionFormDTO;
+import com.unq.dapp_grupo_e.controller.dto.TransactionResponseDTO;
+import com.unq.dapp_grupo_e.model.CryptoVolume;
 import com.unq.dapp_grupo_e.model.Transaction;
 import com.unq.dapp_grupo_e.service.TransactionService;
 
@@ -47,9 +50,22 @@ public class TransactionControllerRest {
     @Operation(summary = "Consult all the transactions",
                description = "Consult all the transactions registered available for all the different crypto currencies")
     @GetMapping("/getAll")
-    public ResponseEntity<List<Transaction>> getAllTransactions() {
+    public ResponseEntity<List<TransactionResponseDTO>> getAllTransactions() {
         var response = transactionService.getAllTransactions();
         return ResponseEntity.ok(response);
     }
+
+    @ApiResponse(responseCode = "200")
+    @ApiResponse(responseCode = "400", content = @Content)
+    @Operation(summary = "Consult the total operation volume of the given user",
+        description = "Consult the total operation volumen of the user indicated with the operations set between the two dates given")
+    @GetMapping("/getVolumeOp")
+    public ResponseEntity<CryptoVolume> getCryptoVolumeOfUser(@RequestParam int idUser, 
+                                                              @RequestParam String startDate, 
+                                                              @RequestParam String endDate) {
+        var response = transactionService.getCryptoVolumeOfUserBetweenDates(idUser, startDate, endDate);
+        return ResponseEntity.ok().body(response);
+    }
+
     
 }

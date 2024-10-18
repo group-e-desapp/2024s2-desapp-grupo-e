@@ -45,7 +45,7 @@ public class CryptoControllerRest {
     @Operation(summary = "Consult all cryptos cotizations",
                description = "Consult the current cotization of all the crypto currencies available for the API")
     @GetMapping("/allPrices")
-    public ResponseEntity<CryptoCurrencyList> getMethodName() {
+    public ResponseEntity<CryptoCurrencyList> getAllCryptoPrices() {
         CryptoCurrencyList listCrypto = cryptoService.getAllCryptoValues();
         return ResponseEntity.ok().body(listCrypto);
     }

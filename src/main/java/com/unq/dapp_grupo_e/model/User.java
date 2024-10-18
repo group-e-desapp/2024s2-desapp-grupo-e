@@ -68,6 +68,10 @@ public class User {
         return walletAddress;
     }
 
+    public Integer getAmountSetOperations() {
+        return amountSetOperations;
+    }
+
     public void setEmail(String email) {
         if (email.length() > 50) {
             throw new InvalidLengthException("The email given is not valid due to its extension");

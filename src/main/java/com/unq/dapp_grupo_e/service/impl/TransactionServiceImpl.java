@@ -6,13 +6,16 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.unq.dapp_grupo_e.controller.dto.TransactionFormDTO;
+import com.unq.dapp_grupo_e.controller.dto.TransactionResponseDTO;
 import com.unq.dapp_grupo_e.controller.dto.TransactionSummaryDTO;
 import com.unq.dapp_grupo_e.model.CryptoActive;
 import com.unq.dapp_grupo_e.model.CryptoCurrencyEnum;
 import com.unq.dapp_grupo_e.model.CryptoVolume;
 import com.unq.dapp_grupo_e.model.Transaction;
+import com.unq.dapp_grupo_e.model.User;
 import com.unq.dapp_grupo_e.model.exceptions.InvalidCryptoPriceOffer;
 import com.unq.dapp_grupo_e.repository.TransactionRepository;
+import com.unq.dapp_grupo_e.repository.UserRepository;
 import com.unq.dapp_grupo_e.service.BinanceService;
 import com.unq.dapp_grupo_e.service.DolarApiService;
 import com.unq.dapp_grupo_e.service.TransactionService;
@@ -25,11 +28,14 @@ public class TransactionServiceImpl implements TransactionService  {
     private final DolarApiService dolarApiService;
     private final BinanceService binanceService;
     private final TransactionRepository transactionRepo;
+    private final UserRepository userRepository;
 
-    public TransactionServiceImpl(DolarApiService dolarApiService, BinanceService binanceService, TransactionRepository transactionRepo) {
+    public TransactionServiceImpl(DolarApiService dolarApiService, BinanceService binanceService, 
+            TransactionRepository transactionRepo, UserRepository userRepository) {
         this.dolarApiService = dolarApiService;
         this.binanceService = binanceService;
         this.transactionRepo = transactionRepo;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -50,9 +56,12 @@ public class TransactionServiceImpl implements TransactionService  {
     }
 
     @Override
-    public ArrayList<Transaction> getAllTransactions() {
-        ArrayList<Transaction> transactions = new ArrayList<>();
-        transactionRepo.findAll().forEach(transactions::add);
+    public List<TransactionResponseDTO> getAllTransactions() {
+        ArrayList<TransactionResponseDTO> transactions = new ArrayList<>();
+        for(Transaction transaction:transactionRepo.findAll()){
+            User userTransaction = userRepository.findById(transaction.getIdUser()).get();
+            transactions.add(TransactionResponseDTO.from(transaction, userTransaction));
+        }
         return transactions;
     }
 
