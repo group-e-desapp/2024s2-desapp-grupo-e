@@ -35,7 +35,7 @@ public class CryptoControllerRest {
     @Operation(summary = "Consult cotization of a crypto currency",
                description = "Consult the latest cotization registered of the crypto currency indicated")
     @GetMapping("/price")
-    public ResponseEntity<CryptoCurrency> getSymbolPrice(@RequestParam(name = "Crypto symbol") String symbol) {
+    public ResponseEntity<CryptoCurrency> getSymbolPrice(@RequestParam(name = "cryptoSymbol") String symbol) {
         var valueResponse = cryptoService.getCryptoValue(symbol);
         return ResponseEntity.ok(valueResponse);
     }

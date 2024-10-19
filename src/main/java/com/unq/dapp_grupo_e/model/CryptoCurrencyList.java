@@ -7,7 +7,7 @@ import com.unq.dapp_grupo_e.model.exceptions.InvalidCurrencyException;
 
 public class CryptoCurrencyList {
 
-    protected static final List<CryptoCurrency> cryptos = new ArrayList<>();
+    public final List<CryptoCurrency> cryptos = new ArrayList<>();
 
     public void addCrypto(CryptoCurrency crypto) {
         cryptos.add(crypto);

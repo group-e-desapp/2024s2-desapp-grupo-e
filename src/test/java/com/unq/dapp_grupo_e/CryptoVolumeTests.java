@@ -119,7 +119,7 @@ class CryptoVolumeTests {
             transactionService.createTransaction(transactionForm3);
 
             CryptoVolume responseVolume = transactionService
-                                        .getCryptoVolumeOfUserBetweenDates(5, "20/09/2024 00:00:00", "15/10/2024 23:00:00");
+                                        .getCryptoVolumeOfUserBetweenDates(1, "20/09/2024 00:00:00", "15/10/2024 23:00:00");
             
             Map<String, Double> cryptoActives = responseVolume.getCryptoActives().stream()
                                                 .collect(Collectors.toMap(CryptoActive::getSymbol, CryptoActive::getTotalNominalValue));

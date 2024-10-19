@@ -59,7 +59,7 @@ public class TransactionControllerRest {
     @ApiResponse(responseCode = "400", content = @Content)
     @Operation(summary = "Consult the total operation volume of the given user",
         description = "Consult the total operation volumen of the user indicated with the operations set between the two dates given")
-    @GetMapping("/getVolumeOp")
+    @GetMapping("/getVolume")
     public ResponseEntity<CryptoVolume> getCryptoVolumeOfUser(@RequestParam int idUser, 
                                                               @RequestParam String startDate, 
                                                               @RequestParam String endDate) {

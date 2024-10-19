@@ -13,6 +13,7 @@ import com.unq.dapp_grupo_e.repository.UserRepository;
 import com.unq.dapp_grupo_e.service.CryptoCurrencyService;
 import com.unq.dapp_grupo_e.service.DolarApiService;
 import com.unq.dapp_grupo_e.service.UserService;
+import com.unq.dapp_grupo_e.utilities.factories.TransactionFactory;
 import com.unq.dapp_grupo_e.utilities.factories.UserFactory;
 
 @Configuration
@@ -93,75 +94,62 @@ public class DatabaseInitializer {
             Double priceNEOUSDT = cryptoList.getCrypto(cryptoNEO).getPrice() * cotizationARS;
             Double priceMATICUSDT = cryptoList.getCrypto(cryptoMATIC).getPrice() * cotizationARS;
 
-            Transaction transaction1 = new Transaction((long) 1, 3, 
-                                                    cryptoDOT, 
-                                                    (float) 20, 
-                                                    (priceDOTUSDT * 1.03), 
-                                                    "Sell");
+            Transaction transaction1 = TransactionFactory.createWithFullData(3, cryptoDOT, 
+                                                            20f, (priceDOTUSDT * 1.03), 
+                                                            "Sell", "17/10/2024 17:00:00");
             transactionRepo.save(transaction1);
 
-            Transaction transaction2 = new Transaction((long) 2, 1, 
-                                                    cryptoATOM, 
-                                                    (float) 20, 
-                                                    (priceATOMUSDT * 1.028), 
-                                                    "Sell");
+            Transaction transaction2 = TransactionFactory.createWithFullData(1, cryptoATOM, 
+                                                            20f, (priceATOMUSDT * 1.028), 
+                                                            "Sell", "25/09/2024 13:00:00");
             transactionRepo.save(transaction2);
 
-            Transaction transaction3 = new Transaction((long) 3, 2, 
-                                                    cryptoADA, 
-                                                    (float) 20, 
-                                                    (priceADAUSDT * 0.98), 
-                                                    "Buy");
+
+            Transaction transaction3 = TransactionFactory.createWithFullData(2, cryptoADA, 
+                                                            30f, (priceADAUSDT * 1.027), 
+                                                            "Sell", "21/09/2024 15:00:00");
             transactionRepo.save(transaction3);
 
-            Transaction transaction4 = new Transaction((long) 4, 4, 
-                                                    cryptoAXS, 
-                                                    (float) 20, 
-                                                    (priceAXSUSDT * 1.019), 
-                                                    "Sell");
+
+            Transaction transaction4 = TransactionFactory.createWithFullData(4, cryptoAXS, 
+                                                            25f, (priceAXSUSDT * 1.019), 
+                                                            "Sell", "07/10/2024 00:00:00");
             transactionRepo.save(transaction4);
 
-            Transaction transaction5 = new Transaction((long) 5, 5, 
-                                                    cryptoDOT, 
-                                                    (float) 20, 
-                                                    (priceDOTUSDT * 1.041), 
-                                                    "Sell");
+            Transaction transaction5 = TransactionFactory.createWithFullData(5, cryptoDOT, 
+                                                            18f, (priceDOTUSDT * 1.041), 
+                                                            "Sell", "19/09/2024 14:00:00");
             transactionRepo.save(transaction5);
 
-            Transaction transaction6 = new Transaction((long) 6, 5, 
-                                                    cryptoADA, 
-                                                    (float) 20, 
-                                                    (priceADAUSDT * 0.974), 
-                                                    "Buy");
+            Transaction transaction6 = TransactionFactory.createWithFullData(5, cryptoNEO, 
+                                                            20f, (priceNEOUSDT * 0.974), 
+                                                            "Buy", "17/10/2024 09:00:00");
             transactionRepo.save(transaction6);
 
-            Transaction transaction7 = new Transaction((long) 7, 2, 
-                                                    cryptoBTC, 
-                                                    (float) 20, 
-                                                    (priceBTCUSDT * 0.968), 
-                                                    "Buy");
+            Transaction transaction7 = TransactionFactory.createWithFullData(2, cryptoBTC, 
+                                                            4f, (priceBTCUSDT * 0.968), 
+                                                            "Buy", "12/10/2024 10:00:00");
             transactionRepo.save(transaction7);
 
-            Transaction transaction8 = new Transaction((long) 8, 2, 
-                                                    cryptoNEO, 
-                                                    (float) 20, 
-                                                    (priceNEOUSDT * 1.017), 
-                                                    "Sell");
+            Transaction transaction8 = TransactionFactory.createWithFullData(2, cryptoADA, 
+                                                            20f, (priceNEOUSDT * 1.017), 
+                                                            "Sell", "10/10/2024 13:00:00");
             transactionRepo.save(transaction8);
 
-            Transaction transaction9 = new Transaction((long) 9, 3, 
-                                                    cryptoMATIC, 
-                                                    (float) 20, 
-                                                    (priceMATICUSDT * 0.975), 
-                                                    "Buy");
+            Transaction transaction9 = TransactionFactory.createWithFullData(3, cryptoMATIC, 
+                                                            30f, (priceMATICUSDT * 0.975), 
+                                                            "Buy", "28/09/2024 12:00:00");
             transactionRepo.save(transaction9);
 
-            Transaction transaction10 = new Transaction((long) 10, 1, 
-                                                    cryptoATOM,
-                                                    (float) 20, 
-                                                    (priceATOMUSDT * 1.033), 
-                                                    "Sell");
+            Transaction transaction10 = TransactionFactory.createWithFullData(1, cryptoATOM, 
+                                                            28f, (priceATOMUSDT * 1.033), 
+                                                            "Sell", "13/10/2024 09:00:00");
             transactionRepo.save(transaction10);
+
+            Transaction transaction11 = TransactionFactory.createWithFullData(4, cryptoAXS, 
+                                                            35f, (priceAXSUSDT * 1.024), 
+                                                            "Sell", "11/10/2024 12:00:00");
+            transactionRepo.save(transaction11);
         };
 
     }

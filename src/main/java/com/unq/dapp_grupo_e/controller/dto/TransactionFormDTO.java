@@ -1,6 +1,7 @@
 package com.unq.dapp_grupo_e.controller.dto;
 
 import com.unq.dapp_grupo_e.model.Transaction;
+import com.unq.dapp_grupo_e.utilities.CurrentDateAndTime;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
@@ -27,6 +28,7 @@ public class TransactionFormDTO {
         createdTransaction.setOperationType(operationType);
         createdTransaction.setCryptoNominalValue(cryptoNominalValue);
         createdTransaction.setPriceOffered(priceOffered);
+        createdTransaction.setDateTimeCreated(CurrentDateAndTime.getNewDateAsString());
         return createdTransaction;
     }
     

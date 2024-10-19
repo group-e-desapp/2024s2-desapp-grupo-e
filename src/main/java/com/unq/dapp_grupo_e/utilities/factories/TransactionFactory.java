@@ -25,5 +25,19 @@ public class TransactionFactory {
         transaction.setOperationType("Sell");
         return transaction;
     }
+
+    public static Transaction createWithFullData(Integer idUser, String symbol, Float nominalValue,
+                                    Double priceOffered, String operationType, String dateTimeCreated) {
+        Transaction transaction = new Transaction();
+        //transaction.setIdExchange(null);    idExchange =;
+        transaction.setIdUser(idUser);
+        transaction.setSymbolTrade(symbol);
+        transaction.setCryptoNominalValue(nominalValue);
+        transaction.setPriceOffered(priceOffered);
+        transaction.setOperationType(operationType);
+        transaction.setDateTimeCreated(dateTimeCreated);
+        return transaction;
+    }
     
 }
+    

@@ -1,6 +1,6 @@
 package com.unq.dapp_grupo_e.model;
 
-import com.unq.dapp_grupo_e.utilities.CurrentDateAndTime;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,7 +15,7 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idExchange;
     @Column(name = "idUser")
-    private Integer idUser = 5;
+    private Integer idUser = 1;
     @Column(name = "symbolTrade")
     private String symbolTrade;
     @Column(name = "cryptoNominalValue")
@@ -27,19 +27,6 @@ public class Transaction {
     @Column(name = "dateTimeCreated")
     private String dateTimeCreated;
 
-
-    public Transaction() {}
-
-    public Transaction(Long idExc, Integer idUser, String symbol, Float cryptoNominalValue,
-    Double priceOffered, String operationType) {
-        this.idExchange = idExc;
-        this.idUser = idUser;
-        this.symbolTrade = symbol;
-        this.cryptoNominalValue = cryptoNominalValue;
-        this.priceOffered = priceOffered;
-        this.operationType = operationType;
-        this.dateTimeCreated = CurrentDateAndTime.getNewDateAsString();
-    }
 
     public Long getIdExchange() {
         return idExchange;
