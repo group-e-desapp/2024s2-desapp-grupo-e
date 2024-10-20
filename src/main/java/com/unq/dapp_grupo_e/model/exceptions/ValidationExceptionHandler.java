@@ -41,7 +41,7 @@ public class ValidationExceptionHandler {
 
     @ExceptionHandler(InvalidCurrencyException.class)
     public ResponseEntity<Map<String, String>> handleCryptoSymbolValidation(InvalidCurrencyException exc) {
-        return new ResponseEntity<>(createResponseError(exc), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(createResponseError(exc), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(InvalidCryptoPriceOffer.class)

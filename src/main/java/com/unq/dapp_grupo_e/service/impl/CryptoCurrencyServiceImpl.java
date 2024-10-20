@@ -24,7 +24,7 @@ public class CryptoCurrencyServiceImpl implements CryptoCurrencyService {
     @Override
     public CryptoCurrency getCryptoValue(String symbol) {
         CryptoCurrencyEnum.validateCrypto(symbol);
-        CryptoCurrency cryptoEntity =  binanceService.getCrypto(symbol);
+        CryptoCurrency cryptoEntity = binanceService.getCrypto(symbol);
         String actualTimeAndDate = CurrentDateAndTime.getNewDateAsString();
         cryptoEntity.setLastUpdateDateAndTime(actualTimeAndDate);
         cryptoCurrencyRepo.save(cryptoEntity);
