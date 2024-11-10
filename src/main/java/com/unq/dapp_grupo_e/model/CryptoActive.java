@@ -1,5 +1,7 @@
 package com.unq.dapp_grupo_e.model;
 
+import com.unq.dapp_grupo_e.utilities.CalculationUtils;
+
 public class CryptoActive {
 
     private String symbol;
@@ -11,7 +13,7 @@ public class CryptoActive {
         this.symbol = symbol;
         this.totalNominalValue = nominalValue;
         this.currentCotization = currentCotization;
-        this.totalCotizationARS = nominalValue * currentCotization;
+        this.totalCotizationARS = CalculationUtils.roundProduct(nominalValue, currentCotization);
     }
 
     public String getSymbol() {

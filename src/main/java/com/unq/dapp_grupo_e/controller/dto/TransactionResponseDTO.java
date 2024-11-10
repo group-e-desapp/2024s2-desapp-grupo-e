@@ -2,6 +2,7 @@ package com.unq.dapp_grupo_e.controller.dto;
 
 import com.unq.dapp_grupo_e.model.Transaction;
 import com.unq.dapp_grupo_e.model.User;
+import com.unq.dapp_grupo_e.utilities.CalculationUtils;
 
 public class TransactionResponseDTO {
 
@@ -22,7 +23,7 @@ public class TransactionResponseDTO {
         transactionDTO.cryptoSymbol = transaction.getSymbolTrade();
         transactionDTO.nominalValue = transaction.getCryptoNominalValue();
         transactionDTO.priceOfferCotization = transaction.getPriceOffered();
-        transactionDTO.totalOperationARS = transaction.getCryptoNominalValue() * transaction.getPriceOffered();
+        transactionDTO.totalOperationARS = CalculationUtils.roundProduct(transaction.getCryptoNominalValue(), transaction.getPriceOffered());
         transactionDTO.userFullName = user.getName() + " " + user.getSurname();
         transactionDTO.userOperationsDone = user.getAmountSetOperations();
         transactionDTO.userReputation = user.reputation();

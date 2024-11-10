@@ -3,6 +3,7 @@ package com.unq.dapp_grupo_e.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.unq.dapp_grupo_e.utilities.CalculationUtils;
 import com.unq.dapp_grupo_e.utilities.CurrentDateAndTime;
 
 public class CryptoVolume {
@@ -26,7 +27,7 @@ public class CryptoVolume {
 
     public void calculateTotalInUSD(Double cotizationARS) {
         Double totalInArs = cryptoActives.stream().mapToDouble(CryptoActive::getTotalCotizationARS).sum();
-        this.totalOperationUSD = totalInArs / cotizationARS; 
+        this.totalOperationUSD = CalculationUtils.roundQuotient(totalInArs, cotizationARS); 
     }
 
     public String getDateTimeRequest() {

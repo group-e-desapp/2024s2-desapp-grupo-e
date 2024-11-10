@@ -203,6 +203,28 @@ class TransactionActionTests {
     }
 
     @Test
+    void userAnsweringCancelsTheTransactionAndGetsActive() {
+
+        TransactionFormDTO transactionForm = TransactionFormFactory
+                                                .createFullData("NEOUSDT", 33f, 111.3, "SELL");
+        CryptoCurrency cryptoMock = CryptoCurrencyFactory.createWithSymbolAndPrice("NEOUSDT", 0.36d);
+        when(binanceService.getCrypto("NEOUSDT")).thenReturn(cryptoMock);
+        when(dolarApiService.getDolarCotization()).thenReturn(300.0);
+
+        UserRegisterDTO userOfTransaction = UserRegisterFactory.anyUserRegister();
+        UserRegisterDTO userOfActions = UserRegisterFactory.createWithEmail("otherUser@mail.com");
+        userService.createUser(userOfTransaction);
+        userService.createUser(userOfActions);
+        transactionService.createTransaction(transactionForm);
+        transactionService.transferToIntention(1, 2);
+        transactionService.cancelTransaction(1, 2);
+
+        var transactionRecovered = transactionService.getTransaction(1);
+
+        Assertions.assertEquals(TransactionStatus.ACTIVE, transactionRecovered.getStatus());
+    }
+
+    @Test
     void exceptionForUserTransferingtoOwnIntention() {
         TransactionFormDTO transactionForm = TransactionFormFactory
                                                 .createFullData("NEOUSDT", 33f, 111.3, "SELL");
