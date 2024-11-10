@@ -24,6 +24,7 @@ public interface TransactionRepository extends CrudRepository<Transaction, Integ
     @Query("SELECT new com.unq.dapp_grupo_e.controller.dto.TransactionSummaryDTO(t.symbolTrade, SUM(t.cryptoNominalValue)) " + 
            "FROM Transaction t " + 
            "WHERE t.idUser = :idUser AND " + 
+           "t.status != 'CANCELLED' AND " +
            "STR_TO_DATE(t.dateTimeCreated, '%d/%m/%Y %H:%i:%s') " + 
            "BETWEEN STR_TO_DATE(:startDate, '%d/%m/%Y %H:%i:%s') AND STR_TO_DATE(:endDate, '%d/%m/%Y %H:%i:%s') " +
            "GROUP BY t.symbolTrade")
@@ -31,5 +32,11 @@ public interface TransactionRepository extends CrudRepository<Transaction, Integ
         @Param("idUser") Integer idUser, 
         @Param("startDate") String startDate, 
         @Param("endDate") String endDate);
+    
+    
+    @Query("SELECT t " +
+           "FROM Transaction t " +
+           "WHERE t.status = 'ACTIVE'")
+    List<Transaction> findAllActiveTransaction();
 
 }

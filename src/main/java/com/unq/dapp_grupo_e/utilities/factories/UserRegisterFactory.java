@@ -76,4 +76,26 @@ public class UserRegisterFactory {
         return userDTO;
     }
 
+    public static UserRegisterDTO createWithCVU(String cvu) {
+        var userDTO = new UserRegisterDTO();
+        userDTO.email = "non7@gmail.com";
+        userDTO.password = "Nonnon!";
+        userDTO.name = "Name";
+        userDTO.surname = "Less";
+        userDTO.cvu = cvu;
+        userDTO.walletAddress = "GG349876";
+        return userDTO;
+    }
+
+    public static UserRegisterDTO createWitWalletAddress(String walletAddress) {
+        var userDTO = new UserRegisterDTO();
+        userDTO.email = "non8@gmail.com";
+        userDTO.password = "N!onnon";
+        userDTO.name = "Path";
+        userDTO.surname = "Surname";
+        userDTO.cvu = "6011121314151617181932";
+        userDTO.walletAddress = walletAddress;
+        return userDTO;
+    }
+
 }

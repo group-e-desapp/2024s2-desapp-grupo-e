@@ -31,8 +31,7 @@ class UserControllerTests {
      
     @Test
     void userRegisterValidReturns200() throws Exception{
-        userService.deleteUsers();
-        userService.resetIdUser();
+        userService.deleteAllUsers();
         var validUser = UserRegisterFactory.anyUserRegister();
 
         mockMvc.perform(post("/user/register")

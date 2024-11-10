@@ -1,9 +1,12 @@
 package com.unq.dapp_grupo_e.model;
 
 
+import com.unq.dapp_grupo_e.model.exceptions.InvalidActionException;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -13,7 +16,7 @@ public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idExchange;
+    private Integer idExchange;
     @Column(name = "idUser")
     private Integer idUser = 1;
     @Column(name = "symbolTrade")
@@ -26,12 +29,16 @@ public class Transaction {
     private String operationType;
     @Column(name = "dateTimeCreated")
     private String dateTimeCreated;
+    @Column(name = "idUserAnswering")
+    private Integer idUserAnswering = 0;
+    @Enumerated(EnumType.STRING)
+    private TransactionStatus status = TransactionStatus.ACTIVE;
 
 
-    public Long getIdExchange() {
+    public Integer getIdExchange() {
         return idExchange;
     }
-    public void setIdExchange(Long idExchange) {
+    public void setIdExchange(Integer idExchange) {
         this.idExchange = idExchange;
     }
     public Integer getIdUser() {
@@ -82,6 +89,61 @@ public class Transaction {
     public Double totalSumOfOperation() {
         return cryptoNominalValue * priceOffered;
     }
+
+
+    public TransactionStatus getStatus() {
+        return status;
+    }
+    public void setStatus(TransactionStatus status) {
+        this.status = status;
+    }
+
+    public void confirmTransactionDone(Integer idUserConfirm) {
+        
+        if (idUserConfirm != idUser) {
+            throw new InvalidActionException("Not allowed to confirm a transaction that you didn't create");
+        }
+
+        if (this.getStatus() == TransactionStatus.TRANSFERING) {
+            this.setStatus(TransactionStatus.CLOSE);
+        } else {
+            throw new InvalidActionException("Not allowed to confirm the transaction in its current state");
+        }
+    }
+
+    public void cancelTransaction(Integer idUserCancel) {
+
+        if (idUserCancel == idUser) {
+            this.setStatus(TransactionStatus.CANCELLED);
+        } else if (idUserCancel == idUserAnswering) {
+            this.setStatus(TransactionStatus.ACTIVE);
+        } else {
+            throw new InvalidActionException("Not allowed to cancel a transaction that you are not part of");
+        }
+    }
+
+    public void realizeTransfer(Integer idUserTransfering) {
+        if (this.getStatus() != TransactionStatus.ACTIVE) {
+            throw new InvalidActionException("Transaction is already in process or is not available for interaction");
+        }
+
+        if (idUserTransfering != idUser) {
+            this.setIdUserAnswering(idUserTransfering);
+            this.setStatus(TransactionStatus.TRANSFERING);
+        } else {
+            throw new InvalidActionException("Not allowed to realize the transfer for your own intention created");
+        }
+    }
+
+
+    public Integer getIdUserAnswering() {
+        return idUserAnswering;
+    }
+
+    public void setIdUserAnswering(Integer idUserAnswering) {
+        this.idUserAnswering = idUserAnswering;
+    }
+    
 
     
 }

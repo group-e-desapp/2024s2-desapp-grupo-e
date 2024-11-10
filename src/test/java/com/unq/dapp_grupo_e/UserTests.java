@@ -31,8 +31,7 @@ class UserTests {
 
     @BeforeEach
     void deleteAndReset() {
-        userService.deleteUsers();
-        userService.resetIdUser();
+        userService.deleteAllUsers();
     }
 
     @Test

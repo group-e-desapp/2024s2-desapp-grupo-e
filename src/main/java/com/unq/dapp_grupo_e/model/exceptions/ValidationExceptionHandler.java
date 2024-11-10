@@ -53,4 +53,19 @@ public class ValidationExceptionHandler {
     public ResponseEntity<Map<String, String>> handleEmptyFieldValidation(InvalidEmptyFieldException exc) {
         return new ResponseEntity<>(createResponseError(exc), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(InvalidActionException.class)
+    public ResponseEntity<Map<String, String>> handleInvalidActionValidation(InvalidActionException exc) {
+        return new ResponseEntity<>(createResponseError(exc), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleUserNotFound(UserNotFoundException exc) {
+        return new ResponseEntity<>(createResponseError(exc), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(TransactionNotFundException.class)
+    public ResponseEntity<Map<String, String>> handleTransactionNotFound(TransactionNotFundException exc) {
+        return new ResponseEntity<>(createResponseError(exc), HttpStatus.NOT_FOUND);
+    }
 }

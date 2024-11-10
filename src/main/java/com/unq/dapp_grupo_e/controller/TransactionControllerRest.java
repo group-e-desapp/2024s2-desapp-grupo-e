@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.unq.dapp_grupo_e.controller.dto.TransactionFormDTO;
+import com.unq.dapp_grupo_e.controller.dto.TransactionProcessedDTO;
 import com.unq.dapp_grupo_e.controller.dto.TransactionResponseDTO;
 import com.unq.dapp_grupo_e.model.CryptoVolume;
 import com.unq.dapp_grupo_e.model.Transaction;
@@ -21,6 +22,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -66,6 +68,47 @@ public class TransactionControllerRest {
         var response = transactionService.getCryptoVolumeOfUserBetweenDates(idUser, startDate, endDate);
         return ResponseEntity.ok().body(response);
     }
+
+
+    @ApiResponse(responseCode = "200")
+    @ApiResponse(responseCode = "400", content = @Content)
+    @Operation(summary = "Confirm the transaction chosen")
+    @PutMapping("/confirm")
+    public ResponseEntity<String> confirmTransaction(@RequestParam int idTransaction,
+                                                     @RequestParam int idUser) {
+        transactionService.confirmTransaction(idTransaction, idUser);
+        return ResponseEntity.ok("Confirmation of transaction realized successfully");
+    }
+
+    @ApiResponse(responseCode = "200")
+    @ApiResponse(responseCode = "400", content = @Content)
+    @Operation(summary = "Cancel the transaction chosen")
+    @PutMapping("/cancel")
+    public ResponseEntity<String> cancelTransaction(@RequestParam Integer idTransaction,
+                                                        @RequestParam Integer idUser) {
+        transactionService.cancelTransaction(idTransaction, idUser);
+        return ResponseEntity.ok("Cancel of operation realized successfully");
+    }
+
+    @ApiResponse(responseCode = "200")
+    @ApiResponse(responseCode = "400", content = @Content)
+    @Operation(summary = "Realise transfer for the transaction chosen")
+    @PutMapping("/transfer")
+    public ResponseEntity<String> transferTransaction(@RequestParam int idTransaction,
+                                                          @RequestParam int idUser) {
+        transactionService.transferToIntention(idTransaction, idUser);
+        return ResponseEntity.ok("Transfer operation realized successfully");
+    }
+
+    @ApiResponse(responseCode = "200")
+    @ApiResponse(responseCode = "400", content = @Content)
+    @Operation(summary = "Process the transaction chosen")
+    @GetMapping("/process")
+    public ResponseEntity<TransactionProcessedDTO> processTransaction(@RequestParam int idTransaction) {
+        var transactionResponse = transactionService.processTransfer(idTransaction);
+        return ResponseEntity.ok().body(transactionResponse);
+    }
+
 
     
 }

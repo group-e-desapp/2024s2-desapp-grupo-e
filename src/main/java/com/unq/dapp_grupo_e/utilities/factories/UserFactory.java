@@ -33,7 +33,7 @@ public class UserFactory {
         return user;
     }
 
-    public static User createWithIdDataAndOperations(Long idUser, String name, String email,
+    public static User createWithIdDataAndOperations(Integer idUser, String name, String email,
                                                     Integer operationsSetted, Integer reputationPoints) {
         var user = new User();
         user.setIdUser(idUser);

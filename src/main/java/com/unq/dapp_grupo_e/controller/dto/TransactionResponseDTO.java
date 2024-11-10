@@ -5,6 +5,7 @@ import com.unq.dapp_grupo_e.model.User;
 
 public class TransactionResponseDTO {
 
+    private Integer idTransaction;
     private String dateIntentionCreated;
     private String cryptoSymbol;
     private Float nominalValue;
@@ -16,6 +17,7 @@ public class TransactionResponseDTO {
 
     public static TransactionResponseDTO from(Transaction transaction, User user) {
         var transactionDTO = new TransactionResponseDTO();
+        transactionDTO.idTransaction = transaction.getIdExchange().intValue();
         transactionDTO.dateIntentionCreated = transaction.getDateTimeCreated();
         transactionDTO.cryptoSymbol = transaction.getSymbolTrade();
         transactionDTO.nominalValue = transaction.getCryptoNominalValue();
@@ -25,6 +27,10 @@ public class TransactionResponseDTO {
         transactionDTO.userOperationsDone = user.getAmountSetOperations();
         transactionDTO.userReputation = user.reputation();
         return transactionDTO;
+    }
+    
+    public Integer getIdTransaction() {
+        return idTransaction;
     }
 
     public String getDateIntentionCreated() {

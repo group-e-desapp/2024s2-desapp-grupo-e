@@ -10,8 +10,6 @@ public interface UserService {
 
     User findById(Integer id);
 
-    void deleteUsers();
-
-    void resetIdUser();
+    void deleteAllUsers();
 
 }

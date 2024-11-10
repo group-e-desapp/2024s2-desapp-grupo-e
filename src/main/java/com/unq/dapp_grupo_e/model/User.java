@@ -16,8 +16,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idUser;
-
+    private Integer idUser;
     @Column
     private String name;
     @Column
@@ -37,10 +36,10 @@ public class User {
     private Integer reputationPoints = 0;
 
 
-    public Long getIdUser() {
+    public Integer getIdUser() {
         return idUser;
     }
-    public void setIdUser(Long idUser) {
+    public void setIdUser(Integer idUser) {
         this.idUser = idUser;
     }
     
@@ -130,7 +129,6 @@ public class User {
     }
     
 
-
     public void countANewOperation() {
         this.amountSetOperations += 1;
     }
@@ -143,8 +141,14 @@ public class User {
             return resultReputation.toString();
         }
     }
-    
 
+    public void discountReputation() {
+        this.reputationPoints -= 20;
+    }
+    
+    public void addReputation(Integer addedPoints) {
+        this.reputationPoints += addedPoints;
+    }
     
     
 }
