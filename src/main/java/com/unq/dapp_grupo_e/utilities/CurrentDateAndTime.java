@@ -8,7 +8,6 @@ import java.util.concurrent.TimeUnit;
 public class CurrentDateAndTime {
 
     private static final String DATE_FORMAT = "dd/MM/yyyy HH:mm:ss";
-    private static SimpleDateFormat FORMAT_APPLIED = new SimpleDateFormat(DATE_FORMAT);
 
     private CurrentDateAndTime() {}
 
@@ -17,14 +16,16 @@ public class CurrentDateAndTime {
     }
 
     public static String getNewDateAsString() {
-        return FORMAT_APPLIED.format(getNewDate());
+        SimpleDateFormat formatApplied = new SimpleDateFormat(DATE_FORMAT);
+        return formatApplied.format(getNewDate());
     }
     
     public static Date toDate(String dateAsString) throws ParseException {
-        return FORMAT_APPLIED.parse(dateAsString);
+        SimpleDateFormat formatApplied = new SimpleDateFormat(DATE_FORMAT);
+        return formatApplied.parse(dateAsString);
     }
 
-    public static Boolean achieveRequirementOfTransacion(String date) {
+    public static boolean achieveRequirementOfTransacion(String date) {
         try {
             Date dateTransactionCreated = toDate(date);
 
@@ -34,8 +35,6 @@ public class CurrentDateAndTime {
         } catch (ParseException e) {
             e.printStackTrace();
             return false;
-        }
-        
-        
+        } 
     }
 }

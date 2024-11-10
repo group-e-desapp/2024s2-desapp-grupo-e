@@ -154,7 +154,7 @@ public class TransactionServiceImpl implements TransactionService  {
     @Override
     public void confirmTransaction(Integer transactionId, Integer userId) {
         Transaction transactionToConfirm = transactionRepo.findById(transactionId)
-            .orElseThrow(() -> new TransactionNotFundException());
+            .orElseThrow(TransactionNotFundException::new);
         User userConfirming = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
 
         transactionToConfirm.confirmTransactionDone(userId);
