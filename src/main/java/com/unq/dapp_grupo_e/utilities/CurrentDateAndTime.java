@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import com.unq.dapp_grupo_e.model.exceptions.InvalidDateFormatException;
+
 public class CurrentDateAndTime {
 
     private static final String DATE_FORMAT = "dd/MM/yyyy HH:mm:ss";
@@ -33,8 +35,7 @@ public class CurrentDateAndTime {
             
             return TimeUnit.MILLISECONDS.toMinutes(diffBetweenDates) < 30;
         } catch (ParseException e) {
-            e.printStackTrace();
-            return false;
+            throw new InvalidDateFormatException("Date given is not valid due to its format or values");
         } 
     }
 }

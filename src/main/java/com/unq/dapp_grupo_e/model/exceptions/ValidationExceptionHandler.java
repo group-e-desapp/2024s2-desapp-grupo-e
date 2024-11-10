@@ -68,4 +68,9 @@ public class ValidationExceptionHandler {
     public ResponseEntity<Map<String, String>> handleTransactionNotFound(TransactionNotFundException exc) {
         return new ResponseEntity<>(createResponseError(exc), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(InvalidDateFormatException.class)
+    public ResponseEntity<Map<String, String>> handleInvalidDateFormat(InvalidDateFormatException exc) {
+        return new ResponseEntity<>(createResponseError(exc), HttpStatus.BAD_REQUEST);
+    }
 }

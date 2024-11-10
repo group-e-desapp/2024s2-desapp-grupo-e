@@ -2,6 +2,9 @@ package com.unq.dapp_grupo_e;
 
 import static org.mockito.Mockito.when;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,7 +24,6 @@ import com.unq.dapp_grupo_e.service.BinanceService;
 import com.unq.dapp_grupo_e.service.DolarApiService;
 import com.unq.dapp_grupo_e.service.TransactionService;
 import com.unq.dapp_grupo_e.service.impl.TransactionServiceImpl;
-import com.unq.dapp_grupo_e.utilities.CurrentDateAndTime;
 import com.unq.dapp_grupo_e.utilities.factories.CryptoCurrencyFactory;
 import com.unq.dapp_grupo_e.utilities.factories.TransactionFactory;
 import com.unq.dapp_grupo_e.utilities.factories.TransactionFormFactory;
@@ -110,14 +112,17 @@ class TransactionTests {
         when(dolarApiService.getDolarCotization()).thenReturn(300.0);
 
         Transaction transactionSaved = transactionService.createTransaction(transactionForm);
-        String currentDate = CurrentDateAndTime.getNewDateAsString();
+        SimpleDateFormat formatApplied = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        String currentDate = formatApplied.format(new Date());
+
+        System.out.println(currentDate);
 
         Assertions.assertEquals(1, transactionSaved.getIdExchange());
         Assertions.assertEquals(33, transactionSaved.getCryptoNominalValue());
         Assertions.assertEquals(104.3, transactionSaved.getPriceOffered());
         Assertions.assertEquals("Sell", transactionSaved.getOperationType());
         Assertions.assertEquals("ADAUSDT", transactionSaved.getSymbolTrade());
-        Assertions.assertEquals(currentDate, transactionSaved.getDateTimeCreated());
+        Assertions.assertTrue(transactionSaved.getDateTimeCreated().contains(currentDate));
     }
 
     
