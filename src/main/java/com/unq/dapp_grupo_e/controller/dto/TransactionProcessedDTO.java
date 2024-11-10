@@ -14,7 +14,7 @@ public class TransactionProcessedDTO {
 
     public static TransactionProcessedDTO from(Transaction transaction, User user) {
         var transactionDTO = new TransactionProcessedDTO();
-        transactionDTO.idTransaction = transaction.getIdExchange().intValue();
+        transactionDTO.idTransaction = transaction.getIdExchange();
         transactionDTO.cryptoSymbol = transaction.getSymbolTrade();
         transactionDTO.userFullName = user.getName() + " " + user.getSurname();
         if (transaction.getOperationType().equals("SELL")) {

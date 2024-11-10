@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 public class CurrentDateAndTime {
 
     private static final String DATE_FORMAT = "dd/MM/yyyy HH:mm:ss";
-    private static final SimpleDateFormat FORMAT_APPLIED = new SimpleDateFormat(DATE_FORMAT);
+    private static SimpleDateFormat FORMAT_APPLIED = new SimpleDateFormat(DATE_FORMAT);
 
     private CurrentDateAndTime() {}
 

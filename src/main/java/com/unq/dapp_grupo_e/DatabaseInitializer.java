@@ -36,7 +36,7 @@ public class DatabaseInitializer {
         return args -> {
 
             userService.deleteAllUsers();
-            transactionService.deleteAllTransactions();;
+            transactionService.deleteAllTransactions();
             
             User user1 = UserFactory.createWithIdDataAndOperations(1, 
                                                                     "Ann", 

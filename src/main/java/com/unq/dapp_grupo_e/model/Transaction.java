@@ -100,7 +100,7 @@ public class Transaction {
 
     public void confirmTransactionDone(Integer idUserConfirm) {
         
-        if (idUserConfirm != idUser) {
+        if (!idUserConfirm.equals(idUser)) {
             throw new InvalidActionException("Not allowed to confirm a transaction that you didn't create");
         }
 
@@ -113,9 +113,9 @@ public class Transaction {
 
     public void cancelTransaction(Integer idUserCancel) {
 
-        if (idUserCancel == idUser) {
+        if (idUserCancel.equals(idUser)) {
             this.setStatus(TransactionStatus.CANCELLED);
-        } else if (idUserCancel == idUserAnswering) {
+        } else if (idUserCancel.equals(idUserAnswering)) {
             this.setStatus(TransactionStatus.ACTIVE);
         } else {
             throw new InvalidActionException("Not allowed to cancel a transaction that you are not part of");
@@ -127,7 +127,7 @@ public class Transaction {
             throw new InvalidActionException("Transaction is already in process or is not available for interaction");
         }
 
-        if (idUserTransfering != idUser) {
+        if (!idUserTransfering.equals(idUser)) {
             this.setIdUserAnswering(idUserTransfering);
             this.setStatus(TransactionStatus.TRANSFERING);
         } else {

@@ -73,9 +73,7 @@ public class TransactionServiceImpl implements TransactionService  {
 
     @Override
     public Transaction getTransaction(Integer transactionId) {
-        Transaction transactionDTO =  transactionRepo.findById(transactionId)
-                                        .orElseThrow(() -> new TransactionNotFundException());
-        return transactionDTO;
+        return transactionRepo.findById(transactionId).orElseThrow(TransactionNotFundException::new);
     }
 
     @Override
@@ -125,9 +123,9 @@ public class TransactionServiceImpl implements TransactionService  {
     @Override
     public TransactionProcessedDTO processTransfer(Integer transactionId) {
         Transaction transactionTransfer = transactionRepo.findById(transactionId)
-            .orElseThrow(() -> new TransactionNotFundException());
+            .orElseThrow(TransactionNotFundException::new);
         User userOfTransfer = userRepository.findById(transactionTransfer.getIdUser())
-            .orElseThrow(() -> new UserNotFoundException());
+            .orElseThrow(UserNotFoundException::new);
 
         return TransactionProcessedDTO.from(transactionTransfer, userOfTransfer);
     }
@@ -135,7 +133,7 @@ public class TransactionServiceImpl implements TransactionService  {
     @Override
     public void transferToIntention(Integer transactionId, Integer userId) {
         Transaction transactionTransfer = transactionRepo.findById(transactionId)
-            .orElseThrow(() -> new TransactionNotFundException());
+            .orElseThrow(TransactionNotFundException::new);
         this.processValidationOfIntention(transactionTransfer);
         transactionTransfer.realizeTransfer(userId);
         transactionRepo.save(transactionTransfer);
@@ -144,8 +142,8 @@ public class TransactionServiceImpl implements TransactionService  {
     @Override
     public void cancelTransaction(Integer transactionId, Integer userId) {
         Transaction transactionToCancel = transactionRepo.findById(transactionId)
-            .orElseThrow(() -> new TransactionNotFundException());
-        User userCancelling = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException());
+            .orElseThrow(TransactionNotFundException::new);
+        User userCancelling = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
 
         transactionToCancel.cancelTransaction(userId);
         userCancelling.discountReputation();
@@ -157,13 +155,14 @@ public class TransactionServiceImpl implements TransactionService  {
     public void confirmTransaction(Integer transactionId, Integer userId) {
         Transaction transactionToConfirm = transactionRepo.findById(transactionId)
             .orElseThrow(() -> new TransactionNotFundException());
-        User userConfirming = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException());
+        User userConfirming = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
 
         transactionToConfirm.confirmTransactionDone(userId);
 
         User userAnsweringIntent = userRepository.findById(transactionToConfirm.getIdUserAnswering())
-            .orElseThrow(() -> new UserNotFoundException());
+            .orElseThrow(UserNotFoundException::new);
         String dateTransaction = transactionToConfirm.getDateTimeCreated();
+        
         if (CurrentDateAndTime.achieveRequirementOfTransacion(dateTransaction)) {
             userConfirming.addReputation(10);
             userAnsweringIntent.addReputation(10);

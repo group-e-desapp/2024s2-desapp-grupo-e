@@ -29,7 +29,6 @@ public class TransactionFactory {
     public static Transaction createWithFullData(Integer idUser, String symbol, Float nominalValue,
                                     Double priceOffered, String operationType, String dateTimeCreated) {
         Transaction transaction = new Transaction();
-        //transaction.setIdExchange(null);    idExchange =;
         transaction.setIdUser(idUser);
         transaction.setSymbolTrade(symbol);
         transaction.setCryptoNominalValue(nominalValue);

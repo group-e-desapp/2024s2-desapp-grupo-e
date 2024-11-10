@@ -17,7 +17,7 @@ public class TransactionResponseDTO {
 
     public static TransactionResponseDTO from(Transaction transaction, User user) {
         var transactionDTO = new TransactionResponseDTO();
-        transactionDTO.idTransaction = transaction.getIdExchange().intValue();
+        transactionDTO.idTransaction = transaction.getIdExchange();
         transactionDTO.dateIntentionCreated = transaction.getDateTimeCreated();
         transactionDTO.cryptoSymbol = transaction.getSymbolTrade();
         transactionDTO.nominalValue = transaction.getCryptoNominalValue();
