@@ -21,9 +21,6 @@ import com.unq.dapp_grupo_e.utilities.factories.UserFactory;
 @Profile("prod")
 public class DatabaseInitializer {
 
-    public Double twoDigits(Double value) {
-        return 0.0;
-    }
 
     @Bean
     public CommandLineRunner initializeDatabase(UserService userService,

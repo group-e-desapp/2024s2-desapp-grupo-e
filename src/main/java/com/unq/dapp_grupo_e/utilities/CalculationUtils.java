@@ -5,6 +5,10 @@ import java.math.RoundingMode;
 
 public class CalculationUtils {
 
+    private CalculationUtils() {
+        throw new IllegalStateException("Utility class");
+      }
+
 
     public static double roundProduct(double double1, double double2) {
         BigDecimal result = BigDecimal.valueOf(double1)

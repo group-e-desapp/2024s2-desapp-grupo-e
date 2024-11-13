@@ -1,4 +1,6 @@
 package com.unq.dapp_grupo_e.repository;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -17,4 +19,6 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     void resetIdUser();
     
     boolean existsByEmail(String email);
+
+    Optional<User>findByEmail(String email);
 }

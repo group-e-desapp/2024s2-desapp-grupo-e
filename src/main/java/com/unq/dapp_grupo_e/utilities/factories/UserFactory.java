@@ -1,6 +1,7 @@
 package com.unq.dapp_grupo_e.utilities.factories;
 
 
+import com.unq.dapp_grupo_e.model.Role;
 import com.unq.dapp_grupo_e.model.User;
 
 public class UserFactory {
@@ -17,6 +18,7 @@ public class UserFactory {
         user.setSurname("Non");
         user.setCvu("1011121314151617181920");
         user.setWalletAddress("AA342341");
+        user.setRole(Role.USER);
         return user;
     }
 
@@ -30,6 +32,7 @@ public class UserFactory {
         user.setWalletAddress("BB342341");
         user.setAmountSetOperations(operationsSetted);
         user.setReputationPoints(reputationPoints);
+        user.setRole(Role.USER);
         return user;
     }
 
@@ -45,6 +48,7 @@ public class UserFactory {
         user.setWalletAddress("CC342341");
         user.setAmountSetOperations(operationsSetted);
         user.setReputationPoints(reputationPoints);
+        user.setRole(Role.USER);
         return user;
     }
     
