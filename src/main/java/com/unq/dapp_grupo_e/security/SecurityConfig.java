@@ -35,11 +35,11 @@ public class SecurityConfig {
     AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
-
+ 
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(userDetailsService());
+        authenticationProvider.setUserDetailsService(new CustomUserDetailsService(userRepo));
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         return authenticationProvider;
     }
@@ -55,18 +55,19 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
     
+    @SuppressWarnings("removal")
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.headers().frameOptions().disable();
         return http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authRequest -> authRequest
-                    .requestMatchers("/authUser/**").permitAll()
-                    .anyRequest().authenticated()
-                    )
+                .requestMatchers("/authUser/**","/doc/swagger-ui/**","/v3/api-docs/**","/h2-console/**","/transaction/**").permitAll()
+                .anyRequest().authenticated())
             .sessionManagement(sessionManager->
                 sessionManager
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authenticationProvider(authenticationProvider()) // -----------------------
+            .authenticationProvider(authenticationProvider()) 
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
             .build();
     }

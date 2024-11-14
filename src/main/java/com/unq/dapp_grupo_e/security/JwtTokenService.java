@@ -18,10 +18,8 @@ import io.jsonwebtoken.security.Keys;
 @Component
 public class JwtTokenService {
     
-    //@Value("${jwt.secret}")
     private static final String SECRET="BANRASRLIAPOPPARHELHAPWORAFOWPASTTESMORICAEAM";
 
-    @SuppressWarnings("deprecation")
     public String generateToken(UserDetails user) {
         Date createdAt = new Date();
         Date expirationToken = new Date(System.currentTimeMillis() + (1000*60*180));
@@ -49,10 +47,9 @@ public class JwtTokenService {
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
-    @SuppressWarnings("deprecation")
     private Claims getAllClaims(String token) {
         return Jwts
-            .parser()
+            .parserBuilder()
             .setSigningKey(getKey())
             .build()
             .parseClaimsJws(token)
