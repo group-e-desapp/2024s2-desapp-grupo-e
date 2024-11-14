@@ -11,13 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import com.unq.dapp_grupo_e.controller.dto.UserRegisterResponseDTO;
+import com.unq.dapp_grupo_e.controller.dto.AuthResponse;
 import com.unq.dapp_grupo_e.model.User;
 import com.unq.dapp_grupo_e.model.exceptions.DuplicationDataException;
 import com.unq.dapp_grupo_e.model.exceptions.InvalidCharactersException;
 import com.unq.dapp_grupo_e.model.exceptions.InvalidEmailException;
 import com.unq.dapp_grupo_e.model.exceptions.InvalidEmptyFieldException;
 import com.unq.dapp_grupo_e.model.exceptions.InvalidLengthException;
+import com.unq.dapp_grupo_e.service.AuthService;
 import com.unq.dapp_grupo_e.service.UserService;
 import com.unq.dapp_grupo_e.utilities.factories.UserFactory;
 import com.unq.dapp_grupo_e.utilities.factories.UserRegisterFactory;
@@ -28,6 +29,8 @@ class UserTests {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private AuthService authUserService;
 
     @BeforeEach
     void deleteAndReset() {
@@ -117,25 +120,25 @@ class UserTests {
     }
 
     // Service side
-
+ 
     @Test
     void checkResponseUserOfRegister() {
         var userDTO = UserRegisterFactory.anyUserRegister();
-        var userResponse = userService.createUser(userDTO);
-        Assertions.assertTrue(userResponse instanceof UserRegisterResponseDTO);
+        var userResponse = authUserService.register(userDTO);
+        Assertions.assertTrue(userResponse instanceof AuthResponse);
     }
 
     @Test
     void checkUserWasSaved() {
         var userDTO = UserRegisterFactory.anyUserRegister();
-        userService.createUser(userDTO);
+        authUserService.register(userDTO);
         Assertions.assertNotNull(userService.findById(1));
     }
 
     @Test
     void checkUserSavedData() {
         var userDTO = UserRegisterFactory.createWithNameAndSurname("Mark", "Coyle");
-        userService.createUser(userDTO);
+        authUserService.register(userDTO);
         var userRecovered = userService.findById(1);
         Assertions.assertEquals("Mark", userRecovered.getName());
         Assertions.assertEquals("Coyle", userRecovered.getSurname());
@@ -145,32 +148,32 @@ class UserTests {
     void exceptionForDuplicatedEmailUsedForRegister() {
         var userDTO = UserRegisterFactory.createWithEmail("mark5@gmail.com");
         var userDTODuplicated = UserRegisterFactory.createWithEmail("mark5@gmail.com");
-        userService.createUser(userDTO);
-        Assertions.assertThrows(DuplicationDataException.class, () -> userService.createUser(userDTODuplicated));
+        authUserService.register(userDTO);
+        Assertions.assertThrows(DuplicationDataException.class, () -> authUserService.register(userDTODuplicated));
     }
 
     @Test
     void exceptionForInvalidEmailForRegister() {
         var userDTO = UserRegisterFactory.createWithEmail("mark5@gmailcom");
-        Assertions.assertThrows(InvalidEmailException.class, () -> userService.createUser(userDTO));
+        Assertions.assertThrows(InvalidEmailException.class, () -> authUserService.register(userDTO));
     }
 
     @Test
     void exceptionForMissingCharactersInPasswordForRegister() {
         var userDTO = UserRegisterFactory.createWithPassword("mark05#");
-        Assertions.assertThrows(InvalidCharactersException.class, () -> userService.createUser(userDTO));
+        Assertions.assertThrows(InvalidCharactersException.class, () -> authUserService.register(userDTO));
     }
 
     @Test
     void exceptionForInvalidLengthInNameForRegister() {
         var userDTO = UserRegisterFactory.createWithName("AI");
-        Assertions.assertThrows(InvalidLengthException.class, () -> userService.createUser(userDTO));
+        Assertions.assertThrows(InvalidLengthException.class, () -> authUserService.register(userDTO));
     }
 
     @Test
     void exceptionForEmptyFieldForRegister() {
         var userDTO = UserRegisterFactory.createWithSurname("");
-        Assertions.assertThrows(InvalidEmptyFieldException.class, () -> userService.createUser(userDTO));
+        Assertions.assertThrows(InvalidEmptyFieldException.class, () -> authUserService.register(userDTO));
     }
 
     @Test

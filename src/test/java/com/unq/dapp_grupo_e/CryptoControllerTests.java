@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -36,6 +37,7 @@ class CryptoControllerTests {
     private CryptoCurrencyService cryptoCurrencyService;
 
 
+    @WithMockUser(username = "ann85@mail.com", password = "Non&noN")
     @Test
     void consultOfCryptoCotizationReturnsCode200() throws Exception{
 
@@ -51,6 +53,7 @@ class CryptoControllerTests {
                     .andExpect(status().isOk());
     }
 
+    @WithMockUser(username = "ann85@mail.com", password = "Non&noN")
     @Test
     void consultCotizationOfInvalidCryptoReturnsCode404() throws Exception{
 
@@ -65,6 +68,7 @@ class CryptoControllerTests {
                     .andExpect(status().isNotFound());
     }
 
+    @WithMockUser(username = "ann85@mail.com", password = "Non&noN")
     @Test
     void consultAllCryptoCotizationsReturnsCode200() throws Exception {
         CryptoCurrency cryptoCAKE = CryptoCurrencyFactory.createWithSymbolAndPrice("CAKEUSDT", 1.812);

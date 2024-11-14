@@ -20,6 +20,7 @@ import com.unq.dapp_grupo_e.model.TransactionStatus;
 import com.unq.dapp_grupo_e.model.exceptions.InvalidActionException;
 import com.unq.dapp_grupo_e.repository.TransactionRepository;
 import com.unq.dapp_grupo_e.repository.UserRepository;
+import com.unq.dapp_grupo_e.service.AuthService;
 import com.unq.dapp_grupo_e.service.BinanceService;
 import com.unq.dapp_grupo_e.service.DolarApiService;
 import com.unq.dapp_grupo_e.service.TransactionService;
@@ -47,6 +48,8 @@ class TransactionActionTests {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private AuthService authUserService;
 
     private TransactionService transactionService;
 
@@ -93,7 +96,7 @@ class TransactionActionTests {
         when(binanceService.getCrypto("ADAUSDT")).thenReturn(cryptoMock);
         when(dolarApiService.getDolarCotization()).thenReturn(300.0);
 
-        userService.createUser(userForm);
+        authUserService.register(userForm);
         transactionService.createTransaction(transactionForm);
 
         TransactionProcessedDTO transactionProcessed = transactionService.processTransfer(1);
@@ -112,7 +115,7 @@ class TransactionActionTests {
         when(binanceService.getCrypto("NEOUSDT")).thenReturn(cryptoMock);
         when(dolarApiService.getDolarCotization()).thenReturn(300.0);
 
-        userService.createUser(userForm);
+        authUserService.register(userForm);
         transactionService.createTransaction(transactionForm);
 
         TransactionProcessedDTO transactionProcessed = transactionService.processTransfer(1);
@@ -131,7 +134,7 @@ class TransactionActionTests {
         when(binanceService.getCrypto("NEOUSDT")).thenReturn(cryptoMock);
         when(dolarApiService.getDolarCotization()).thenReturn(300.0);
 
-        userService.createUser(userForm);
+        authUserService.register(userForm);
         transactionService.createTransaction(transactionForm);
 
         TransactionProcessedDTO transactionProcessed = transactionService.processTransfer(1);
@@ -151,8 +154,8 @@ class TransactionActionTests {
 
         UserRegisterDTO firstUser = UserRegisterFactory.anyUserRegister();
         UserRegisterDTO secondUser = UserRegisterFactory.createWithEmail("secondUser@mail.com");
-        userService.createUser(firstUser);
-        userService.createUser(secondUser);
+        authUserService.register(firstUser);
+        authUserService.register(secondUser);
         transactionService.createTransaction(transactionForm);
         transactionService.transferToIntention(1, 2);
 
@@ -172,8 +175,8 @@ class TransactionActionTests {
 
         UserRegisterDTO firstUser = UserRegisterFactory.anyUserRegister();
         UserRegisterDTO secondUser = UserRegisterFactory.createWithEmail("secondUser@mail.com");
-        userService.createUser(firstUser);
-        userService.createUser(secondUser);
+        authUserService.register(firstUser);
+        authUserService.register(secondUser);
         transactionService.createTransaction(transactionForm);
         transactionService.transferToIntention(1, 2);
         transactionService.confirmTransaction(1,1);
@@ -193,7 +196,7 @@ class TransactionActionTests {
         when(dolarApiService.getDolarCotization()).thenReturn(300.0);
 
         UserRegisterDTO cancellingUser = UserRegisterFactory.anyUserRegister();
-        userService.createUser(cancellingUser);
+        authUserService.register(cancellingUser);
         transactionService.createTransaction(transactionForm);
         transactionService.cancelTransaction(1, 1);
 
@@ -213,8 +216,8 @@ class TransactionActionTests {
 
         UserRegisterDTO userOfTransaction = UserRegisterFactory.anyUserRegister();
         UserRegisterDTO userOfActions = UserRegisterFactory.createWithEmail("otherUser@mail.com");
-        userService.createUser(userOfTransaction);
-        userService.createUser(userOfActions);
+        authUserService.register(userOfTransaction);
+        authUserService.register(userOfActions);
         transactionService.createTransaction(transactionForm);
         transactionService.transferToIntention(1, 2);
         transactionService.cancelTransaction(1, 2);
@@ -233,7 +236,7 @@ class TransactionActionTests {
         when(dolarApiService.getDolarCotization()).thenReturn(300.0);
 
         UserRegisterDTO uniqueUser = UserRegisterFactory.anyUserRegister();
-        userService.createUser(uniqueUser);
+        authUserService.register(uniqueUser);
         transactionService.createTransaction(transactionForm);
 
         InvalidActionException error = Assertions.assertThrows(InvalidActionException.class, 
@@ -251,7 +254,7 @@ class TransactionActionTests {
         when(dolarApiService.getDolarCotization()).thenReturn(300.0);
 
         UserRegisterDTO uniqueUser = UserRegisterFactory.anyUserRegister();
-        userService.createUser(uniqueUser);
+        authUserService.register(uniqueUser);
         transactionService.createTransaction(transactionForm);
 
         InvalidActionException error = Assertions.assertThrows(InvalidActionException.class, 
@@ -269,8 +272,8 @@ class TransactionActionTests {
 
         UserRegisterDTO userOfIntention = UserRegisterFactory.anyUserRegister();
         UserRegisterDTO userCancelling = UserRegisterFactory.createWithEmail("errorUser@mail.com");
-        userService.createUser(userOfIntention);
-        userService.createUser(userCancelling);
+        authUserService.register(userOfIntention);
+        authUserService.register(userCancelling);
         transactionService.createTransaction(transactionForm);
 
         InvalidActionException error = Assertions.assertThrows(InvalidActionException.class, 
@@ -288,8 +291,8 @@ class TransactionActionTests {
 
         UserRegisterDTO userOfIntention = UserRegisterFactory.anyUserRegister();
         UserRegisterDTO userConfirming = UserRegisterFactory.createWithEmail("errorUser@mail.com");
-        userService.createUser(userOfIntention);
-        userService.createUser(userConfirming);
+        authUserService.register(userOfIntention);
+        authUserService.register(userConfirming);
         transactionService.createTransaction(transactionForm);
 
         InvalidActionException error = Assertions.assertThrows(InvalidActionException.class, 
@@ -308,9 +311,9 @@ class TransactionActionTests {
         UserRegisterDTO userOfIntention = UserRegisterFactory.anyUserRegister();
         UserRegisterDTO firstUserTransfer = UserRegisterFactory.createWithEmail("correctUser@mail.com");
         UserRegisterDTO secondtUserTransfer = UserRegisterFactory.createWithEmail("errorUser@mail.com");
-        userService.createUser(userOfIntention);
-        userService.createUser(firstUserTransfer);
-        userService.createUser(secondtUserTransfer);
+        authUserService.register(userOfIntention);
+        authUserService.register(firstUserTransfer);
+        authUserService.register(secondtUserTransfer);
         transactionService.createTransaction(transactionForm);
 
         transactionService.transferToIntention(1, 2);

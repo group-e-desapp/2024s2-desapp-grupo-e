@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -28,46 +29,49 @@ class UserControllerTests {
     @Autowired
     private UserService userService;
 
-     
+    @WithMockUser(username = "non85@mail.com", password = "Non&noN")
     @Test
     void userRegisterValidReturns200() throws Exception{
         userService.deleteAllUsers();
         var validUser = UserRegisterFactory.anyUserRegister();
 
-        mockMvc.perform(post("/user/register")
+        mockMvc.perform(post("/authUser/register")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(objectMapper.writeValueAsString(validUser)))
                     .andExpect(status().isOk());
     }
     
+    @WithMockUser(username = "non85@mail.com", password = "Non&noN")
     @Test
     void userRegisterWithInvalidNameLength() throws Exception {
         var invalidUser = UserRegisterFactory.createWithName("AI");
 
-        mockMvc.perform(post("/user/register")
+        mockMvc.perform(post("/authUser/register")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(objectMapper.writeValueAsString(invalidUser)))
                     .andExpect(status().isBadRequest());
 
     }
 
+    @WithMockUser(username = "non85@mail.com", password = "Non&noN")
     @Test
     void userRegisterWithInvalidSurnameLength() throws Exception {
         var invalidUser = UserRegisterFactory.createWithSurname("toomuchcharactersforsurnamefield");
 
-        mockMvc.perform(post("/user/register")
+        mockMvc.perform(post("/authUser/register")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(objectMapper.writeValueAsString(invalidUser)))
                     .andExpect(status().isBadRequest());
 
     }
 
+    @WithMockUser(username = "non85@mail.com", password = "Non&noN")
     @ParameterizedTest
     @ValueSource(strings = {"Try", "notvalid", "NOTVALID"})
     void userRegisterInvalidForMissingRequerimentsForPassword(String passwordTry) throws Exception {
         var invalidUser = UserRegisterFactory.createWithPassword(passwordTry);
 
-        mockMvc.perform(post("/user/register")
+        mockMvc.perform(post("/authUser/register")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(objectMapper.writeValueAsString(invalidUser)))
                     .andExpect(status().isBadRequest());
