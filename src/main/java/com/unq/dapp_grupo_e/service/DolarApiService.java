@@ -3,7 +3,7 @@ package com.unq.dapp_grupo_e.service;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.unq.dapp_grupo_e.controller.dto.DolarApiResponseDTO;
+import com.unq.dapp_grupo_e.dto.DolarApiResponseDTO;
 
 import jakarta.persistence.EntityNotFoundException;
 

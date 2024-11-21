@@ -2,7 +2,7 @@ package com.unq.dapp_grupo_e.model;
 
 import java.util.Arrays;
 
-import com.unq.dapp_grupo_e.model.exceptions.InvalidCurrencyException;
+import com.unq.dapp_grupo_e.exceptions.InvalidCurrencyException;
 
 public enum CryptoCurrencyEnum {
     ALICEUSDT,

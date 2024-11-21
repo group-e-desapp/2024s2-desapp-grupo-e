@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.unq.dapp_grupo_e.controller.dto.AuthResponse;
-import com.unq.dapp_grupo_e.controller.dto.LoginRequest;
-import com.unq.dapp_grupo_e.controller.dto.UserRegisterDTO;
+import com.unq.dapp_grupo_e.dto.AuthResponse;
+import com.unq.dapp_grupo_e.dto.LoginRequest;
+import com.unq.dapp_grupo_e.dto.UserRegisterDTO;
 import com.unq.dapp_grupo_e.service.AuthService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,7 +27,8 @@ public class AuthController {
     
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
-        return ResponseEntity.ok(authService.login(request));
+        String tokenGenerated = authService.login(request.getEmail(), request.getPassword());
+        return ResponseEntity.ok(AuthResponse.builder().token(tokenGenerated).build());
     }
 
     @ApiResponse(responseCode = "201", description = "New user registered")
@@ -36,7 +37,8 @@ public class AuthController {
                description = "Register a new user with the described data in the form fields")
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody UserRegisterDTO userRequest) {
-        return ResponseEntity.ok(authService.register(userRequest));
+        String tokenGenerated = authService.register(userRequest);
+        return ResponseEntity.ok(AuthResponse.builder().token(tokenGenerated).build());
     }
 
 }

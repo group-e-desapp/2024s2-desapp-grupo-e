@@ -2,9 +2,9 @@ package com.unq.dapp_grupo_e.service;
 
 import java.util.List;
 
-import com.unq.dapp_grupo_e.controller.dto.TransactionFormDTO;
-import com.unq.dapp_grupo_e.controller.dto.TransactionProcessedDTO;
-import com.unq.dapp_grupo_e.controller.dto.TransactionResponseDTO;
+import com.unq.dapp_grupo_e.dto.TransactionFormDTO;
+import com.unq.dapp_grupo_e.dto.TransactionProcessedDTO;
+import com.unq.dapp_grupo_e.dto.TransactionResponseDTO;
 import com.unq.dapp_grupo_e.model.CryptoVolume;
 import com.unq.dapp_grupo_e.model.Transaction;
 

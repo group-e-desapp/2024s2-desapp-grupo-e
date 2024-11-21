@@ -7,9 +7,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.unq.dapp_grupo_e.model.exceptions.InvalidCharactersException;
-import com.unq.dapp_grupo_e.model.exceptions.InvalidEmailException;
-import com.unq.dapp_grupo_e.model.exceptions.InvalidLengthException;
+import com.unq.dapp_grupo_e.exceptions.InvalidCharactersException;
+import com.unq.dapp_grupo_e.exceptions.InvalidEmailException;
+import com.unq.dapp_grupo_e.exceptions.InvalidLengthException;
 import com.unq.dapp_grupo_e.utilities.CharacterValidator;
 
 import jakarta.persistence.Column;

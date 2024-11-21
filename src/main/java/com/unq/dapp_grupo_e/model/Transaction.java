@@ -1,7 +1,7 @@
 package com.unq.dapp_grupo_e.model;
 
 
-import com.unq.dapp_grupo_e.model.exceptions.InvalidActionException;
+import com.unq.dapp_grupo_e.exceptions.InvalidActionException;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

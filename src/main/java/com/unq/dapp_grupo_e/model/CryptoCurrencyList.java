@@ -3,7 +3,7 @@ package com.unq.dapp_grupo_e.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.unq.dapp_grupo_e.model.exceptions.InvalidCurrencyException;
+import com.unq.dapp_grupo_e.exceptions.InvalidCurrencyException;
 
 public class CryptoCurrencyList {
 

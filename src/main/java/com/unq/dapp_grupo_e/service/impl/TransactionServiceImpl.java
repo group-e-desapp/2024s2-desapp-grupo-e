@@ -6,19 +6,19 @@ import java.util.NoSuchElementException;
 
 import org.springframework.stereotype.Service;
 
-import com.unq.dapp_grupo_e.controller.dto.TransactionFormDTO;
-import com.unq.dapp_grupo_e.controller.dto.TransactionProcessedDTO;
-import com.unq.dapp_grupo_e.controller.dto.TransactionResponseDTO;
-import com.unq.dapp_grupo_e.controller.dto.TransactionSummaryDTO;
+import com.unq.dapp_grupo_e.dto.TransactionFormDTO;
+import com.unq.dapp_grupo_e.dto.TransactionProcessedDTO;
+import com.unq.dapp_grupo_e.dto.TransactionResponseDTO;
+import com.unq.dapp_grupo_e.exceptions.InvalidCryptoPriceOffer;
+import com.unq.dapp_grupo_e.exceptions.TransactionNotFundException;
+import com.unq.dapp_grupo_e.exceptions.UserNotFoundException;
 import com.unq.dapp_grupo_e.model.CryptoActive;
 import com.unq.dapp_grupo_e.model.CryptoCurrencyEnum;
 import com.unq.dapp_grupo_e.model.CryptoVolume;
 import com.unq.dapp_grupo_e.model.Transaction;
 import com.unq.dapp_grupo_e.model.TransactionStatus;
+import com.unq.dapp_grupo_e.model.TransactionSummary;
 import com.unq.dapp_grupo_e.model.User;
-import com.unq.dapp_grupo_e.model.exceptions.InvalidCryptoPriceOffer;
-import com.unq.dapp_grupo_e.model.exceptions.TransactionNotFundException;
-import com.unq.dapp_grupo_e.model.exceptions.UserNotFoundException;
 import com.unq.dapp_grupo_e.repository.TransactionRepository;
 import com.unq.dapp_grupo_e.repository.UserRepository;
 import com.unq.dapp_grupo_e.service.BinanceService;
@@ -86,10 +86,10 @@ public class TransactionServiceImpl implements TransactionService  {
     public CryptoVolume getCryptoVolumeOfUserBetweenDates(Integer userId, String startDate, String endDate) {
         CryptoVolume responseVolume = new CryptoVolume();
 
-        List<TransactionSummaryDTO> listCryptoActives = transactionRepo.getTotalNominalValuesOfUserBetweenDates(userId, startDate, endDate);
+        List<TransactionSummary> listCryptoActives = transactionRepo.getTotalNominalValuesOfUserBetweenDates(userId, startDate, endDate);
         Double cotizationToARS = dolarApiService.getDolarCotization();
 
-        for (TransactionSummaryDTO active:listCryptoActives) {
+        for (TransactionSummary active:listCryptoActives) {
             Double cryptoPrice = binanceService.getCrypto(active.getSymbolTrade()).getPrice();
             responseVolume.addCryptoActive(new CryptoActive(active.getSymbolTrade(), 
                                                             active.getTotalNominalValue(), 

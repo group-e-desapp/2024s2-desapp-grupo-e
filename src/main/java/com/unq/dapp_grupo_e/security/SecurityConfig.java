@@ -15,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.unq.dapp_grupo_e.model.exceptions.UserNotFoundException;
+import com.unq.dapp_grupo_e.exceptions.UserNotFoundException;
 import com.unq.dapp_grupo_e.repository.UserRepository;
 
 @Configuration
@@ -62,7 +62,9 @@ public class SecurityConfig {
         return http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authRequest -> authRequest
-                .requestMatchers("/authUser/**","/doc/swagger-ui/**","/v3/api-docs/**","/h2-console/**","/transaction/**").permitAll()
+                .requestMatchers("/authUser/**","/doc/swagger-ui/**",
+                    "/v3/api-docs/**","/h2-console/**","/transaction/**", "/crypto/**", "/actuator/prometheus", "/actuator",
+                    "/actuator/health", "/actuator/metrics", "/actuator/metrics/**").permitAll()
                 .anyRequest().authenticated())
             .sessionManagement(sessionManager->
                 sessionManager

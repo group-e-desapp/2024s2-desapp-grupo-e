@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import com.unq.dapp_grupo_e.model.exceptions.InvalidDateFormatException;
+import com.unq.dapp_grupo_e.exceptions.InvalidDateFormatException;
 
 public class CurrentDateAndTime {
 

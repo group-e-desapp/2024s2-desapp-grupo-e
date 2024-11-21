@@ -4,9 +4,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.unq.dapp_grupo_e.controller.dto.TransactionFormDTO;
-import com.unq.dapp_grupo_e.controller.dto.TransactionProcessedDTO;
-import com.unq.dapp_grupo_e.controller.dto.TransactionResponseDTO;
+import com.unq.dapp_grupo_e.dto.TransactionFormDTO;
+import com.unq.dapp_grupo_e.dto.TransactionProcessedDTO;
+import com.unq.dapp_grupo_e.dto.TransactionResponseDTO;
 import com.unq.dapp_grupo_e.model.CryptoVolume;
 import com.unq.dapp_grupo_e.model.Transaction;
 import com.unq.dapp_grupo_e.service.TransactionService;

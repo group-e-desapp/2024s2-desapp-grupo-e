@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.unq.dapp_grupo_e.factory.TransactionFactory;
+import com.unq.dapp_grupo_e.factory.UserFactory;
 import com.unq.dapp_grupo_e.model.CryptoCurrencyList;
 import com.unq.dapp_grupo_e.model.Transaction;
 import com.unq.dapp_grupo_e.model.User;
@@ -14,8 +16,6 @@ import com.unq.dapp_grupo_e.service.CryptoCurrencyService;
 import com.unq.dapp_grupo_e.service.DolarApiService;
 import com.unq.dapp_grupo_e.service.TransactionService;
 import com.unq.dapp_grupo_e.service.UserService;
-import com.unq.dapp_grupo_e.utilities.factories.TransactionFactory;
-import com.unq.dapp_grupo_e.utilities.factories.UserFactory;
 
 @Configuration
 @Profile("prod")

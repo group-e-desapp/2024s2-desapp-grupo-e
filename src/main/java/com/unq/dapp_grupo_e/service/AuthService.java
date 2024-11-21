@@ -1,6 +1,5 @@
 package com.unq.dapp_grupo_e.service;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -8,14 +7,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.unq.dapp_grupo_e.controller.dto.AuthResponse;
-import com.unq.dapp_grupo_e.controller.dto.LoginRequest;
-import com.unq.dapp_grupo_e.controller.dto.UserRegisterDTO;
+import com.unq.dapp_grupo_e.dto.UserRegisterDTO;
+import com.unq.dapp_grupo_e.exceptions.DuplicationDataException;
+import com.unq.dapp_grupo_e.exceptions.InvalidEmptyFieldException;
+import com.unq.dapp_grupo_e.exceptions.UserNotFoundException;
 import com.unq.dapp_grupo_e.model.Role;
 import com.unq.dapp_grupo_e.model.User;
-import com.unq.dapp_grupo_e.model.exceptions.DuplicationDataException;
-import com.unq.dapp_grupo_e.model.exceptions.InvalidEmptyFieldException;
-import com.unq.dapp_grupo_e.model.exceptions.UserNotFoundException;
 import com.unq.dapp_grupo_e.repository.UserRepository;
 import com.unq.dapp_grupo_e.security.JwtTokenService;
 
@@ -40,16 +37,14 @@ public class AuthService {
     }
 
 
-    public AuthResponse login(LoginRequest request) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
-        UserDetails user = userRepo.findByEmail(request.getEmail()).orElseThrow(UserNotFoundException::new);
+    public String login(String userEmail, String userPassword) {
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userEmail, userPassword));
+        UserDetails user = userRepo.findByEmail(userEmail).orElseThrow(UserNotFoundException::new);
         String token = jwtTokenProvider.generateToken(user);
-        return AuthResponse.builder()
-            .token(token)
-            .build();
+        return token;
     }
     
-    public AuthResponse register(UserRegisterDTO userForm) {
+    public String register(UserRegisterDTO userForm) {
         if (userForm.validationOfEmptyFields()) {
             throw new InvalidEmptyFieldException("There is a missing required field");
         }
@@ -67,9 +62,7 @@ public class AuthService {
         user.setRole(Role.USER);
         userRepo.save(user);
 
-        return AuthResponse.builder()
-            .token(jwtTokenProvider.generateToken(user))
-            .build();
+        return jwtTokenProvider.generateToken(user);
     }
 
 }
