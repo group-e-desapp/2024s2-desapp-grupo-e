@@ -102,7 +102,7 @@ public class TransactionServiceImpl implements TransactionService  {
 
     }
 
-    public boolean isAValidPriceCurently(Transaction transaction, Double currentPrice) {
+    public boolean isAValidPriceCurrently(Transaction transaction, Double currentPrice) {
         var cotizationDolar = dolarApiService.getDolarCotization();
         if (transaction.getOperationType().equals("SELL")) {
             return transaction.getPriceOffered() > (currentPrice * cotizationDolar);
@@ -113,7 +113,7 @@ public class TransactionServiceImpl implements TransactionService  {
 
     public void processValidationOfIntention(Transaction transaction) {
         var actualCotization = binanceService.getCrypto(transaction.getSymbolTrade()).getPrice();
-        if (!isAValidPriceCurently(transaction, actualCotization)) {
+        if (!isAValidPriceCurrently(transaction, actualCotization)) {
             transaction.setStatus(TransactionStatus.CANCELLED);
             transactionRepo.save(transaction);
             throw new InvalidCryptoPriceOffer("The current price of the intention is not valid for a transaction, it won't appear again as an option for trading");

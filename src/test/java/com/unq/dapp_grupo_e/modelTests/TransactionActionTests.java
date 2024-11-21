@@ -15,6 +15,7 @@ import com.unq.dapp_grupo_e.dto.TransactionFormDTO;
 import com.unq.dapp_grupo_e.dto.TransactionProcessedDTO;
 import com.unq.dapp_grupo_e.dto.UserRegisterDTO;
 import com.unq.dapp_grupo_e.exceptions.InvalidActionException;
+import com.unq.dapp_grupo_e.exceptions.InvalidCryptoPriceOffer;
 import com.unq.dapp_grupo_e.factory.CryptoCurrencyFactory;
 import com.unq.dapp_grupo_e.factory.factoriesdto.TransactionFormFactory;
 import com.unq.dapp_grupo_e.factory.factoriesdto.UserRegisterFactory;
@@ -144,10 +145,31 @@ class TransactionActionTests {
     }
 
     @Test
-    void userRealizeTransferForTransactionCreatedByFirstUser() {
+    void userRealizeTransferForSellTransactionCreatedByFirstUser() {
 
         TransactionFormDTO transactionForm = TransactionFormFactory
                                                 .createFullData("NEOUSDT", 33f, 111.3, "SELL");
+        CryptoCurrency cryptoMock = CryptoCurrencyFactory.createWithSymbolAndPrice("NEOUSDT", 0.36d);
+        when(binanceService.getCrypto("NEOUSDT")).thenReturn(cryptoMock);
+        when(dolarApiService.getDolarCotization()).thenReturn(300.0);
+
+        UserRegisterDTO firstUser = UserRegisterFactory.anyUserRegister();
+        UserRegisterDTO secondUser = UserRegisterFactory.createWithEmail("secondUser@mail.com");
+        authUserService.register(firstUser);
+        authUserService.register(secondUser);
+        transactionService.createTransaction(transactionForm);
+        transactionService.transferToIntention(1, 2);
+
+        var transactionRecovered = transactionService.getTransaction(1);
+
+        Assertions.assertEquals(TransactionStatus.TRANSFERING, transactionRecovered.getStatus());
+    }
+
+    @Test
+    void userRealizeTransferForBuyTransactionCreatedByFirstUser() {
+
+        TransactionFormDTO transactionForm = TransactionFormFactory
+                                                .createFullData("NEOUSDT", 33f, 105.4, "BUY");
         CryptoCurrency cryptoMock = CryptoCurrencyFactory.createWithSymbolAndPrice("NEOUSDT", 0.36d);
         when(binanceService.getCrypto("NEOUSDT")).thenReturn(cryptoMock);
         when(dolarApiService.getDolarCotization()).thenReturn(300.0);
@@ -323,5 +345,33 @@ class TransactionActionTests {
         Assertions.assertEquals("Transaction is already in process or is not available for interaction", error.getMessage());
     }
 
+    @Test
+    void exceptionForPriceOfferDuringTransferFromUserToTransactionCreated() {
+
+        TransactionFormDTO transactionForm = TransactionFormFactory
+                                            .createFullData("NEOUSDT", 33f, 107.3, "BUY");
+
+        CryptoCurrency cryptoMock = CryptoCurrencyFactory.createWithSymbolAndPrice("NEOUSDT", 0.36d);
+        when(binanceService.getCrypto("NEOUSDT")).thenReturn(cryptoMock);
+        when(dolarApiService.getDolarCotization()).thenReturn(300.0);
+        
+        transactionService.createTransaction(transactionForm);
+
+        UserRegisterDTO userOfIntention = UserRegisterFactory.anyUserRegister();
+        UserRegisterDTO userTransfer = UserRegisterFactory.createWithEmail("correctUser@mail.com");
+        authUserService.register(userOfIntention);
+        authUserService.register(userTransfer);
+
+        cryptoMock = CryptoCurrencyFactory.createWithSymbolAndPrice("NEOUSDT", 0.3d);
+        when(binanceService.getCrypto("NEOUSDT")).thenReturn(cryptoMock);
+
+        InvalidCryptoPriceOffer exception = Assertions.assertThrows(InvalidCryptoPriceOffer.class, 
+                                                            () -> transactionService.transferToIntention(1, 2));
+        
+        Transaction transactionRecover = transactionRepo.findById(1).get();
+        Assertions.assertEquals(TransactionStatus.CANCELLED, transactionRecover.getStatus());
+        Assertions.assertEquals("The current price of the intention is not valid for a transaction, it won't appear again as an option for trading",
+                                exception.getMessage());
+    }
 
 }
