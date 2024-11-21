@@ -24,24 +24,23 @@ public class AuthService {
 
     private UserRepository userRepo;
     private JwtTokenService jwtTokenProvider;
-
-    @Autowired
     private AuthenticationManager authenticationManager;
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AuthService(UserRepository userRepo, JwtTokenService jwtTokenProvider) {
+    public AuthService(UserRepository userRepo, JwtTokenService jwtTokenProvider, 
+        PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager) {
         this.jwtTokenProvider = jwtTokenProvider;
         this.userRepo = userRepo;
+        this.passwordEncoder = passwordEncoder;
+        this.authenticationManager = authenticationManager;
     }
 
 
     public String login(String userEmail, String userPassword) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userEmail, userPassword));
         UserDetails user = userRepo.findByEmail(userEmail).orElseThrow(UserNotFoundException::new);
-        String token = jwtTokenProvider.generateToken(user);
-        return token;
+        return jwtTokenProvider.generateToken(user);
     }
     
     public String register(UserRegisterDTO userForm) {

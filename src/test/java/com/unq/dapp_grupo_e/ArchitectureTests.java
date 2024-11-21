@@ -12,7 +12,7 @@ import com.tngtech.archunit.library.dependencies.SlicesRuleDefinition;
 
 @ActiveProfiles("test") 
 @SpringBootTest
-public class ArchitectureTests {
+class ArchitectureTests {
 
     @Test
     void archAboutPackages() {

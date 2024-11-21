@@ -3,12 +3,7 @@ package com.unq.dapp_grupo_e.service.impl;
 import java.util.NoSuchElementException;
 
 import org.springframework.stereotype.Service;
-
-//import com.unq.dapp_grupo_e.controller.dto.UserRegisterDTO;
-//import com.unq.dapp_grupo_e.controller.dto.UserRegisterResponseDTO;
 import com.unq.dapp_grupo_e.model.User;
-//import com.unq.dapp_grupo_e.model.exceptions.DuplicationDataException;
-//import com.unq.dapp_grupo_e.model.exceptions.InvalidEmptyFieldException;
 import com.unq.dapp_grupo_e.repository.UserRepository;
 import com.unq.dapp_grupo_e.service.UserService;
 

@@ -17,7 +17,7 @@ import com.unq.dapp_grupo_e.exceptions.InvalidEmailException;
 import com.unq.dapp_grupo_e.exceptions.InvalidEmptyFieldException;
 import com.unq.dapp_grupo_e.exceptions.InvalidLengthException;
 import com.unq.dapp_grupo_e.factory.UserFactory;
-import com.unq.dapp_grupo_e.factory.factoriesDTO.UserRegisterFactory;
+import com.unq.dapp_grupo_e.factory.factoriesdto.UserRegisterFactory;
 import com.unq.dapp_grupo_e.model.User;
 import com.unq.dapp_grupo_e.service.AuthService;
 import com.unq.dapp_grupo_e.service.UserService;

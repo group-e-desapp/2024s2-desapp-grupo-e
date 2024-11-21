@@ -31,13 +31,15 @@
 		<java.version>17</java.version>
 		<sonar.organization>desapp-grupo-e</sonar.organization>
 	  	<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-		<sonar.coverage.exclusions>**/controller/**, !**/controller/dto**, 
-									**/service/**, **/exceptions/**,
+		<sonar.coverage.exclusions>**/controller/**, **/security/**, 
+									**/exceptions/**,
 									**/DatabaseInitializer.java, **/factories/**
 		</sonar.coverage.exclusions>
     	<sonar.organization>group-e-desapp</sonar.organization>
     	<sonar.projectKey>group-e-desapp_2024s2-desapp-grupo-e</sonar.projectKey>
     	<sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+		<sonar.cpd.minLines>10</sonar.cpd.minLines>
+    	<sonar.cpd.minTokens>30</sonar.cpd.minTokens>
 	</properties>
 	<dependencies>
 		<dependency>

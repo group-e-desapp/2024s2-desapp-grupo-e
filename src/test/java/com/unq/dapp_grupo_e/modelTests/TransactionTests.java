@@ -18,7 +18,7 @@ import com.unq.dapp_grupo_e.dto.TransactionFormDTO;
 import com.unq.dapp_grupo_e.exceptions.InvalidCryptoPriceOffer;
 import com.unq.dapp_grupo_e.factory.CryptoCurrencyFactory;
 import com.unq.dapp_grupo_e.factory.TransactionFactory;
-import com.unq.dapp_grupo_e.factory.factoriesDTO.TransactionFormFactory;
+import com.unq.dapp_grupo_e.factory.factoriesdto.TransactionFormFactory;
 import com.unq.dapp_grupo_e.model.CryptoCurrency;
 import com.unq.dapp_grupo_e.model.Transaction;
 import com.unq.dapp_grupo_e.repository.TransactionRepository;
