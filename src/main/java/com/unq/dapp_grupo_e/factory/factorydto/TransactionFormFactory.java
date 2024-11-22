@@ -1,4 +1,4 @@
-package com.unq.dapp_grupo_e.factory.factoriesdto;
+package com.unq.dapp_grupo_e.factory.factorydto;
 
 import com.unq.dapp_grupo_e.dto.TransactionFormDTO;
 

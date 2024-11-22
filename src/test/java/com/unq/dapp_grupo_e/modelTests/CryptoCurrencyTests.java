@@ -1,30 +1,57 @@
 package com.unq.dapp_grupo_e.modelTests;
 
+import static org.mockito.Mockito.when;
+
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.EnabledIfSystemProperty;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.unq.dapp_grupo_e.exceptions.InvalidCurrencyException;
+import com.unq.dapp_grupo_e.factory.CryptoCurrencyFactory;
 import com.unq.dapp_grupo_e.model.CryptoCurrency;
 import com.unq.dapp_grupo_e.model.CryptoCurrencyEnum;
+import com.unq.dapp_grupo_e.repository.CryptoCurrencyRepository;
+import com.unq.dapp_grupo_e.service.BinanceService;
 import com.unq.dapp_grupo_e.service.CryptoCurrencyService;
+import com.unq.dapp_grupo_e.service.impl.CryptoCurrencyServiceImpl;
 
 @ActiveProfiles("test") 
 @SpringBootTest
 class CryptoCurrencyTests {
 
-    @Autowired
+    @Mock
+    private  BinanceService binanceService;
+    @Mock
+    private  CryptoCurrencyRepository cryptoCurrencyRepo;
+
     private CryptoCurrencyService cryptoService;
 
-    @EnabledIfSystemProperty(named = "enable.binance.tests", matches = "true")
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+
+        cryptoService = new CryptoCurrencyServiceImpl(
+            binanceService,
+            cryptoCurrencyRepo
+        );
+        
+    }
+
     @Test
-    void getCurrentPriceOfCryptoCurrency() {
-        CryptoCurrencyEnum cryptoSelected = CryptoCurrencyEnum.ADAUSDT;
-        CryptoCurrency cryptoConsulted = cryptoService.getCryptoValue(cryptoSelected.name());
-        Assertions.assertNotNull(cryptoConsulted.getPrice());
+    void obtainPriceOfCryptoCurrency() {
+        CryptoCurrency cryptoMocked = CryptoCurrencyFactory.createWithSymbolAndPrice("NEOUSDT", 3.58);
+        when(binanceService.getCrypto("NEOUSDT")).thenReturn(cryptoMocked);
+
+        CryptoCurrency cryptoConsulted = cryptoService.getCryptoValue("NEOUSDT");
+        
+        Assertions.assertEquals("NEOUSDT", cryptoConsulted.getSymbol());
+        Assertions.assertEquals(3.58, cryptoConsulted.getPrice());
+
     }
 
     @Test

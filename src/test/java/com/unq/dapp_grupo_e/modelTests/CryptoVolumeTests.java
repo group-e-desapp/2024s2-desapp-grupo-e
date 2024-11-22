@@ -19,7 +19,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 import com.unq.dapp_grupo_e.dto.TransactionFormDTO;
 import com.unq.dapp_grupo_e.factory.CryptoCurrencyFactory;
-import com.unq.dapp_grupo_e.factory.factoriesdto.TransactionFormFactory;
+import com.unq.dapp_grupo_e.factory.factorydto.TransactionFormFactory;
 import com.unq.dapp_grupo_e.model.CryptoActive;
 import com.unq.dapp_grupo_e.model.CryptoCurrency;
 import com.unq.dapp_grupo_e.model.CryptoVolume;

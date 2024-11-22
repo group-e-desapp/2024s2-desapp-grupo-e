@@ -17,6 +17,9 @@ public class DolarApiResponseDTO {
         return sale;
     }
 
-    
+    public DolarApiResponseDTO(String currency, Double salePrice) {
+        this.currency = currency;
+        this.sale = salePrice;
+    }
     
 }

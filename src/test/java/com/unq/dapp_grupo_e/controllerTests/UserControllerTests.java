@@ -14,7 +14,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.unq.dapp_grupo_e.factory.factoriesdto.UserRegisterFactory;
+import com.unq.dapp_grupo_e.factory.factorydto.UserRegisterFactory;
 import com.unq.dapp_grupo_e.service.UserService;
 
 @ActiveProfiles("test") 
