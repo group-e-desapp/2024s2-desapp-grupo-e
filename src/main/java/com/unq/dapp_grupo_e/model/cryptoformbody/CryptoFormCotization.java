@@ -1,4 +1,4 @@
-package com.unq.dapp_grupo_e.model.cryptoCotizationsBody;
+package com.unq.dapp_grupo_e.model.cryptoformbody;
 
 import java.util.ArrayList;
 import java.util.List;

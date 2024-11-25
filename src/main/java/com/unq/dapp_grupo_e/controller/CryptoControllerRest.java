@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.unq.dapp_grupo_e.model.CryptoCurrency;
 import com.unq.dapp_grupo_e.model.CryptoCurrencyList;
-import com.unq.dapp_grupo_e.model.cryptoCotizationsBody.CryptoFormCotization;
+import com.unq.dapp_grupo_e.model.cryptoformbody.CryptoFormCotization;
 import com.unq.dapp_grupo_e.service.CryptoCurrencyService;
 
 import io.swagger.v3.oas.annotations.Operation;

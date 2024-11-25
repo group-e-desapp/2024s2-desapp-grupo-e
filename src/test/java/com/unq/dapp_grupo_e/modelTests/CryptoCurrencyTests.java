@@ -17,7 +17,7 @@ import com.unq.dapp_grupo_e.exceptions.InvalidCurrencyException;
 import com.unq.dapp_grupo_e.factory.CryptoCurrencyFactory;
 import com.unq.dapp_grupo_e.model.CryptoCurrency;
 import com.unq.dapp_grupo_e.model.CryptoCurrencyEnum;
-import com.unq.dapp_grupo_e.model.cryptoCotizationsBody.CryptoFormCotization;
+import com.unq.dapp_grupo_e.model.cryptoformbody.CryptoFormCotization;
 import com.unq.dapp_grupo_e.repository.CryptoCurrencyRepository;
 import com.unq.dapp_grupo_e.service.BinanceService;
 import com.unq.dapp_grupo_e.service.CryptoCurrencyService;

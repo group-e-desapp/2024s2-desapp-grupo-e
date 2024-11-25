@@ -1,17 +1,17 @@
-package com.unq.dapp_grupo_e.model.cryptoCotizationsBody;
+package com.unq.dapp_grupo_e.model.cryptoformbody;
 
 public class DateTimeCotization {
 
-    private String dateTimeCotization;
+    private String dateTimeRecord;
     private Double cotization;
 
     public DateTimeCotization(String dateRegistered, Double cotization) {
-        this.dateTimeCotization = dateRegistered;
+        this.dateTimeRecord = dateRegistered;
         this.cotization = cotization;
     }
 
     public String getDateTimeCotization() {
-        return dateTimeCotization;
+        return dateTimeRecord;
     }
 
     public Double getCotization() {

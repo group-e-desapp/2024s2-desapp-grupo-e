@@ -2,7 +2,7 @@ package com.unq.dapp_grupo_e.service;
 
 import com.unq.dapp_grupo_e.model.CryptoCurrency;
 import com.unq.dapp_grupo_e.model.CryptoCurrencyList;
-import com.unq.dapp_grupo_e.model.cryptoCotizationsBody.CryptoFormCotization;
+import com.unq.dapp_grupo_e.model.cryptoformbody.CryptoFormCotization;
 
 public interface CryptoCurrencyService {
 

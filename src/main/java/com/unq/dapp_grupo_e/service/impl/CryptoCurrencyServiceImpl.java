@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import com.unq.dapp_grupo_e.model.CryptoCurrency;
 import com.unq.dapp_grupo_e.model.CryptoCurrencyEnum;
 import com.unq.dapp_grupo_e.model.CryptoCurrencyList;
-import com.unq.dapp_grupo_e.model.cryptoCotizationsBody.CryptoFormCotization;
-import com.unq.dapp_grupo_e.model.cryptoCotizationsBody.DateTimeCotization;
+import com.unq.dapp_grupo_e.model.cryptoformbody.CryptoFormCotization;
+import com.unq.dapp_grupo_e.model.cryptoformbody.DateTimeCotization;
 import com.unq.dapp_grupo_e.repository.CryptoCurrencyRepository;
 import com.unq.dapp_grupo_e.service.BinanceService;
 import com.unq.dapp_grupo_e.service.CryptoCurrencyService;
@@ -54,8 +54,6 @@ public class CryptoCurrencyServiceImpl implements CryptoCurrencyService {
     public CryptoFormCotization getLatestCotizationsOf(String symbolCrypto) {
         var endDate = CurrentDateAndTime.getNewDateAsString();
         var startDate = CurrentDateAndTime.previousDayOf(endDate);
-        System.out.println(endDate);
-        System.out.println(startDate);
         List<CryptoCurrency> cotizations = cryptoCurrencyRepo.getLatestCotizationsOf(symbolCrypto, startDate, endDate);
         CryptoFormCotization cryptoForm = new CryptoFormCotization(symbolCrypto);
 
