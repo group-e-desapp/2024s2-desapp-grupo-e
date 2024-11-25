@@ -9,6 +9,10 @@ public class CryptoCurrencyList {
 
     public final List<CryptoCurrency> cryptos = new ArrayList<>();
 
+    public List<CryptoCurrency> getCryptos() {
+        return cryptos;
+    }
+
     public void addCrypto(CryptoCurrency crypto) {
         cryptos.add(crypto);
     }

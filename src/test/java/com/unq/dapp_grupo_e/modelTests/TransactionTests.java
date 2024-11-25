@@ -27,7 +27,6 @@ import com.unq.dapp_grupo_e.model.CryptoCurrency;
 import com.unq.dapp_grupo_e.model.Transaction;
 import com.unq.dapp_grupo_e.repository.TransactionRepository;
 import com.unq.dapp_grupo_e.repository.UserRepository;
-import com.unq.dapp_grupo_e.service.AuthService;
 import com.unq.dapp_grupo_e.service.BinanceService;
 import com.unq.dapp_grupo_e.service.DolarApiService;
 import com.unq.dapp_grupo_e.service.TransactionService;
@@ -52,8 +51,6 @@ class TransactionTests {
 
     private TransactionService transactionService;
 
-    @Autowired
-    private AuthService authUserService;
     @Autowired
     private UserService userService;
 
@@ -152,7 +149,7 @@ class TransactionTests {
         when(dolarApiService.getDolarCotization()).thenReturn(300.0);
 
         UserRegisterDTO uniqueUser = UserRegisterFactory.anyUserRegister();
-        authUserService.register(uniqueUser);
+        userService.registerUser(uniqueUser);
 
         transactionService.createTransaction(transactionFormBuy);
         transactionService.createTransaction(transactionFormSell);

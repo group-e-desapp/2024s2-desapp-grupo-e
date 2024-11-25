@@ -35,7 +35,7 @@ class UserControllerTests {
         userService.deleteAllUsers();
         var validUser = UserRegisterFactory.anyUserRegister();
 
-        mockMvc.perform(post("/authUser/register")
+        mockMvc.perform(post("/user/register")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(objectMapper.writeValueAsString(validUser)))
                     .andExpect(status().isOk());
@@ -46,7 +46,7 @@ class UserControllerTests {
     void userRegisterWithInvalidNameLength() throws Exception {
         var invalidUser = UserRegisterFactory.createWithName("AI");
 
-        mockMvc.perform(post("/authUser/register")
+        mockMvc.perform(post("/user/register")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(objectMapper.writeValueAsString(invalidUser)))
                     .andExpect(status().isBadRequest());
@@ -58,7 +58,7 @@ class UserControllerTests {
     void userRegisterWithInvalidSurnameLength() throws Exception {
         var invalidUser = UserRegisterFactory.createWithSurname("toomuchcharactersforsurnamefield");
 
-        mockMvc.perform(post("/authUser/register")
+        mockMvc.perform(post("/user/register")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(objectMapper.writeValueAsString(invalidUser)))
                     .andExpect(status().isBadRequest());
@@ -71,7 +71,7 @@ class UserControllerTests {
     void userRegisterInvalidForMissingRequerimentsForPassword(String passwordTry) throws Exception {
         var invalidUser = UserRegisterFactory.createWithPassword(passwordTry);
 
-        mockMvc.perform(post("/authUser/register")
+        mockMvc.perform(post("/user/register")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(objectMapper.writeValueAsString(invalidUser)))
                     .andExpect(status().isBadRequest());

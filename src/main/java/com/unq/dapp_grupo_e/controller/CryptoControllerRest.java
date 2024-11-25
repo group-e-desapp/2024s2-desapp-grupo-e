@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.unq.dapp_grupo_e.model.CryptoCurrency;
 import com.unq.dapp_grupo_e.model.CryptoCurrencyList;
+import com.unq.dapp_grupo_e.model.cryptoCotizationsBody.CryptoFormCotization;
 import com.unq.dapp_grupo_e.service.CryptoCurrencyService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -48,6 +49,12 @@ public class CryptoControllerRest {
     public ResponseEntity<CryptoCurrencyList> getAllCryptoPrices() {
         CryptoCurrencyList listCrypto = cryptoService.getAllCryptoValues();
         return ResponseEntity.ok().body(listCrypto);
+    }
+
+    @GetMapping("/cotization24Hours")
+    public ResponseEntity<CryptoFormCotization> getLatestCotizationsOf(@RequestParam(name = "cryptoSymbol") String symbol) {
+        var valueResponse = cryptoService.getLatestCotizationsOf(symbol);
+        return ResponseEntity.ok().body(valueResponse);
     }
     
     

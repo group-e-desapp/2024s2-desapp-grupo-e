@@ -70,6 +70,8 @@ public class DatabaseInitializer {
                                                                     45);
             userRepo.save(user5);
 
+            cryptoService.deleteAllCotizationsOf("TRXUSDT");
+
             final String cryptoDOT = "DOTUSDT";
             final String cryptoATOM = "ATOMUSDT";
             final String cryptoADA = "ADAUSDT";

@@ -2,6 +2,8 @@ package com.unq.dapp_grupo_e.utilities;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -25,6 +27,24 @@ public class CurrentDateAndTime {
     public static Date toDate(String dateAsString) throws ParseException {
         SimpleDateFormat formatApplied = new SimpleDateFormat(DATE_FORMAT);
         return formatApplied.parse(dateAsString);
+    }
+
+    public static String previousDayOf(String date) {
+        DateTimeFormatter formatApplied = DateTimeFormatter.ofPattern(DATE_FORMAT);
+        var dateToUpdate = LocalDateTime.parse(date, formatApplied);
+        dateToUpdate = dateToUpdate.minusDays(1);
+
+        return formatApplied.format(dateToUpdate);
+    }
+
+    public static String previousTimeAs(String date,  Integer hoursToGoBack) {
+        DateTimeFormatter formatApplied = DateTimeFormatter.ofPattern(DATE_FORMAT);
+        var dateToUpdate = LocalDateTime.parse(date, formatApplied);
+
+        dateToUpdate = dateToUpdate.minusHours(hoursToGoBack);
+       
+        return formatApplied.format(dateToUpdate);
+
     }
 
     public static boolean achieveRequirementOfTransacion(String date) {

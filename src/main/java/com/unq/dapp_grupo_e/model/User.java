@@ -1,11 +1,5 @@
 package com.unq.dapp_grupo_e.model;
 
-import java.util.Collection;
-import java.util.List;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import com.unq.dapp_grupo_e.exceptions.InvalidCharactersException;
 import com.unq.dapp_grupo_e.exceptions.InvalidEmailException;
@@ -22,7 +16,7 @@ import jakarta.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "user", uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})})
-public class User implements UserDetails {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -160,14 +154,6 @@ public class User implements UserDetails {
     
     public void addReputation(Integer addedPoints) {
         this.reputationPoints += addedPoints;
-    }
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
-    }
-    @Override
-    public String getUsername() {
-        return this.email;
     }
     
     public Role getRole() {

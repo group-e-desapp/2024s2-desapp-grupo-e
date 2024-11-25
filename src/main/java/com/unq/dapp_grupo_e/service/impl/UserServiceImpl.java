@@ -3,6 +3,12 @@ package com.unq.dapp_grupo_e.service.impl;
 import java.util.NoSuchElementException;
 
 import org.springframework.stereotype.Service;
+
+import com.unq.dapp_grupo_e.dto.UserRegisterDTO;
+import com.unq.dapp_grupo_e.dto.UserRegisterResponseDTO;
+import com.unq.dapp_grupo_e.exceptions.DuplicationDataException;
+import com.unq.dapp_grupo_e.exceptions.InvalidEmptyFieldException;
+import com.unq.dapp_grupo_e.model.Role;
 import com.unq.dapp_grupo_e.model.User;
 import com.unq.dapp_grupo_e.repository.UserRepository;
 import com.unq.dapp_grupo_e.service.UserService;
@@ -15,6 +21,26 @@ public class UserServiceImpl implements UserService {
 
     public UserServiceImpl(UserRepository userRepo) {
         this.repo = userRepo;
+    }
+
+    public UserRegisterResponseDTO registerUser(UserRegisterDTO userForm) {
+        if (userForm.validationOfEmptyFields()) {
+            throw new InvalidEmptyFieldException("There is a missing required field");
+        }
+        if (repo.existsByEmail(userForm.email)) {
+            throw new DuplicationDataException("This email has already been used");
+        }
+        var user = new User();
+        user.setEmail(userForm.email);
+        user.setName(userForm.name);
+        user.setSurname(userForm.surname);
+        user.setPassword(userForm.password);
+        user.setPassword(userForm.password);
+        user.setCvu(userForm.cvu);
+        user.setWalletAddress(userForm.walletAddress);
+        user.setRole(Role.USER);
+        repo.save(user);
+        return UserRegisterResponseDTO.from(user);
     }
 
     @Override

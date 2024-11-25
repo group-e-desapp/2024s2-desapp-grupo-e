@@ -6,39 +6,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.unq.dapp_grupo_e.dto.AuthResponse;
-import com.unq.dapp_grupo_e.dto.LoginRequest;
 import com.unq.dapp_grupo_e.dto.UserRegisterDTO;
-import com.unq.dapp_grupo_e.service.AuthService;
+import com.unq.dapp_grupo_e.dto.UserRegisterResponseDTO;
+import com.unq.dapp_grupo_e.service.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.RequiredArgsConstructor;
 
 @Tag(name = "Users", description = "Methods for users of CryptoAPI")
+@RequestMapping("/user")
 @RestController
-@RequestMapping("/authUser")
-@RequiredArgsConstructor
-public class AuthController {
+public class UserControllerRest {
 
-    private final AuthService authService;
-    
-    @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
-        String tokenGenerated = authService.login(request.getEmail(), request.getPassword());
-        return ResponseEntity.ok(AuthResponse.builder().token(tokenGenerated).build());
+    private final UserService userService;
+
+
+    public UserControllerRest(UserService userService) {
+        this.userService = userService;
     }
+
 
     @ApiResponse(responseCode = "201", description = "New user registered")
     @ApiResponse(responseCode = "400", description = "Invalid required data was given", content = @Content)
     @Operation(summary = "Register a new user",
                description = "Register a new user with the described data in the form fields")
     @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register(@RequestBody UserRegisterDTO userRequest) {
-        String tokenGenerated = authService.register(userRequest);
-        return ResponseEntity.ok(AuthResponse.builder().token(tokenGenerated).build());
+    public ResponseEntity<UserRegisterResponseDTO> createUser(@RequestBody UserRegisterDTO user) {
+        var response = userService.registerUser(user);
+        return ResponseEntity.ok(response);
     }
-
+    
 }
