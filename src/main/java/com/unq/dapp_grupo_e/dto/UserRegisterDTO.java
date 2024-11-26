@@ -51,4 +51,10 @@ public class UserRegisterDTO {
         return fields.stream().anyMatch(f -> f == null || f.isEmpty()); // 
     }
 
+    @Override
+    public String toString() {
+        return String.format("UserRegisterDTO{name='%s', surname='%s', email='%s', cvu='%s', walletAddress='%s'}",
+                            name, surname, email, cvu, walletAddress);
+    }
+
 }

@@ -20,5 +20,10 @@ public class LoginRequest {
     @NotNull
     @Schema(example = "Non&noN")
     String password;
+
+    @Override
+    public String toString() {
+        return String.format("LoginRequest{email='%s', password=******}", email);
+    }
     
 }

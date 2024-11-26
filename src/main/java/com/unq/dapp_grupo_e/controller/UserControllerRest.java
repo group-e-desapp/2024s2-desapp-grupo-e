@@ -17,7 +17,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.transaction.Transactional;
 
+@Transactional
 @Tag(name = "Users", description = "Methods for users of CryptoAPI")
 @RequestMapping("/user")
 @RestController

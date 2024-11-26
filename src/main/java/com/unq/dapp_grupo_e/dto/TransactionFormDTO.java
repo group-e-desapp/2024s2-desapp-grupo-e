@@ -31,6 +31,12 @@ public class TransactionFormDTO {
         createdTransaction.setDateTimeCreated(CurrentDateAndTime.getNewDateAsString());
         return createdTransaction;
     }
+
+    @Override
+    public String toString() {
+        return String.format("TransactionFormDTO{symbolCrypto='%s', operationType='%s', nominalValue='%s', priceOffered='%s'}", 
+                                symbolCrypto, operationType, cryptoNominalValue, priceOffered);
+    }
     
     
 }
