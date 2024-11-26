@@ -73,14 +73,14 @@ class UserTests {
     @Test
     void exceptionForInvalidLengthForPassword() {
         var user = new User();
-        Assertions.assertThrows(InvalidLengthException.class, () -> user.setPassword("Mark#"));
+        Assertions.assertThrows(InvalidLengthException.class, () -> user.checkPassword("Mark#"));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"#asdfg", "#QWERT", "Wasdfg"})
     void exceptionForMissingATypeOfCharacterInPassword(String passwordTry) {
         var user = new User();
-        Assertions.assertThrows(InvalidCharactersException.class, () -> user.setPassword("passwordTry"));
+        Assertions.assertThrows(InvalidCharactersException.class, () -> user.checkPassword("passwordTry"));
     }
 
     @ParameterizedTest
