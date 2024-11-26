@@ -33,7 +33,7 @@
 	  	<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<sonar.coverage.exclusions>**/controller/**, **/security/**, 
 									**/exceptions/**,
-									**/DatabaseInitializer.java, **/factories/**
+									**/DatabaseInitializer.java, **/factory/**
 		</sonar.coverage.exclusions>
     	<sonar.organization>group-e-desapp</sonar.organization>
     	<sonar.projectKey>group-e-desapp_2024s2-desapp-grupo-e</sonar.projectKey>
@@ -68,6 +68,10 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
 
 
 		

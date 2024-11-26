@@ -12,13 +12,14 @@ import com.unq.dapp_grupo_e.service.CryptoCurrencyService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
+@SecurityRequirement(name = "Authorization")
 @Tag(name = "Crypto Currency", description = "Methods for the crypto currency of the CryptoAPI")
 @RequestMapping("/crypto")
 @RestController
@@ -51,6 +52,10 @@ public class CryptoControllerRest {
         return ResponseEntity.ok().body(listCrypto);
     }
 
+    @ApiResponse(responseCode = "200")
+    @ApiResponse(responseCode = "404", description = "Crypto currency given is not valid", content = @Content)
+    @Operation(summary = "Consult all latest cotizations of a crypto currency",
+               description = "Consult all the cotizations registered in the last 24 hours of the given crypto currency")
     @GetMapping("/cotization24Hours")
     public ResponseEntity<CryptoFormCotization> getLatestCotizationsOf(@RequestParam(name = "cryptoSymbol") String symbol) {
         var valueResponse = cryptoService.getLatestCotizationsOf(symbol);

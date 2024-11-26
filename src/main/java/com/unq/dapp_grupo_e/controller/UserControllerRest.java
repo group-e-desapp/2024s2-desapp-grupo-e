@@ -1,11 +1,14 @@
 package com.unq.dapp_grupo_e.controller;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.unq.dapp_grupo_e.dto.LoginRequest;
 import com.unq.dapp_grupo_e.dto.UserRegisterDTO;
 import com.unq.dapp_grupo_e.dto.UserRegisterResponseDTO;
 import com.unq.dapp_grupo_e.service.UserService;
@@ -22,9 +25,21 @@ public class UserControllerRest {
 
     private final UserService userService;
 
-
     public UserControllerRest(UserService userService) {
         this.userService = userService;
+    }
+
+    @ApiResponse(responseCode = "200", description = "Successfull login")
+    @ApiResponse(responseCode = "404", content = @Content)
+    @Operation(summary = "Login with user credentials",
+               description = "Log with your specific email and password")
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginRequest request) {
+        String tokenGenerated = userService.login(request);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Bearer " + tokenGenerated);
+        return new ResponseEntity<>(headers, HttpStatus.OK);
     }
 
 

@@ -102,13 +102,16 @@ public class User {
     }
     
     public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void checkPassword(String password) {
         if (password.length() < 6) {
             throw new InvalidLengthException("The password given need to have at least 6 characters");
         }
         if (!CharacterValidator.validatePassword(password)) {
             throw new InvalidCharactersException("The password need to have at least 1 lowercase, 1 uppercase and 1 special character");
         }
-        this.password = password;
     }
     
     public void setCvu(String cvu) {
