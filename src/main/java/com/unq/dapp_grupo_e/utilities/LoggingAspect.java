@@ -28,7 +28,7 @@ public class LoggingAspect {
 
         var methodName = proceedingJoinPoint.getSignature().toShortString();
         Object[] arguments = proceedingJoinPoint.getArgs();
-        var argumentsProcessed = Arrays.stream(arguments).map(arg -> arg.toString()).collect(Collectors.joining(", "));
+        var argumentsProcessed = Arrays.stream(arguments).map(Object::toString).collect(Collectors.joining(", "));
 
         try {
             Object result = proceedingJoinPoint.proceed();
