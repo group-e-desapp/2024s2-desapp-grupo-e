@@ -25,6 +25,7 @@ import com.unq.dapp_grupo_e.model.CryptoCurrency;
 import com.unq.dapp_grupo_e.model.CryptoVolume;
 import com.unq.dapp_grupo_e.repository.TransactionRepository;
 import com.unq.dapp_grupo_e.repository.UserRepository;
+import com.unq.dapp_grupo_e.service.AuthenticatedUserService;
 import com.unq.dapp_grupo_e.service.BinanceService;
 import com.unq.dapp_grupo_e.service.DolarApiService;
 import com.unq.dapp_grupo_e.service.TransactionService;
@@ -40,6 +41,9 @@ class CryptoVolumeTests {
 
     @Mock
     private DolarApiService dolarApiService;
+
+    @Mock
+    private AuthenticatedUserService authenticationService;
 
     @Autowired
     private TransactionRepository transactionRepo;
@@ -57,7 +61,8 @@ class CryptoVolumeTests {
             dolarApiService,
             binanceService,
             transactionRepo,
-            userRepository
+            userRepository,
+            authenticationService
         );
     }
 
@@ -110,6 +115,7 @@ class CryptoVolumeTests {
             when(binanceService.getCrypto("NEOUSDT")).thenReturn(mockNEOUSDT);
             when(binanceService.getCrypto("BNBUSDT")).thenReturn(mockBNBUSDT);
             when(dolarApiService.getDolarCotization()).thenReturn(400.0);
+            when(authenticationService.getCurrentUserId()).thenReturn(1);
         
             mockedStatic.when(CurrentDateAndTime::getNewDateAsString)
                         .thenReturn("29/09/2024 12:15:00");

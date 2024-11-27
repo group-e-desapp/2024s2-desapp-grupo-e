@@ -21,6 +21,7 @@ import com.unq.dapp_grupo_e.model.TransactionSummary;
 import com.unq.dapp_grupo_e.model.User;
 import com.unq.dapp_grupo_e.repository.TransactionRepository;
 import com.unq.dapp_grupo_e.repository.UserRepository;
+import com.unq.dapp_grupo_e.service.AuthenticatedUserService;
 import com.unq.dapp_grupo_e.service.BinanceService;
 import com.unq.dapp_grupo_e.service.DolarApiService;
 import com.unq.dapp_grupo_e.service.TransactionService;
@@ -32,15 +33,17 @@ public class TransactionServiceImpl implements TransactionService  {
 
     private final DolarApiService dolarApiService;
     private final BinanceService binanceService;
+    private final AuthenticatedUserService authenticationService;
     private final TransactionRepository transactionRepo;
     private final UserRepository userRepository;
 
     public TransactionServiceImpl(DolarApiService dolarApiService, BinanceService binanceService, 
-            TransactionRepository transactionRepo, UserRepository userRepository) {
+            TransactionRepository transactionRepo, UserRepository userRepository, AuthenticatedUserService authenticationService) {
         this.dolarApiService = dolarApiService;
         this.binanceService = binanceService;
         this.transactionRepo = transactionRepo;
         this.userRepository = userRepository;
+        this.authenticationService = authenticationService;
     }
 
     @Override
@@ -54,6 +57,7 @@ public class TransactionServiceImpl implements TransactionService  {
         if (!transaction.isAValidMarginForTransaction(cryptoPrice * cotizationToARS)) {
             throw new InvalidCryptoPriceOffer("Price is not acceptable within the margin expected for the currency");
         } else {
+            transaction.setIdUser(authenticationService.getCurrentUserId());
             String actualTimeAndDate = CurrentDateAndTime.getNewDateAsString();
             transaction.setDateTimeCreated(actualTimeAndDate);
             return transactionRepo.save(transaction);

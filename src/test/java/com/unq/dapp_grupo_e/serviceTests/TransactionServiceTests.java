@@ -26,6 +26,7 @@ import com.unq.dapp_grupo_e.model.CryptoCurrency;
 import com.unq.dapp_grupo_e.model.Transaction;
 import com.unq.dapp_grupo_e.repository.TransactionRepository;
 import com.unq.dapp_grupo_e.repository.UserRepository;
+import com.unq.dapp_grupo_e.service.AuthenticatedUserService;
 import com.unq.dapp_grupo_e.service.BinanceService;
 import com.unq.dapp_grupo_e.service.DolarApiService;
 import com.unq.dapp_grupo_e.service.TransactionService;
@@ -41,6 +42,9 @@ class TransactionServiceTests {
 
     @Mock
     private DolarApiService dolarApiService;
+
+    @Mock
+    private AuthenticatedUserService authenticationService;
 
     @Autowired
     private TransactionRepository transactionRepo;
@@ -61,7 +65,8 @@ class TransactionServiceTests {
             dolarApiService,
             binanceService,
             transactionRepo,
-            userRepository
+            userRepository,
+            authenticationService
         );
     }
 
@@ -91,6 +96,7 @@ class TransactionServiceTests {
 
         when(binanceService.getCrypto("ADAUSDT")).thenReturn(cryptoMock);
         when(dolarApiService.getDolarCotization()).thenReturn(300.0);
+        when(authenticationService.getCurrentUserId()).thenReturn(1);
 
         Transaction transactionSaved = transactionService.createTransaction(transactionForm);
         SimpleDateFormat formatApplied = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -120,6 +126,7 @@ class TransactionServiceTests {
 
         when(binanceService.getCrypto("ADAUSDT")).thenReturn(cryptoMock);
         when(dolarApiService.getDolarCotization()).thenReturn(300.0);
+        when(authenticationService.getCurrentUserId()).thenReturn(1);
 
         UserRegisterDTO uniqueUser = UserRegisterFactory.anyUserRegister();
         userService.registerUser(uniqueUser);

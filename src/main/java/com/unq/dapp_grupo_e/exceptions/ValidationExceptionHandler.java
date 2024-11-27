@@ -73,4 +73,9 @@ public class ValidationExceptionHandler {
     public ResponseEntity<Map<String, String>> handleInvalidDateFormat(InvalidDateFormatException exc) {
         return new ResponseEntity<>(createResponseError(exc), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(UserNotAuthenticatedException.class)
+    public ResponseEntity<Map<String, String>> handleUserNotAuthenticated(UserNotAuthenticatedException exc) {
+        return new ResponseEntity<>(createResponseError(exc), HttpStatus.UNAUTHORIZED);
+    }
 }

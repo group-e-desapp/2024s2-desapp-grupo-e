@@ -10,6 +10,7 @@ public class TransactionFactory {
 
     public static Transaction createWithPrice(Double priceOffered) {
         var transaction = new Transaction();
+        transaction.setIdUser(1);
         transaction.setSymbolTrade("ADAUSDT");
         transaction.setCryptoNominalValue((float) 10.0);
         transaction.setPriceOffered(priceOffered);
@@ -19,6 +20,7 @@ public class TransactionFactory {
 
     public static Transaction createWithPriceAndNominalValue(Double priceOffered, Float nominalValue) {
         var transaction = new Transaction();
+        transaction.setIdUser(1);
         transaction.setSymbolTrade("ADAUSDT");
         transaction.setCryptoNominalValue(nominalValue);
         transaction.setPriceOffered(priceOffered);

@@ -24,6 +24,7 @@ import com.unq.dapp_grupo_e.model.Transaction;
 import com.unq.dapp_grupo_e.model.TransactionStatus;
 import com.unq.dapp_grupo_e.repository.TransactionRepository;
 import com.unq.dapp_grupo_e.repository.UserRepository;
+import com.unq.dapp_grupo_e.service.AuthenticatedUserService;
 import com.unq.dapp_grupo_e.service.BinanceService;
 import com.unq.dapp_grupo_e.service.DolarApiService;
 import com.unq.dapp_grupo_e.service.TransactionService;
@@ -39,6 +40,9 @@ class TransactionActionTests {
 
     @Mock
     private DolarApiService dolarApiService;
+
+    @Mock
+    private AuthenticatedUserService authenticationService;
 
     @Autowired
     private TransactionRepository transactionRepo;
@@ -61,7 +65,8 @@ class TransactionActionTests {
             dolarApiService,
             binanceService,
             transactionRepo,
-            userRepository
+            userRepository,
+            authenticationService
         );
         transactionService.deleteAllTransactions();
         userService.deleteAllUsers();
@@ -77,6 +82,7 @@ class TransactionActionTests {
 
         when(binanceService.getCrypto("ADAUSDT")).thenReturn(cryptoMock);
         when(dolarApiService.getDolarCotization()).thenReturn(300.0);
+        when(authenticationService.getCurrentUserId()).thenReturn(1);
 
         Transaction transactionSaved = transactionService.createTransaction(transactionForm);
 
@@ -93,6 +99,7 @@ class TransactionActionTests {
         CryptoCurrency cryptoMock = CryptoCurrencyFactory.createWithSymbolAndPrice("ADAUSDT", 0.36d);
         when(binanceService.getCrypto("ADAUSDT")).thenReturn(cryptoMock);
         when(dolarApiService.getDolarCotization()).thenReturn(300.0);
+        when(authenticationService.getCurrentUserId()).thenReturn(1);
 
         userService.registerUser(userForm);
         transactionService.createTransaction(transactionForm);
@@ -112,6 +119,7 @@ class TransactionActionTests {
         CryptoCurrency cryptoMock = CryptoCurrencyFactory.createWithSymbolAndPrice("NEOUSDT", 0.36d);
         when(binanceService.getCrypto("NEOUSDT")).thenReturn(cryptoMock);
         when(dolarApiService.getDolarCotization()).thenReturn(300.0);
+        when(authenticationService.getCurrentUserId()).thenReturn(1);
 
         userService.registerUser(userForm);
         transactionService.createTransaction(transactionForm);
@@ -131,6 +139,7 @@ class TransactionActionTests {
         CryptoCurrency cryptoMock = CryptoCurrencyFactory.createWithSymbolAndPrice("NEOUSDT", 0.36d);
         when(binanceService.getCrypto("NEOUSDT")).thenReturn(cryptoMock);
         when(dolarApiService.getDolarCotization()).thenReturn(300.0);
+        when(authenticationService.getCurrentUserId()).thenReturn(1);
 
         userService.registerUser(userForm);
         transactionService.createTransaction(transactionForm);
@@ -149,6 +158,7 @@ class TransactionActionTests {
         CryptoCurrency cryptoMock = CryptoCurrencyFactory.createWithSymbolAndPrice("NEOUSDT", 0.36d);
         when(binanceService.getCrypto("NEOUSDT")).thenReturn(cryptoMock);
         when(dolarApiService.getDolarCotization()).thenReturn(300.0);
+        when(authenticationService.getCurrentUserId()).thenReturn(1);
 
         UserRegisterDTO firstUser = UserRegisterFactory.anyUserRegister();
         UserRegisterDTO secondUser = UserRegisterFactory.createWithEmail("secondUser@mail.com");
@@ -170,6 +180,7 @@ class TransactionActionTests {
         CryptoCurrency cryptoMock = CryptoCurrencyFactory.createWithSymbolAndPrice("NEOUSDT", 0.36d);
         when(binanceService.getCrypto("NEOUSDT")).thenReturn(cryptoMock);
         when(dolarApiService.getDolarCotization()).thenReturn(300.0);
+        when(authenticationService.getCurrentUserId()).thenReturn(1);
 
         UserRegisterDTO firstUser = UserRegisterFactory.anyUserRegister();
         UserRegisterDTO secondUser = UserRegisterFactory.createWithEmail("secondUser@mail.com");
@@ -191,6 +202,7 @@ class TransactionActionTests {
         CryptoCurrency cryptoMock = CryptoCurrencyFactory.createWithSymbolAndPrice("NEOUSDT", 0.36d);
         when(binanceService.getCrypto("NEOUSDT")).thenReturn(cryptoMock);
         when(dolarApiService.getDolarCotization()).thenReturn(300.0);
+        when(authenticationService.getCurrentUserId()).thenReturn(1);
 
         UserRegisterDTO firstUser = UserRegisterFactory.anyUserRegister();
         UserRegisterDTO secondUser = UserRegisterFactory.createWithEmail("secondUser@mail.com");
@@ -213,6 +225,7 @@ class TransactionActionTests {
         CryptoCurrency cryptoMock = CryptoCurrencyFactory.createWithSymbolAndPrice("NEOUSDT", 0.36d);
         when(binanceService.getCrypto("NEOUSDT")).thenReturn(cryptoMock);
         when(dolarApiService.getDolarCotization()).thenReturn(300.0);
+        when(authenticationService.getCurrentUserId()).thenReturn(1);
 
         UserRegisterDTO cancellingUser = UserRegisterFactory.anyUserRegister();
         userService.registerUser(cancellingUser);
@@ -232,6 +245,7 @@ class TransactionActionTests {
         CryptoCurrency cryptoMock = CryptoCurrencyFactory.createWithSymbolAndPrice("NEOUSDT", 0.36d);
         when(binanceService.getCrypto("NEOUSDT")).thenReturn(cryptoMock);
         when(dolarApiService.getDolarCotization()).thenReturn(300.0);
+        when(authenticationService.getCurrentUserId()).thenReturn(1);
 
         UserRegisterDTO userOfTransaction = UserRegisterFactory.anyUserRegister();
         UserRegisterDTO userOfActions = UserRegisterFactory.createWithEmail("otherUser@mail.com");
@@ -253,6 +267,7 @@ class TransactionActionTests {
         CryptoCurrency cryptoMock = CryptoCurrencyFactory.createWithSymbolAndPrice("NEOUSDT", 0.36d);
         when(binanceService.getCrypto("NEOUSDT")).thenReturn(cryptoMock);
         when(dolarApiService.getDolarCotization()).thenReturn(300.0);
+        when(authenticationService.getCurrentUserId()).thenReturn(1);
 
         UserRegisterDTO uniqueUser = UserRegisterFactory.anyUserRegister();
         userService.registerUser(uniqueUser);
@@ -271,6 +286,7 @@ class TransactionActionTests {
         CryptoCurrency cryptoMock = CryptoCurrencyFactory.createWithSymbolAndPrice("NEOUSDT", 0.36d);
         when(binanceService.getCrypto("NEOUSDT")).thenReturn(cryptoMock);
         when(dolarApiService.getDolarCotization()).thenReturn(300.0);
+        when(authenticationService.getCurrentUserId()).thenReturn(1);
 
         UserRegisterDTO uniqueUser = UserRegisterFactory.anyUserRegister();
         userService.registerUser(uniqueUser);
@@ -288,6 +304,7 @@ class TransactionActionTests {
         CryptoCurrency cryptoMock = CryptoCurrencyFactory.createWithSymbolAndPrice("NEOUSDT", 0.36d);
         when(binanceService.getCrypto("NEOUSDT")).thenReturn(cryptoMock);
         when(dolarApiService.getDolarCotization()).thenReturn(300.0);
+        when(authenticationService.getCurrentUserId()).thenReturn(1);
 
         UserRegisterDTO userOfIntention = UserRegisterFactory.anyUserRegister();
         UserRegisterDTO userCancelling = UserRegisterFactory.createWithEmail("errorUser@mail.com");
@@ -307,6 +324,7 @@ class TransactionActionTests {
         CryptoCurrency cryptoMock = CryptoCurrencyFactory.createWithSymbolAndPrice("NEOUSDT", 0.36d);
         when(binanceService.getCrypto("NEOUSDT")).thenReturn(cryptoMock);
         when(dolarApiService.getDolarCotization()).thenReturn(300.0);
+        when(authenticationService.getCurrentUserId()).thenReturn(1);
 
         UserRegisterDTO userOfIntention = UserRegisterFactory.anyUserRegister();
         UserRegisterDTO userConfirming = UserRegisterFactory.createWithEmail("errorUser@mail.com");
@@ -326,6 +344,7 @@ class TransactionActionTests {
         CryptoCurrency cryptoMock = CryptoCurrencyFactory.createWithSymbolAndPrice("NEOUSDT", 0.36d);
         when(binanceService.getCrypto("NEOUSDT")).thenReturn(cryptoMock);
         when(dolarApiService.getDolarCotization()).thenReturn(300.0);
+        when(authenticationService.getCurrentUserId()).thenReturn(1);
 
         UserRegisterDTO userOfIntention = UserRegisterFactory.anyUserRegister();
         UserRegisterDTO firstUserTransfer = UserRegisterFactory.createWithEmail("correctUser@mail.com");
@@ -351,6 +370,7 @@ class TransactionActionTests {
         CryptoCurrency cryptoMock = CryptoCurrencyFactory.createWithSymbolAndPrice("NEOUSDT", 0.36d);
         when(binanceService.getCrypto("NEOUSDT")).thenReturn(cryptoMock);
         when(dolarApiService.getDolarCotization()).thenReturn(300.0);
+        when(authenticationService.getCurrentUserId()).thenReturn(1);
         
         transactionService.createTransaction(transactionForm);
 

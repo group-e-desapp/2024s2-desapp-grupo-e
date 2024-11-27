@@ -30,7 +30,6 @@ public class LoggingAspect {
         Object[] arguments = proceedingJoinPoint.getArgs();
         var argumentsProcessed = Arrays.stream(arguments).map(Object::toString).collect(Collectors.joining(", "));
 
-
         try {
             Object result = proceedingJoinPoint.proceed();
             String timestamp = CurrentDateAndTime.getNewDateAsString();
@@ -38,18 +37,19 @@ public class LoggingAspect {
 
             LOGGER.info("Audit Log | timestamp: {}, user: {}, method: {}, params: {}, executionTime: {} ms",
                 timestamp, userData, methodName, argumentsProcessed, (timeEnd - timeStart));
-            
+
             return result;
         } catch (Exception e) {
             LOGGER.error("Error in execution of method: " + methodName, e);
-            throw e;
+            return proceedingJoinPoint.proceed();
         }
+        
     }
 
     private String getCurrentUserData() {
         Authentication authUser = SecurityContextHolder.getContext().getAuthentication();
         if (authUser != null && authUser.isAuthenticated() && !"anonymousUser".equals(authUser.getPrincipal())) {
-            return "User: " + authUser.getName();
+            return authUser.getName();
         }
         return "Anon User";
     }
