@@ -30,6 +30,7 @@ public class LoggingAspect {
         Object[] arguments = proceedingJoinPoint.getArgs();
         var argumentsProcessed = Arrays.stream(arguments).map(Object::toString).collect(Collectors.joining(", "));
 
+
         try {
             Object result = proceedingJoinPoint.proceed();
             String timestamp = CurrentDateAndTime.getNewDateAsString();
@@ -40,11 +41,9 @@ public class LoggingAspect {
             
             return result;
         } catch (Exception e) {
-            LOGGER.error("Error in execution", e);
+            LOGGER.error("Error in execution of method: " + methodName, e);
+            throw e;
         }
-
-        return proceedingJoinPoint.proceed();
-
     }
 
     private String getCurrentUserData() {

@@ -81,6 +81,14 @@ public class Transaction {
         this.dateTimeCreated = dateTimeCreated;
     }
 
+    public Integer getIdUserAnswering() {
+        return idUserAnswering;
+    }
+
+    public void setIdUserAnswering(Integer idUserAnswering) {
+        this.idUserAnswering = idUserAnswering;
+    }
+
     public boolean isAValidMarginForTransaction(Double currentCryptoPriceInARS) {
         var marginOfPrice = currentCryptoPriceInARS * 0.05;
         return (currentCryptoPriceInARS - marginOfPrice < priceOffered) && (priceOffered < currentCryptoPriceInARS + marginOfPrice);
@@ -135,14 +143,6 @@ public class Transaction {
         }
     }
 
-
-    public Integer getIdUserAnswering() {
-        return idUserAnswering;
-    }
-
-    public void setIdUserAnswering(Integer idUserAnswering) {
-        this.idUserAnswering = idUserAnswering;
-    }
     
 
     

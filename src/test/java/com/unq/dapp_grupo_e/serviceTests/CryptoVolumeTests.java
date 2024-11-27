@@ -1,4 +1,4 @@
-package com.unq.dapp_grupo_e.modelTests;
+package com.unq.dapp_grupo_e.serviceTests;
 
 import static org.mockito.Mockito.when;
 
